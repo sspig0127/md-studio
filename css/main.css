@@ -107,7 +107,7 @@ html, body {
   padding: 0 12px;
   gap: 8px;
   position: relative;
-  z-index: 100;
+  z-index: 1000;
   overflow: hidden;
 }
 
@@ -160,7 +160,7 @@ html, body {
   border-radius: var(--radius);
   min-width: 160px;
   box-shadow: var(--shadow);
-  z-index: 200;
+  z-index: 1200;
   overflow: hidden;
 }
 .dropdown-menu.open { display: block; }
@@ -215,7 +215,7 @@ html, body {
   border-bottom: 1px solid var(--color-border);
   border-radius: 0 0 0 var(--radius);
   box-shadow: var(--shadow);
-  z-index: 150;
+  z-index: 1100;
   padding: 8px 0;
 }
 .mobile-drawer button {
@@ -300,7 +300,7 @@ html, body {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 500;
+  z-index: 2000;
   align-items: center;
   justify-content: center;
   padding: 16px;
