@@ -64,6 +64,17 @@ python3 -m http.server 8080
 
 將整個資料夾上傳至靜態網站服務即可（GitHub Pages、Netlify、Vercel 等），**無需 build 步驟**。
 
+### 預覽最新版本（GitHub Pages）
+
+部署後若畫面未更新，請執行強制重新整理以清除 Service Worker 舊快取：
+
+| 作業系統 | 快捷鍵 |
+|---|---|
+| Windows / Linux | `Ctrl + Shift + R` |
+| macOS | `Cmd + Shift + R` |
+
+> 一般 `F5` 或 `Ctrl+R` 只會重新整理頁面，不會清除 Service Worker 快取，可能仍顯示舊版本。
+
 ---
 
 ## ☁️ Google Drive 設定 / Google Drive Setup
