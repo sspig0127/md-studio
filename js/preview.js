@@ -4,6 +4,8 @@
 const Preview = (() => {
   let _container = null;
   let _renderTimer = null;
+  let _tooltip = null;
+  let _tooltipTimer = null;
 
   function init(containerEl) {
     _container = containerEl;
@@ -21,6 +23,27 @@ const Preview = (() => {
       securityLevel: 'loose',
       fontFamily: 'inherit',
     });
+    // Create global tooltip element
+    _tooltip = document.createElement('div');
+    _tooltip.id = 'mermaid-tooltip';
+    _tooltip.style.cssText = [
+      'position:fixed',
+      'z-index:9999',
+      'padding:6px 12px',
+      'border-radius:6px',
+      'font-size:13px',
+      'line-height:1.5',
+      'max-width:280px',
+      'word-break:break-all',
+      'pointer-events:none',
+      'opacity:0',
+      'transition:opacity 0.2s ease',
+      'background:var(--color-surface)',
+      'color:var(--color-text)',
+      'border:1px solid var(--color-border)',
+      'box-shadow:0 4px 16px rgba(0,0,0,0.3)',
+    ].join(';');
+    document.body.appendChild(_tooltip);
   }
 
   // Debounced render call
@@ -31,6 +54,9 @@ const Preview = (() => {
 
   async function render(markdown) {
     if (!_container) return;
+    // Clear any pending tooltip timer from previous render
+    clearTimeout(_tooltipTimer);
+    if (_tooltip) _tooltip.style.opacity = '0';
     if (!markdown || markdown.trim() === '') {
       _container.innerHTML = '';
       return;
@@ -62,15 +88,95 @@ const Preview = (() => {
         wrapper.innerHTML = svg;
         const svgEl = wrapper.querySelector('svg');
         if (svgEl) {
+          // 1. Remove height constraint
           svgEl.removeAttribute('height');
           svgEl.style.height = 'auto';
+
+          // 2. Remove clip-path so text is never clipped by shape boundary
+          svgEl.querySelectorAll('[clip-path]').forEach(el => {
+            el.removeAttribute('clip-path');
+          });
         }
       } catch (e) {
         wrapper.innerHTML = `<div class="mermaid-error">Mermaid error: ${_escapeHtml(e.message || String(e))}</div>`;
       }
 
+      // Insert into DOM first — getBoundingClientRect requires live DOM
       pre.replaceWith(wrapper);
+
+      // 3. Expand shapes AFTER DOM insertion so measurements are accurate
+      const svgEl = wrapper.querySelector('svg');
+      if (svgEl) {
+        requestAnimationFrame(() => {
+          svgEl.querySelectorAll('.node').forEach(node => {
+            const textEl  = node.querySelector('.label text, .nodeLabel');
+            const shapeEl = node.querySelector('rect, polygon, circle, ellipse');
+            if (!textEl || !shapeEl) return;
+            try {
+              const textBox  = textEl.getBoundingClientRect();
+              const shapeBox = shapeEl.getBoundingClientRect();
+              const padX = 16, padY = 8;
+              if (textBox.width + padX * 2 > shapeBox.width) {
+                const diff = (textBox.width + padX * 2 - shapeBox.width) / 2;
+                const x = parseFloat(shapeEl.getAttribute('x') || '0');
+                const w = parseFloat(shapeEl.getAttribute('width') || shapeBox.width);
+                shapeEl.setAttribute('x', x - diff);
+                shapeEl.setAttribute('width', w + diff * 2);
+              }
+              if (textBox.height + padY * 2 > shapeBox.height) {
+                const diff = (textBox.height + padY * 2 - shapeBox.height) / 2;
+                const y = parseFloat(shapeEl.getAttribute('y') || '0');
+                const h = parseFloat(shapeEl.getAttribute('height') || shapeBox.height);
+                shapeEl.setAttribute('y', y - diff);
+                shapeEl.setAttribute('height', h + diff * 2);
+              }
+            } catch (_) {}
+          });
+        });
+      }
+
+      _addMermaidTooltips(wrapper);
     }
+  }
+
+  function _addMermaidTooltips(wrapperEl) {
+    wrapperEl.querySelectorAll('.node').forEach(node => {
+      const textEl = node.querySelector('.label text, .nodeLabel');
+      if (!textEl) return;
+      const label = textEl.textContent.trim();
+      if (!label) return;
+
+      node.style.cursor = 'default';
+
+      node.addEventListener('mouseenter', (e) => {
+        _tooltipTimer = setTimeout(() => {
+          _tooltip.textContent = label;
+          _tooltip.style.opacity = '1';
+          _positionTooltip(e);
+        }, 2500);
+      });
+
+      node.addEventListener('mousemove', (e) => {
+        if (_tooltip.style.opacity === '1') _positionTooltip(e);
+      });
+
+      node.addEventListener('mouseleave', () => {
+        clearTimeout(_tooltipTimer);
+        _tooltip.style.opacity = '0';
+      });
+    });
+  }
+
+  function _positionTooltip(e) {
+    const pad = 12;
+    const tw = _tooltip.offsetWidth;
+    const th = _tooltip.offsetHeight;
+    let x = e.clientX + pad;
+    let y = e.clientY + pad;
+    if (x + tw > window.innerWidth  - pad) x = e.clientX - tw - pad;
+    if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+    _tooltip.style.left = x + 'px';
+    _tooltip.style.top  = y + 'px';
   }
 
   function _escapeHtml(str) {
