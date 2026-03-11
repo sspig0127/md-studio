@@ -5,7 +5,7 @@
  * 快取所有本地資源，確保離線可完整使用。
  */
 
-const CACHE_NAME = 'md-editor-v3';
+const CACHE_NAME = 'md-editor-v4';
 
 const PRECACHE_URLS = [
   '/',
@@ -55,7 +55,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Cache-First for local assets, Network-First for Google APIs
+// Fetch: Network-First for HTML navigation, Cache-First for static assets
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
@@ -66,21 +66,32 @@ self.addEventListener('fetch', (event) => {
     return; // Browser default
   }
 
+  // Network-First for HTML navigation — ensures reload always gets latest index.html
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
+  // Cache-First for all other local assets (JS, CSS, vendor libs, etc.)
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
-        // Cache new local resources dynamically
         if (response.ok && url.origin === self.location.origin) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
-      }).catch(() => {
-        // Offline fallback: return index.html for navigation
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
       });
     })
   );
