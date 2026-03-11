@@ -140,15 +140,25 @@ const Preview = (() => {
   }
 
   function _addMermaidTooltips(wrapperEl) {
-    wrapperEl.querySelectorAll('.node').forEach(node => {
-      const textEl = node.querySelector('.label text, .nodeLabel');
+    // Node labels + Edge labels
+    const targets = [
+      // Nodes: .node elements
+      ...wrapperEl.querySelectorAll('.node'),
+      // Edges: .edgeLabel g.label (Mermaid v10 uses foreignObject inside)
+      ...wrapperEl.querySelectorAll('.edgeLabel'),
+    ];
+
+    targets.forEach(el => {
+      // Extract text: try foreignObject span first (Mermaid v10), then SVG text
+      const spanEl = el.querySelector('foreignObject span, span.edgeLabel');
+      const textEl = spanEl || el.querySelector('.label text, .nodeLabel, text');
       if (!textEl) return;
       const label = textEl.textContent.trim();
       if (!label) return;
 
-      node.style.cursor = 'default';
+      el.style.cursor = 'default';
 
-      node.addEventListener('mouseenter', (e) => {
+      el.addEventListener('mouseenter', (e) => {
         _tooltipTimer = setTimeout(() => {
           _tooltip.textContent = label;
           _tooltip.style.opacity = '1';
@@ -156,11 +166,11 @@ const Preview = (() => {
         }, 2500);
       });
 
-      node.addEventListener('mousemove', (e) => {
+      el.addEventListener('mousemove', (e) => {
         if (_tooltip.style.opacity === '1') _positionTooltip(e);
       });
 
-      node.addEventListener('mouseleave', () => {
+      el.addEventListener('mouseleave', () => {
         clearTimeout(_tooltipTimer);
         _tooltip.style.opacity = '0';
       });
