@@ -9,6 +9,7 @@
   "nav.cloud.logout": "Sign out",
   "nav.cloud.open": "Open from Drive",
   "nav.cloud.save": "Save to Drive",
+  "nav.typo": "Type",
   "nav.lang": "Language",
   "tabs.new": "+ New",
   "tabs.untitled": "Untitled",
@@ -45,5 +46,10 @@
   "settings.cloud.status.unset": "⚠ Not configured",
   "settings.cloud.hint": "Reload the page after saving to apply changes",
   "settings.theme.title": "Theme",
-  "settings.theme.apply": "Apply Theme"
+  "settings.theme.apply": "Apply Theme",
+  "typo.default": "Default",
+  "typo.reading": "Reading",
+  "typo.compact": "Compact",
+  "typo.document": "Document",
+  "typo.wide": "Wide"
 }

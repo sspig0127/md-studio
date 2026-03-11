@@ -31,6 +31,36 @@
   font-size: 15px;
 }
 
+/* ---- TYPOGRAPHY PRESETS ---- */
+/* Default: no data-typo attribute — existing .preview-content styles apply */
+
+.preview-content[data-typo="reading"] {
+  font-size: 17px;
+  line-height: 1.95;
+  max-width: 660px;
+  font-family: 'Georgia', 'Noto Serif TC', 'Times New Roman', serif;
+}
+
+.preview-content[data-typo="compact"] {
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 960px;
+}
+
+.preview-content[data-typo="document"] {
+  font-size: 15px;
+  line-height: 1.85;
+  max-width: 720px;
+  font-family: 'Georgia', 'Noto Serif TC', 'Times New Roman', serif;
+}
+
+.preview-content[data-typo="wide"] {
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 100%;
+  padding: 24px 40px;
+}
+
 /* ---- EASYMDE OVERRIDES ---- */
 .EasyMDEContainer {
   height: 100%;

@@ -9,6 +9,7 @@
   "nav.cloud.logout": "Đăng xuất",
   "nav.cloud.open": "Mở từ Drive",
   "nav.cloud.save": "Lưu vào Drive",
+  "nav.typo": "Kiểu chữ",
   "nav.lang": "Ngôn ngữ",
   "tabs.new": "+ Mới",
   "tabs.untitled": "Chưa đặt tên",
@@ -45,5 +46,10 @@
   "settings.cloud.status.unset": "⚠ Chưa cấu hình",
   "settings.cloud.hint": "Tải lại trang sau khi lưu để áp dụng thay đổi",
   "settings.theme.title": "Giao diện",
-  "settings.theme.apply": "Áp dụng giao diện"
+  "settings.theme.apply": "Áp dụng giao diện",
+  "typo.default": "Mặc định",
+  "typo.reading": "Đọc sách",
+  "typo.compact": "Thu gọn",
+  "typo.document": "Tài liệu",
+  "typo.wide": "Rộng"
 }

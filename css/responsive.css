@@ -18,9 +18,10 @@
   /* Navbar logo: truncate on overflow */
   .nav-logo { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex-shrink: 1; min-width: 0; }
 
-  /* Hide desktop cloud/lang dropdowns on mobile */
+  /* Hide desktop dropdowns on mobile */
   #cloud-dropdown,
-  #lang-dropdown { display: none; }
+  #lang-dropdown,
+  #typo-dropdown { display: none; }
 
   /* Move open/download to drawer on mobile */
   #btn-open,

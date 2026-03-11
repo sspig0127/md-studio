@@ -54,6 +54,16 @@
           <button data-lang="vi">Tiếng Việt</button>
         </div>
       </div>
+      <div class="dropdown" id="typo-dropdown">
+        <button class="nav-btn dropdown-toggle desktop-only" id="btn-typo"><span data-i18n="nav.typo">字型</span> ▾</button>
+        <div class="dropdown-menu" id="typo-menu">
+          <button data-typo-btn="default"  data-i18n="typo.default">標準</button>
+          <button data-typo-btn="reading"  data-i18n="typo.reading">閱讀</button>
+          <button data-typo-btn="compact"  data-i18n="typo.compact">緊湊</button>
+          <button data-typo-btn="document" data-i18n="typo.document">文件</button>
+          <button data-typo-btn="wide"     data-i18n="typo.wide">全寬</button>
+        </div>
+      </div>
       <!-- Settings button -->
       <button class="nav-btn" id="btn-settings" title="設定" data-i18n="nav.settings">⚙</button>
       <!-- Mobile menu -->
@@ -76,6 +86,15 @@
       <button data-lang="zh-TW">繁體中文</button>
       <button data-lang="en">English</button>
       <button data-lang="vi">Tiếng Việt</button>
+    </div>
+    <hr>
+    <div class="typo-group">
+      <span class="drawer-label" data-i18n="nav.typo">字型</span>
+      <button data-typo-btn="default"  data-i18n="typo.default">標準</button>
+      <button data-typo-btn="reading"  data-i18n="typo.reading">閱讀</button>
+      <button data-typo-btn="compact"  data-i18n="typo.compact">緊湊</button>
+      <button data-typo-btn="document" data-i18n="typo.document">文件</button>
+      <button data-typo-btn="wide"     data-i18n="typo.wide">全寬</button>
     </div>
   </div>
 

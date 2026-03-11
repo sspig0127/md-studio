@@ -241,6 +241,32 @@ html, body {
   border-radius: var(--radius);
   font-size: 12px;
 }
+.mobile-drawer .typo-group {
+  padding: 4px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.mobile-drawer .typo-group button {
+  display: inline-block;
+  width: auto;
+  padding: 4px 10px;
+  background: var(--color-btn);
+  border-radius: var(--radius);
+  font-size: 12px;
+}
+.mobile-drawer .typo-group button.active,
+.dropdown-menu button.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+.drawer-label {
+  display: block;
+  width: 100%;
+  padding: 4px 8px 2px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
 
 /* ---- STATUS BAR ---- */
 .status-bar {

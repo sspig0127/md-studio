@@ -9,6 +9,7 @@
   "nav.cloud.logout": "登出",
   "nav.cloud.open": "從雲端開啟",
   "nav.cloud.save": "儲存到雲端",
+  "nav.typo": "字型",
   "nav.lang": "語言",
   "tabs.new": "+ 新增",
   "tabs.untitled": "未命名",
@@ -45,5 +46,10 @@
   "settings.cloud.status.unset": "⚠ 尚未設定",
   "settings.cloud.hint": "設定後需重新整理頁面以套用",
   "settings.theme.title": "佈景主題",
-  "settings.theme.apply": "套用配色"
+  "settings.theme.apply": "套用配色",
+  "typo.default": "標準",
+  "typo.reading": "閱讀",
+  "typo.compact": "緊湊",
+  "typo.document": "文件",
+  "typo.wide": "全寬"
 }

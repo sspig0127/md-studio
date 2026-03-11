@@ -35,17 +35,74 @@ const Theme = (() => {
   return { init, apply, activate };
 })();
 
+function closeAllDropdowns() {
+  document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+}
+
+function closeMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  if (drawer) drawer.hidden = true;
+}
+
+const Typo = (() => {
+  const KEY = 'md_typo';
+
+  function apply(style) {
+    const el = document.getElementById('preview-content');
+    if (!el) return;
+    if (style === 'default') {
+      el.removeAttribute('data-typo');
+    } else {
+      el.setAttribute('data-typo', style);
+    }
+    localStorage.setItem(KEY, style);
+    document.querySelectorAll('[data-typo-btn]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.typoBtn === style);
+    });
+  }
+
+  function init() {
+    const saved = localStorage.getItem(KEY) || 'default';
+    apply(saved);
+    document.querySelectorAll('[data-typo-btn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        apply(btn.dataset.typoBtn);
+        closeAllDropdowns();
+        closeMobileDrawer();
+      });
+    });
+  }
+
+  return { init };
+})();
+
 (async function AppInit() {
+  function toggleDropdown(menuId) {
+    const menu = document.getElementById(menuId);
+    const isOpen = menu.classList.contains('open');
+    closeAllDropdowns();
+    if (!isOpen) menu.classList.add('open');
+  }
+
+  function setMode(mode) {
+    document.body.classList.toggle('preview-mode', mode === 'preview');
+    document.getElementById('btn-mode-edit').classList.toggle('active', mode === 'edit');
+    document.getElementById('btn-mode-preview').classList.toggle('active', mode === 'preview');
+  }
+
   // 1. Theme（最先套用，確保 EasyMDE 以正確顏色初始化）
   Theme.init();
 
-  // 2. i18n
+  // 2. Typography
+  Typo.init();
+
+  // 3. i18n
   await I18n.init();
 
-  // 3. Preview
+  // 4. Preview
   Preview.init(document.getElementById('preview-content'));
 
-  // 4. Editor
+  // 5. Editor
   Editor.init('editor', (content) => {
     // Notify storage (auto-save + word count)
     Storage.onContentChange(content);
@@ -54,7 +111,7 @@ const Theme = (() => {
     if (tab) Tabs.setDirty(tab.id, true);
   });
 
-  // 5. Tabs
+  // 6. Tabs
   Tabs.init(
     document.getElementById('tabs-list'),
     (tab) => {
@@ -64,13 +121,13 @@ const Theme = (() => {
     }
   );
 
-  // 6. Storage
+  // 7. Storage
   Storage.init();
 
-  // 7. Settings
+  // 8. Settings
   Settings.init();
 
-  // 8. Cloud (non-blocking)
+  // 9. Cloud (non-blocking)
   Cloud.init();
 
   // ---- BIND EVENTS ----
@@ -131,6 +188,10 @@ const Theme = (() => {
     e.stopPropagation();
     toggleDropdown('lang-menu');
   });
+  document.getElementById('btn-typo')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown('typo-menu');
+  });
 
   // Mobile menu
   document.getElementById('btn-mobile-menu').addEventListener('click', (e) => {
@@ -151,29 +212,6 @@ const Theme = (() => {
     closeAllDropdowns();
     closeMobileDrawer();
   });
-
-  // ---- HELPERS ----
-
-  function toggleDropdown(menuId) {
-    const menu = document.getElementById(menuId);
-    const isOpen = menu.classList.contains('open');
-    closeAllDropdowns();
-    if (!isOpen) menu.classList.add('open');
-  }
-
-  function closeAllDropdowns() {
-    document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
-  }
-
-  function closeMobileDrawer() {
-    document.getElementById('mobile-drawer').hidden = true;
-  }
-
-  function setMode(mode) {
-    document.body.classList.toggle('preview-mode', mode === 'preview');
-    document.getElementById('btn-mode-edit').classList.toggle('active', mode === 'edit');
-    document.getElementById('btn-mode-preview').classList.toggle('active', mode === 'preview');
-  }
 
   // Initial preview render
   const activeTab = Tabs.activeTab();
