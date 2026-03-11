@@ -64,6 +64,7 @@
   <!-- Mobile menu drawer -->
   <div id="mobile-drawer" class="mobile-drawer" hidden>
     <button id="md-new" data-i18n="nav.new">新增</button>
+    <button id="md-open" data-i18n="nav.open">開啟檔案</button>
     <button id="md-download" data-i18n="nav.download">下載 .md</button>
     <button id="md-cloud-login" data-i18n="nav.cloud.login">Google 登入</button>
     <button id="md-cloud-open" data-i18n="nav.cloud.open" disabled>從雲端開啟</button>
@@ -112,6 +113,15 @@
       </div>
       <div class="modal-body">
         <section class="settings-section">
+          <h3 data-i18n="settings.theme.title">佈景主題</h3>
+          <div class="theme-swatches">
+            <button class="theme-swatch" data-theme-btn="purple" title="Dark Purple" style="background:#7c6af7;"></button>
+            <button class="theme-swatch" data-theme-btn="dark"   title="Dark"        style="background:#58a6ff;"></button>
+            <button class="theme-swatch" data-theme-btn="light"  title="Light"       style="background:#0969da;"></button>
+            <button class="theme-swatch" data-theme-btn="nord"   title="Nord"        style="background:#88c0d0;"></button>
+          </div>
+        </section>
+        <section class="settings-section" style="margin-top: 20px;">
           <h3 data-i18n="settings.cloud.title">Google Drive</h3>
           <p class="settings-desc" data-i18n="settings.cloud.desc">
             填入 Google OAuth 2.0 Client ID 以啟用 Google Drive 功能。
@@ -141,6 +151,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" id="btn-settings-cancel" data-i18n="settings.cancel">取消</button>
+        <button class="btn-primary" id="btn-apply-theme" data-i18n="settings.theme.apply">套用配色</button>
         <button class="btn-primary" id="btn-settings-save" data-i18n="settings.save">儲存設定</button>
       </div>
     </div>

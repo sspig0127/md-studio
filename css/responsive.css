@@ -15,11 +15,22 @@
 
   /* Navbar */
   .navbar { padding: 0 8px; gap: 6px; }
-  .nav-logo { font-size: 14px; }
+  /* Navbar logo: truncate on overflow */
+  .nav-logo { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex-shrink: 1; min-width: 0; }
 
   /* Hide desktop cloud/lang dropdowns on mobile */
   #cloud-dropdown,
   #lang-dropdown { display: none; }
+
+  /* Move open/download to drawer on mobile */
+  #btn-open,
+  #btn-download { display: none; }
+
+  /* Settings button: icon only on mobile */
+  #btn-settings { padding: 4px 7px; font-size: 15px; }
+
+  /* Prevent nav-actions from overflowing */
+  .nav-actions { overflow: hidden; flex-shrink: 1; min-width: 0; }
 
   /* Tab bar: horizontal scroll */
   .tabs-bar { height: 36px; }

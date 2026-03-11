@@ -43,5 +43,7 @@
   "settings.cloud.help": "📖 How to get a Client ID?",
   "settings.cloud.status.set": "✓ Configured",
   "settings.cloud.status.unset": "⚠ Not configured",
-  "settings.cloud.hint": "Reload the page after saving to apply changes"
+  "settings.cloud.hint": "Reload the page after saving to apply changes",
+  "settings.theme.title": "Theme",
+  "settings.theme.apply": "Apply Theme"
 }

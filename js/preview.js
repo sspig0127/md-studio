@@ -13,9 +13,11 @@ const Preview = (() => {
       gfm: true,
     });
     // Configure mermaid
+    const savedTheme = localStorage.getItem('md_theme') || 'purple';
+    const mermaidTheme = savedTheme === 'light' ? 'default' : 'dark';
     mermaid.initialize({
       startOnLoad: false,
-      theme: 'dark',
+      theme: mermaidTheme,
       securityLevel: 'loose',
       fontFamily: 'inherit',
     });
@@ -58,6 +60,11 @@ const Preview = (() => {
         const id = 'mermaid-' + Math.random().toString(36).slice(2, 9);
         const { svg } = await mermaid.render(id, source);
         wrapper.innerHTML = svg;
+        const svgEl = wrapper.querySelector('svg');
+        if (svgEl) {
+          svgEl.removeAttribute('height');
+          svgEl.style.height = 'auto';
+        }
       } catch (e) {
         wrapper.innerHTML = `<div class="mermaid-error">Mermaid error: ${_escapeHtml(e.message || String(e))}</div>`;
       }

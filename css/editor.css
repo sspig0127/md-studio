@@ -180,12 +180,15 @@
   border-radius: var(--radius);
   padding: 16px;
   margin: 1em 0;
-  overflow-x: auto;
+  overflow: auto;
   text-align: center;
 }
 .mermaid-wrapper svg {
   max-width: 100%;
   height: auto;
+  overflow: visible;
+  display: block;
+  margin: 0 auto;
 }
 .mermaid-error {
   color: var(--color-danger);

@@ -43,5 +43,7 @@
   "settings.cloud.help": "📖 如何取得 Client ID？",
   "settings.cloud.status.set": "✓ 已設定",
   "settings.cloud.status.unset": "⚠ 尚未設定",
-  "settings.cloud.hint": "設定後需重新整理頁面以套用"
+  "settings.cloud.hint": "設定後需重新整理頁面以套用",
+  "settings.theme.title": "佈景主題",
+  "settings.theme.apply": "套用配色"
 }

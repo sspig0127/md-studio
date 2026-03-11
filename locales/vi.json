@@ -43,5 +43,7 @@
   "settings.cloud.help": "📖 Cách lấy Client ID?",
   "settings.cloud.status.set": "✓ Đã cấu hình",
   "settings.cloud.status.unset": "⚠ Chưa cấu hình",
-  "settings.cloud.hint": "Tải lại trang sau khi lưu để áp dụng thay đổi"
+  "settings.cloud.hint": "Tải lại trang sau khi lưu để áp dụng thay đổi",
+  "settings.theme.title": "Giao diện",
+  "settings.theme.apply": "Áp dụng giao diện"
 }

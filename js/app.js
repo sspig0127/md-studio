@@ -3,14 +3,49 @@
  * 初始化所有模組，綁定 UI 事件
  */
 
+const Theme = (() => {
+  const KEY = 'md_theme';
+
+  function apply(theme) {
+    localStorage.setItem(KEY, theme);
+    document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.themeBtn === theme);
+    });
+  }
+
+  function activate(theme) {
+    if (theme === 'purple') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  }
+
+  function init() {
+    const saved = localStorage.getItem(KEY) || 'purple';
+    activate(saved);
+    document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.themeBtn === saved);
+      btn.addEventListener('click', () => apply(btn.dataset.themeBtn));
+    });
+    document.getElementById('btn-apply-theme')
+      ?.addEventListener('click', () => location.reload());
+  }
+
+  return { init, apply, activate };
+})();
+
 (async function AppInit() {
-  // 1. i18n 先初始化（其他模組需要 I18n.t）
+  // 1. Theme（最先套用，確保 EasyMDE 以正確顏色初始化）
+  Theme.init();
+
+  // 2. i18n
   await I18n.init();
 
-  // 2. Preview
+  // 3. Preview
   Preview.init(document.getElementById('preview-content'));
 
-  // 3. Editor
+  // 4. Editor
   Editor.init('editor', (content) => {
     // Notify storage (auto-save + word count)
     Storage.onContentChange(content);
@@ -19,7 +54,7 @@
     if (tab) Tabs.setDirty(tab.id, true);
   });
 
-  // 4. Tabs
+  // 5. Tabs
   Tabs.init(
     document.getElementById('tabs-list'),
     (tab) => {
@@ -29,13 +64,13 @@
     }
   );
 
-  // 5. Storage
+  // 6. Storage
   Storage.init();
 
-  // 6. Settings
+  // 7. Settings
   Settings.init();
 
-  // 7. Cloud (non-blocking)
+  // 8. Cloud (non-blocking)
   Cloud.init();
 
   // ---- BIND EVENTS ----
@@ -52,6 +87,10 @@
   document.getElementById('btn-open').addEventListener('click', () =>
     document.getElementById('file-input').click()
   );
+  document.getElementById('md-open')?.addEventListener('click', () => {
+    document.getElementById('file-input').click();
+    closeMobileDrawer();
+  });
   document.getElementById('file-input').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) Storage.openFile(file);

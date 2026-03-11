@@ -32,6 +32,60 @@
   --transition: 0.18s ease;
 }
 
+[data-theme="dark"] {
+  --color-bg: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-border: #2e2e2e;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #388bfd;
+  --color-text: #e6edf3;
+  --color-text-muted: #7d8590;
+  --color-navbar: #010409;
+  --color-tabs: #0d1117;
+  --color-status: #010409;
+  --color-tab-active: #1a1a1a;
+  --color-tab-inactive: #0d1117;
+  --color-btn: #21262d;
+  --color-btn-hover: #30363d;
+}
+
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-border: #d0d7de;
+  --color-accent: #0969da;
+  --color-accent-hover: #0550ae;
+  --color-text: #1f2328;
+  --color-text-muted: #636c76;
+  --color-navbar: #f6f8fa;
+  --color-tabs: #eaeef2;
+  --color-status: #f6f8fa;
+  --color-tab-active: #ffffff;
+  --color-tab-inactive: #eaeef2;
+  --color-btn: #f3f4f6;
+  --color-btn-hover: #e9ecef;
+  --color-danger: #d1242f;
+  --color-success: #1a7f37;
+  --color-warning: #9a6700;
+}
+
+[data-theme="nord"] {
+  --color-bg: #2e3440;
+  --color-surface: #3b4252;
+  --color-border: #4c566a;
+  --color-accent: #88c0d0;
+  --color-accent-hover: #81a1c1;
+  --color-text: #eceff4;
+  --color-text-muted: #d8dee9;
+  --color-navbar: #242933;
+  --color-tabs: #2e3440;
+  --color-status: #242933;
+  --color-tab-active: #3b4252;
+  --color-tab-inactive: #2e3440;
+  --color-btn: #434c5e;
+  --color-btn-hover: #4c566a;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -54,6 +108,13 @@ html, body {
   gap: 8px;
   position: relative;
   z-index: 100;
+  overflow: hidden;
+}
+
+.nav-left {
+  overflow: hidden;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .nav-logo {
@@ -361,3 +422,20 @@ html, body {
   transition: background var(--transition);
 }
 .btn-secondary:hover { background: var(--color-btn-hover); }
+
+/* ---- THEME SWATCHES ---- */
+.theme-swatches {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.theme-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.theme-swatch:hover { transform: scale(1.15); }
+.theme-swatch.active { border-color: var(--color-text); }
