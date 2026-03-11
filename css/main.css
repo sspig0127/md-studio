@@ -152,15 +152,15 @@ html, body {
 
 .dropdown-menu {
   display: none;
-  position: absolute;
-  top: calc(100% + 4px);
+  position: fixed;   /* fixed 脫離所有 stacking context，直接定位至 viewport */
+  top: 0;
   right: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   min-width: 160px;
   box-shadow: var(--shadow);
-  z-index: 1200;
+  z-index: 9000;
   overflow: hidden;
 }
 .dropdown-menu.open { display: block; }

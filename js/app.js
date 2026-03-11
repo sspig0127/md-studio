@@ -3,7 +3,7 @@
  * 初始化所有模組，綁定 UI 事件
  */
 
-const APP_VERSION = '2026-03-11.4';
+const APP_VERSION = '2026-03-11.5';
 console.info(`%c[md-studio] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
 
 const Theme = (() => {
@@ -84,7 +84,15 @@ const Typo = (() => {
     const menu = document.getElementById(menuId);
     const isOpen = menu.classList.contains('open');
     closeAllDropdowns();
-    if (!isOpen) menu.classList.add('open');
+    if (!isOpen) {
+      // 用 fixed 定位：取觸發按鈕的位置計算下拉選單座標
+      const btn = menu.previousElementSibling;
+      const rect = btn.getBoundingClientRect();
+      menu.style.top   = (rect.bottom + 4) + 'px';
+      menu.style.left  = 'auto';
+      menu.style.right = (window.innerWidth - rect.right) + 'px';
+      menu.classList.add('open');
+    }
   }
 
   function setMode(mode) {
