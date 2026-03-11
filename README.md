@@ -36,7 +36,7 @@
 ## 🚀 線上預覽與使用 (Live Demo)
 
 您可以直接點擊以下連結開啟此工具（請使用手機開啟以獲得最佳體驗）：
-👉 **[點我開啟網站編輯預覽Markdown](https://sspig0127.github.io/md-studio/)**
+👉 **[點我開啟網站編輯預覽Markdown文件](https://sspig0127.github.io/md-studio/)**
 
 ---
 
