@@ -3,6 +3,9 @@
  * 初始化所有模組，綁定 UI 事件
  */
 
+const APP_VERSION = '2026-03-11.4';
+console.info(`%c[md-studio] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
+
 const Theme = (() => {
   const KEY = 'md_theme';
 
