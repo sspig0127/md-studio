@@ -32,21 +32,22 @@
 ## 專案檔案結構
 
 ```
-Markdown_webap/
+Markdown_webapp/
 ├── index.html              # 主頁面（唯一 HTML）
 ├── manifest.json           # PWA manifest
-├── sw.js                   # Service Worker（離線快取）
+├── sw.js                   # Service Worker（HTML network-first / 靜態 cache-first）
 ├── css/
-│   ├── main.css            # 全域樣式、CSS 變數
-│   ├── editor.css          # 編輯器客製化樣式
+│   ├── main.css            # 全域樣式、CSS 變數（7 種主題）
+│   ├── editor.css          # 編輯器客製化樣式、5 種排版風格
 │   ├── tabs.css            # 多分頁樣式
 │   └── responsive.css      # RWD media query
 ├── js/
-│   ├── app.js              # 主程式入口，初始化各模組
+│   ├── app.js              # 主程式入口；Theme / Typo 模組、事件綁定
 │   ├── editor.js           # EasyMDE 初始化與設定
-│   ├── preview.js          # 預覽區渲染（marked + mermaid）
+│   ├── preview.js          # 預覽區渲染（marked + mermaid + tooltip）
 │   ├── tabs.js             # 多檔案分頁管理
 │   ├── storage.js          # localStorage、開啟/下載 .md
+│   ├── settings.js         # 設定 Modal（Google Client ID）
 │   ├── cloud.js            # Google Drive API 整合
 │   └── i18n.js             # 多語言切換邏輯
 ├── locales/
@@ -134,6 +135,27 @@ Markdown_webap/
 
 ## 模組說明
 
+---
+
+## 佈景主題系統
+
+CSS 自訂屬性（`--color-*`）定義於 `css/main.css`，透過 `[data-theme]` attribute 切換：
+
+| 主題 key | 名稱 | 類型 | 標題色 (`--color-heading`) |
+|---|---|---|---|
+| `purple`（預設，無 attribute）| Dark Purple | 深色 | `#c8b8ff` 淺紫 |
+| `dark` | Dark | 深色 | `#79c0ff` 淺藍 |
+| `light` | Light | 淺色 | `#0550ae` 深藍 |
+| `nord` | Nord | 深色 | `#8fbcbb` 青綠 |
+| `solarized` | Solarized Light | 淺色 | `#073642` 深青 |
+| `latte` | Catppuccin Latte | 淺色 | `#1e1e2e` 近黑 |
+| `rosepine` | Rosé Pine Dawn | 淺色 | `#286983` 松綠 |
+
+- 切換後需點「套用配色」觸發 `location.reload()`；SW network-first 確保重載後 HTML 為最新版本
+- Mermaid 依 `lightThemes` 陣列自動選擇 `'default'` 或 `'dark'` 主題
+
+---
+
 ### `editor.js` — 編輯器核心
 - 使用 EasyMDE 初始化 `<textarea id="editor">`
 - Toolbar 項目：粗體、斜體、標題、連結、圖片、程式碼、引言、清單、Mermaid 插入按鈕、分隔、預覽（桌機）
@@ -142,10 +164,10 @@ Markdown_webap/
 
 ### `preview.js` — 預覽渲染
 - 使用 `marked.js` 解析 Markdown → HTML
-- 渲染完成後，掃描所有 ` ```mermaid ` 程式碼區塊
-- 將其替換為 `<div class="mermaid">...</div>`
-- 呼叫 `mermaid.init()` 渲染成 SVG
-- Mermaid SVG 容器設定 `max-width: 100%` 確保手機縮放正常
+- 渲染完成後，掃描所有 ` ```mermaid ` 程式碼區塊，呼叫 `mermaid.render()` 轉成 SVG
+- SVG 處理三步驟：① 移除 height 限制 ② 移除 clip-path 防截斷 ③ 插入 DOM 後用 `requestAnimationFrame` 展開過窄的節點框
+- Mermaid 主題：淺色佈景（light / solarized / latte / rosepine）→ `'default'`；深色佈景 → `'dark'`
+- **Tooltip**：節點（`.node`）與箭頭標籤（`.edgeLabel`）均支援，滑鼠停留 2.5 秒後顯示完整文字；使用 `position:fixed` 確保不被遮擋
 
 ### `tabs.js` — 多檔案分頁管理
 - 維護 `tabs[]` 陣列，每個 tab 物件包含：`{ id, filename, content, isDirty, storageKey }`
@@ -167,12 +189,18 @@ Markdown_webap/
 - **下載 `.md` 檔**：Blob + URL.createObjectURL
 - **關閉頁面保護**：任一分頁有未儲存變更時，`beforeunload` 提示
 
+### `app.js` — 主程式入口（新增模組）
+- **`Theme` 模組**：讀取 / 儲存 `localStorage('md_theme')`；`activate()` 設定 `<html data-theme>`；初始化順序最優先，確保 EasyMDE 以正確色彩渲染
+- **`Typo` 模組**：讀取 / 儲存 `localStorage('md_typo')`；`apply()` 設定 `#preview-content[data-typo]`；5 種排版：default / reading / compact / document / wide
+- **下拉選單定位**：所有下拉改用 `position:fixed` + `getBoundingClientRect()` 動態計算座標，完全跳出 stacking context，不會被編輯器元素遮擋
+
 ### `pwa` — 離線支援（sw.js + manifest.json）
-- **Service Worker 策略**：Cache-First（所有本地檔案優先讀快取）
+- **Service Worker 策略（雙軌）**：
+  - HTML 導航請求（`navigate` mode）→ **Network-First**：確保 `location.reload()` 後取得最新 `index.html`，更新成功後寫入快取
+  - 其他靜態資源（JS / CSS / vendor）→ **Cache-First**：離線時仍可使用
 - **快取清單**：index.html、所有 CSS/JS/vendor/locales 檔案
-- **更新機制**：sw.js 版本號更新時，自動清除舊快取
+- **更新機制**：`CACHE_NAME` 版本升號時，`activate` 事件自動清除舊快取；`skipWaiting()` + `clients.claim()` 確保新 SW 即時生效
 - **manifest.json**：設定 App 名稱、圖示、`display: standalone`、`start_url: /`
-- **安裝提示**：瀏覽器支援時顯示「加入主畫面」按鈕
 
 
 - **自動暫存**：內容變更後 1 秒寫入 `localStorage['md_draft']`
