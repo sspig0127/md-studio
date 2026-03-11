@@ -17,7 +17,9 @@
 |------|------|
 | 📄 即時預覽 | 分割畫面，即時渲染 Markdown |
 | 🗂️ 多分頁管理 | 同時開啟多份文件，狀態自動保存 |
-| 📊 Mermaid 圖表 | 支援流程圖、循序圖、狀態圖等 |
+| 📊 Mermaid 圖表 | 支援流程圖、循序圖、狀態圖等；滑鼠停留 2.5 秒顯示節點標籤 tooltip |
+| 🎨 7 種配色主題 | Dark Purple、Dark、Light、Nord、Solarized Light、Catppuccin Latte、Rosé Pine Dawn |
+| 🖋️ 5 種排版風格 | 標準、閱讀、緊湊、文件、全寬 |
 | ☁️ Google Drive | OAuth2 登入，讀取 / 寫入雲端檔案 |
 | ⚙️ 組態設定 | 透過網頁介面設定 Google Client ID，存入 localStorage |
 | 📴 離線可用 | Service Worker 快取，完整離線功能 |
@@ -34,7 +36,7 @@
 ## 🚀 線上預覽與使用 (Live Demo)
 
 您可以直接點擊以下連結開啟此工具（請使用手機開啟以獲得最佳體驗）：
-👉 **[點我開啟條碼比對小工具](https://sspig0127.github.io/md-studio/)**
+👉 **[點我開啟網站編輯預覽Markdown](https://sspig0127.github.io/md-studio/)**
 
 ---
 
@@ -201,6 +203,32 @@ flowchart TD
     B -->|否| D[結束]
 ```
 ````
+
+> 💡 **Tooltip**：桌機版滑鼠停留在節點或箭頭文字上超過 2.5 秒，會自動顯示完整標籤內容。
+
+### 配色主題
+點選右上角 **⚙ 設定** → 色票選擇 → **套用配色**（頁面重整後生效）：
+
+| 色票 | 主題名稱 | 風格 |
+|------|---------|------|
+| 🟣 | Dark Purple（預設）| 深色，紫色強調 |
+| 🔵 | Dark | 深色，GitHub Dark 風格 |
+| 🔵 | Light | 淺色，GitHub Light 風格 |
+| 🩵 | Nord | 深色，北歐冷色調 |
+| 🟡 | Solarized Light | 淺色，米黃底 Solarized 經典配色 |
+| 🔷 | Catppuccin Latte | 淺色，Catppuccin 柔和粉彩 |
+| 🌸 | Rosé Pine Dawn | 淺色，玫瑰松木暖白 |
+
+### 排版風格
+點選頂部工具列 **風格** 下拉選單即時切換，不需重新整理：
+
+| 風格 | 特色 |
+|------|------|
+| 標準 | 預設，15px，800px 寬 |
+| 閱讀 | 17px，serif 字型，660px 寬，行距寬 |
+| 緊湊 | 13px，960px 寬，行距緊 |
+| 文件 | 15px，serif 字型，720px 寬 |
+| 全寬 | 15px，不限寬度 |
 
 ### Google Drive
 1. 點選右上角 **⚙ 設定**，貼入 Google Client ID 並儲存（[如何取得？](#️-google-drive-設定--google-drive-setup)）

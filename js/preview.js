@@ -16,7 +16,8 @@ const Preview = (() => {
     });
     // Configure mermaid
     const savedTheme = localStorage.getItem('md_theme') || 'purple';
-    const mermaidTheme = savedTheme === 'light' ? 'default' : 'dark';
+    const lightThemes = ['light', 'solarized', 'latte', 'rosepine'];
+    const mermaidTheme = lightThemes.includes(savedTheme) ? 'default' : 'dark';
     mermaid.initialize({
       startOnLoad: false,
       theme: mermaidTheme,

@@ -119,7 +119,7 @@
 .preview-content h4,
 .preview-content h5,
 .preview-content h6 {
-  color: var(--color-text);
+  color: var(--color-heading, var(--color-text));
   margin: 1.4em 0 0.6em;
   line-height: 1.3;
   font-weight: 600;

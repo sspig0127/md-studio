@@ -10,6 +10,7 @@
   --color-accent-hover: #6b59e8;
   --color-text: #e0e0f0;
   --color-text-muted: #8888aa;
+  --color-heading: #c8b8ff;
   --color-navbar: #16161f;
   --color-tabs: #1a1a28;
   --color-status: #12121a;
@@ -40,6 +41,7 @@
   --color-accent-hover: #388bfd;
   --color-text: #e6edf3;
   --color-text-muted: #7d8590;
+  --color-heading: #79c0ff;
   --color-navbar: #010409;
   --color-tabs: #0d1117;
   --color-status: #010409;
@@ -57,6 +59,7 @@
   --color-accent-hover: #0550ae;
   --color-text: #1f2328;
   --color-text-muted: #636c76;
+  --color-heading: #0550ae;
   --color-navbar: #f6f8fa;
   --color-tabs: #eaeef2;
   --color-status: #f6f8fa;
@@ -77,6 +80,7 @@
   --color-accent-hover: #81a1c1;
   --color-text: #eceff4;
   --color-text-muted: #d8dee9;
+  --color-heading: #8fbcbb;
   --color-navbar: #242933;
   --color-tabs: #2e3440;
   --color-status: #242933;
@@ -84,6 +88,72 @@
   --color-tab-inactive: #2e3440;
   --color-btn: #434c5e;
   --color-btn-hover: #4c566a;
+}
+
+/* Solarized Light */
+[data-theme="solarized"] {
+  --color-bg: #fdf6e3;
+  --color-surface: #eee8d5;
+  --color-border: #93a1a1;
+  --color-accent: #268bd2;
+  --color-accent-hover: #1a6fa8;
+  --color-text: #657b83;
+  --color-text-muted: #93a1a1;
+  --color-heading: #073642;
+  --color-navbar: #eee8d5;
+  --color-tabs: #e8dfc9;
+  --color-status: #eee8d5;
+  --color-tab-active: #fdf6e3;
+  --color-tab-inactive: #e8dfc9;
+  --color-btn: #e8dfc9;
+  --color-btn-hover: #ddd5bc;
+  --color-danger: #dc322f;
+  --color-success: #859900;
+  --color-warning: #b58900;
+}
+
+/* Catppuccin Latte */
+[data-theme="latte"] {
+  --color-bg: #eff1f5;
+  --color-surface: #e6e9ef;
+  --color-border: #bcc0cc;
+  --color-accent: #1e66f5;
+  --color-accent-hover: #1652cc;
+  --color-text: #4c4f69;
+  --color-text-muted: #8c8fa1;
+  --color-heading: #1e1e2e;
+  --color-navbar: #dce0e8;
+  --color-tabs: #e6e9ef;
+  --color-status: #dce0e8;
+  --color-tab-active: #eff1f5;
+  --color-tab-inactive: #e6e9ef;
+  --color-btn: #ccd0da;
+  --color-btn-hover: #bcc0cc;
+  --color-danger: #d20f39;
+  --color-success: #40a02b;
+  --color-warning: #df8e1d;
+}
+
+/* Rosé Pine Dawn */
+[data-theme="rosepine"] {
+  --color-bg: #faf4ed;
+  --color-surface: #f2e9e1;
+  --color-border: #cecacd;
+  --color-accent: #d7827e;
+  --color-accent-hover: #c46f6b;
+  --color-text: #575279;
+  --color-text-muted: #9893a5;
+  --color-heading: #286983;
+  --color-navbar: #f4ede8;
+  --color-tabs: #f2e9e1;
+  --color-status: #f4ede8;
+  --color-tab-active: #faf4ed;
+  --color-tab-inactive: #f2e9e1;
+  --color-btn: #dfdad9;
+  --color-btn-hover: #cecacd;
+  --color-danger: #b4637a;
+  --color-success: #56949f;
+  --color-warning: #ea9d34;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
