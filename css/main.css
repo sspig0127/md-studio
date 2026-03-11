@@ -535,12 +535,19 @@ html, body {
   margin-top: 8px;
 }
 .theme-swatch {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 3px solid transparent;
   cursor: pointer;
   transition: border-color var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: var(--font-ui);
+  box-shadow: 0 0 0 1px rgba(128,128,128,0.3);
 }
 .theme-swatch:hover { transform: scale(1.15); }
-.theme-swatch.active { border-color: var(--color-text); }
+.theme-swatch.active { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
