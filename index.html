@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2c3e50">
+  <title data-i18n="nav.title">Markdown 編輯器</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="vendor/easymde.min.css">
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/tabs.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="nav-logo" data-i18n="nav.title">Markdown 編輯器</span>
+    </div>
+    <div class="nav-actions">
+      <!-- Mobile: Edit/Preview toggle -->
+      <div class="mode-toggle mobile-only">
+        <button id="btn-mode-edit" class="mode-btn active" data-i18n="mode.edit">編輯</button>
+        <button id="btn-mode-preview" class="mode-btn" data-i18n="mode.preview">預覽</button>
+      </div>
+      <!-- Desktop actions -->
+      <button id="btn-new" class="nav-btn desktop-only" data-i18n="nav.new" title="新增">新增</button>
+      <button id="btn-open" class="nav-btn" data-i18n="nav.open" title="開啟檔案">開啟</button>
+      <input type="file" id="file-input" accept=".md,.txt,.markdown" style="display:none">
+      <button id="btn-download" class="nav-btn" data-i18n="nav.download" title="下載 .md">下載</button>
+      <!-- Cloud dropdown -->
+      <div class="dropdown" id="cloud-dropdown">
+        <button class="nav-btn dropdown-toggle" id="btn-cloud" data-i18n="nav.cloud">雲端 ▾</button>
+        <div class="dropdown-menu" id="cloud-menu">
+          <button id="btn-cloud-login" data-i18n="nav.cloud.login">Google 登入</button>
+          <button id="btn-cloud-open" data-i18n="nav.cloud.open" disabled>從雲端開啟</button>
+          <button id="btn-cloud-save" data-i18n="nav.cloud.save" disabled>儲存到雲端</button>
+          <hr>
+          <button id="btn-cloud-logout" data-i18n="nav.cloud.logout" style="display:none">登出</button>
+        </div>
+      </div>
+      <!-- Language dropdown -->
+      <div class="dropdown" id="lang-dropdown">
+        <button class="nav-btn dropdown-toggle" id="btn-lang">語言 ▾</button>
+        <div class="dropdown-menu" id="lang-menu">
+          <button data-lang="zh-TW">繁體中文</button>
+          <button data-lang="en">English</button>
+          <button data-lang="vi">Tiếng Việt</button>
+        </div>
+      </div>
+      <!-- Settings button -->
+      <button class="nav-btn" id="btn-settings" title="設定" data-i18n="nav.settings">⚙</button>
+      <!-- Mobile menu -->
+      <button class="nav-btn mobile-only" id="btn-mobile-menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu drawer -->
+  <div id="mobile-drawer" class="mobile-drawer" hidden>
+    <button id="md-new" data-i18n="nav.new">新增</button>
+    <button id="md-download" data-i18n="nav.download">下載 .md</button>
+    <button id="md-cloud-login" data-i18n="nav.cloud.login">Google 登入</button>
+    <button id="md-cloud-open" data-i18n="nav.cloud.open" disabled>從雲端開啟</button>
+    <button id="md-cloud-save" data-i18n="nav.cloud.save" disabled>儲存到雲端</button>
+    <hr>
+    <button id="md-settings" data-i18n="nav.settings">⚙ 設定</button>
+    <hr>
+    <div class="lang-group">
+      <button data-lang="zh-TW">繁體中文</button>
+      <button data-lang="en">English</button>
+      <button data-lang="vi">Tiếng Việt</button>
+    </div>
+  </div>
+
+  <!-- TABS BAR -->
+  <div class="tabs-bar" id="tabs-bar">
+    <div class="tabs-list" id="tabs-list"></div>
+    <button class="tab-new-btn" id="btn-tab-new" data-i18n="tabs.new">+ 新增</button>
+  </div>
+
+  <!-- MAIN EDITOR AREA -->
+  <main class="editor-wrapper" id="editor-wrapper">
+    <div class="editor-pane" id="editor-pane">
+      <textarea id="editor"></textarea>
+    </div>
+    <div class="preview-pane" id="preview-pane">
+      <div class="preview-content" id="preview-content"></div>
+    </div>
+  </main>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span id="status-text" class="status-saved" data-i18n="status.saved">已自動儲存</span>
+    <span class="status-sep">|</span>
+    <span id="status-words"><span data-i18n="status.words">字數</span>: <span id="word-count">0</span></span>
+    <span class="status-sep">|</span>
+    <span id="status-chars"><span data-i18n="status.chars">字元</span>: <span id="char-count">0</span></span>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="settings-modal" class="modal-overlay" hidden>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+      <div class="modal-header">
+        <h2 id="settings-modal-title" data-i18n="settings.title">設定</h2>
+        <button class="modal-close" id="btn-settings-close" aria-label="關閉">×</button>
+      </div>
+      <div class="modal-body">
+        <section class="settings-section">
+          <h3 data-i18n="settings.cloud.title">Google Drive</h3>
+          <p class="settings-desc" data-i18n="settings.cloud.desc">
+            填入 Google OAuth 2.0 Client ID 以啟用 Google Drive 功能。
+          </p>
+          <div class="settings-field">
+            <label for="input-client-id" data-i18n="settings.cloud.clientId">Google Client ID</label>
+            <span id="settings-client-id-status" class="settings-status status-warn">⚠ 尚未設定</span>
+          </div>
+          <input
+            type="text"
+            id="input-client-id"
+            class="settings-input"
+            data-i18n-placeholder="settings.cloud.placeholder"
+            placeholder="貼上你的 Google OAuth 2.0 Client ID"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <p class="settings-hint" data-i18n="settings.cloud.hint">設定後需重新整理頁面以套用</p>
+          <a
+            class="settings-link"
+            href="https://console.cloud.google.com/apis/credentials"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="settings.cloud.help"
+          >📖 如何取得 Client ID？</a>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-settings-cancel" data-i18n="settings.cancel">取消</button>
+        <button class="btn-primary" id="btn-settings-save" data-i18n="settings.save">儲存設定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS -->
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/mermaid.min.js"></script>
+  <script src="vendor/easymde.min.js"></script>
+  <!-- App JS -->
+  <script src="js/i18n.js"></script>
+  <script src="js/preview.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/cloud.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- PWA service worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .catch(err => console.warn('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

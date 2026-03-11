@@ -1,0 +1,66 @@
+/* ============================================
+   responsive.css — RWD Media Queries
+   ============================================ */
+
+/* ---- TABLET (< 1024px): shrink toolbar ---- */
+@media (max-width: 1023px) {
+  .preview-content { padding: 18px 20px; }
+}
+
+/* ---- MOBILE (< 768px) ---- */
+@media (max-width: 767px) {
+  /* Show/hide helpers */
+  .desktop-only { display: none !important; }
+  .mobile-only  { display: flex !important; }
+
+  /* Navbar */
+  .navbar { padding: 0 8px; gap: 6px; }
+  .nav-logo { font-size: 14px; }
+
+  /* Hide desktop cloud/lang dropdowns on mobile */
+  #cloud-dropdown,
+  #lang-dropdown { display: none; }
+
+  /* Tab bar: horizontal scroll */
+  .tabs-bar { height: 36px; }
+  .tab-item { min-width: 80px; max-width: 130px; padding: 0 8px 0 10px; font-size: 12px; }
+
+  /* Editor: single column */
+  .editor-wrapper {
+    flex-direction: column;
+    height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height));
+  }
+
+  /* Default: show edit, hide preview */
+  .editor-pane {
+    flex: 1;
+    border-right: none;
+    border-bottom: none;
+    height: 100%;
+  }
+  .preview-pane {
+    flex: 1;
+    height: 100%;
+    display: none;
+  }
+
+  /* Mode toggle states */
+  body.preview-mode .editor-pane  { display: none; }
+  body.preview-mode .preview-pane { display: block; }
+
+  /* Preview content */
+  .preview-content { padding: 16px 14px; font-size: 14px; }
+
+  /* EasyMDE toolbar: smaller icons */
+  .editor-toolbar { padding: 2px 4px !important; }
+  .editor-toolbar button { width: 28px !important; height: 28px !important; }
+
+  /* Status bar */
+  .status-bar { font-size: 10px; gap: 6px; padding: 0 8px; }
+}
+
+/* ---- SMALL MOBILE (< 400px) ---- */
+@media (max-width: 399px) {
+  .tab-item { min-width: 70px; max-width: 110px; font-size: 11px; }
+  .nav-logo { display: none; }
+}

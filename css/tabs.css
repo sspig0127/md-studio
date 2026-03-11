@@ -1,0 +1,95 @@
+/* ============================================
+   tabs.css — 多分頁樣式
+   ============================================ */
+
+.tabs-bar {
+  height: var(--tabs-height);
+  background: var(--color-tabs);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  z-index: 50;
+}
+
+.tabs-list {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1;
+  scrollbar-width: none;
+}
+.tabs-list::-webkit-scrollbar { display: none; }
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px 0 14px;
+  min-width: 100px;
+  max-width: 180px;
+  height: 100%;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-tab-inactive);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 13px;
+  transition: background var(--transition), color var(--transition);
+  position: relative;
+  user-select: none;
+}
+.tab-item:hover {
+  background: var(--color-btn-hover);
+  color: var(--color-text);
+}
+.tab-item.active {
+  background: var(--color-tab-active);
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.tab-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tab-dirty { color: var(--color-warning); font-size: 10px; }
+
+.tab-close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1;
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+.tab-close:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.tab-new-btn {
+  background: none;
+  border: none;
+  border-left: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 0 14px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color var(--transition), background var(--transition);
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  height: 100%;
+}
+.tab-new-btn:hover {
+  color: var(--color-accent);
+  background: var(--color-btn-hover);
+}

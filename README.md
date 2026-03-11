@@ -1,0 +1,211 @@
+# 📝 Markdown 編輯器 (Markdown Editor)
+
+> 一款支援離線使用的 PWA Markdown 編輯器，具備多分頁管理、Mermaid 圖表、Google Drive 整合與多語系支援。
+>
+> A PWA-based offline-first Markdown editor with multi-tab management, Mermaid diagrams, Google Drive integration, and multi-language support.
+
+![License](https://img.shields.io/badge/license-MIT-blue)
+![PWA](https://img.shields.io/badge/PWA-supported-brightgreen)
+![Languages](https://img.shields.io/badge/languages-zh--TW%20%7C%20en%20%7C%20vi-orange)
+![No Build](https://img.shields.io/badge/build-none%20required-lightgrey)
+
+---
+
+## ✨ 功能特色 / Features
+
+| 功能 | 說明 |
+|------|------|
+| 📄 即時預覽 | 分割畫面，即時渲染 Markdown |
+| 🗂️ 多分頁管理 | 同時開啟多份文件，狀態自動保存 |
+| 📊 Mermaid 圖表 | 支援流程圖、循序圖、狀態圖等 |
+| ☁️ Google Drive | OAuth2 登入，讀取 / 寫入雲端檔案 |
+| ⚙️ 組態設定 | 透過網頁介面設定 Google Client ID，存入 localStorage |
+| 📴 離線可用 | Service Worker 快取，完整離線功能 |
+| 📱 響應式設計 | 桌機分割預覽，手機切換模式 |
+| 🌐 多語系 | 繁體中文 / English / Tiếng Việt |
+| 💾 自動存檔 | 內容即時存入 localStorage |
+
+---
+
+## 🖥️ 畫面預覽 / Screenshot
+
+> *(可在此放置截圖)*
+
+---
+
+## 🚀 快速開始 / Quick Start
+
+### 本地測試（Windows）
+
+在專案資料夾開啟 **PowerShell 或 CMD**：
+
+```powershell
+cd D:\_SideProject\Markdown_webapp
+python -m http.server 8080
+```
+
+然後開啟瀏覽器前往 `http://localhost:8080`，按 `Ctrl+C` 停止伺服器。
+
+### 本地測試（macOS / Linux）
+
+```bash
+cd /path/to/Markdown_webapp
+python3 -m http.server 8080
+```
+
+> ⚠️ **WSL 使用者注意**：請在 **Windows 側**執行 Python 指令（而非 WSL 終端），避免虛擬網路造成連線問題。
+
+### 直接部署
+
+將整個資料夾上傳至靜態網站服務即可（GitHub Pages、Netlify、Vercel 等），**無需 build 步驟**。
+
+---
+
+## ☁️ Google Drive 設定 / Google Drive Setup
+
+> 若不需要 Google Drive 功能，可跳過此步驟。
+
+1. 前往 [Google Cloud Console](https://console.cloud.google.com/)
+2. 建立專案並啟用 **Google Drive API**
+3. 建立 **OAuth 2.0 用戶端 ID**（網頁應用程式）
+4. 新增授權的 JavaScript 來源（例如 `http://localhost:8080` 或部署網址）
+5. 複製 Client ID
+6. 點選畫面右上角的 **⚙ 設定** 按鈕，貼入 Client ID 並儲存
+
+> Client ID 存放於瀏覽器 localStorage，不會寫入任何程式碼或伺服器。
+
+---
+
+## 🛠️ 技術棧 / Tech Stack
+
+| 技術 | 用途 |
+|------|------|
+| [EasyMDE](https://easy-markdown-editor.tk/) | Markdown 編輯器 UI |
+| [marked.js](https://marked.js.org/) | Markdown → HTML 解析 |
+| [Mermaid.js v10](https://mermaid.js.org/) | 圖表渲染 |
+| Vanilla JavaScript | 應用邏輯（無框架） |
+| Pure CSS | 自訂樣式（無 UI 框架） |
+| Service Worker | 離線快取 (PWA) |
+| Google Drive API v3 | 雲端讀寫 |
+
+> **所有第三方函式庫均已打包在 `vendor/` 目錄中，確保完整離線可用。**
+
+---
+
+## 📁 專案結構 / Project Structure
+
+```
+Markdown_webapp/
+├── index.html              # 單頁應用入口
+├── manifest.json           # PWA 設定
+├── sw.js                   # Service Worker（離線快取）
+├── ARCHITECTURE.md         # 架構說明文件
+│
+├── css/
+│   ├── main.css            # 全域樣式與 CSS 變數
+│   ├── editor.css          # 編輯器與預覽區樣式
+│   ├── tabs.css            # 分頁列樣式
+│   └── responsive.css      # RWD 手機版樣式
+│
+├── js/
+│   ├── app.js              # 主入口，事件綁定
+│   ├── editor.js           # EasyMDE 初始化
+│   ├── preview.js          # Markdown + Mermaid 渲染
+│   ├── storage.js          # localStorage 與檔案操作
+│   ├── tabs.js             # 多分頁管理
+│   ├── settings.js         # 使用者設定（Google Client ID）
+│   ├── cloud.js            # Google Drive 整合
+│   └── i18n.js             # 多語系系統
+│
+├── locales/
+│   ├── zh-TW.json          # 繁體中文
+│   ├── en.json             # English
+│   └── vi.json             # Tiếng Việt
+│
+├── vendor/                 # 第三方函式庫（本地打包）
+│   ├── easymde.min.js
+│   ├── easymde.min.css
+│   ├── marked.min.js
+│   └── mermaid.min.js
+│
+└── assets/
+    ├── favicon.ico
+    └── icons/
+        ├── icon-192.png    # PWA 圖示
+        └── icon-512.png
+```
+
+---
+
+## 📴 離線支援 / Offline Support
+
+| 功能 | 離線可用 |
+|------|---------|
+| 編輯 Markdown | ✅ |
+| 即時預覽 | ✅ |
+| 開啟本地檔案 | ✅ |
+| 下載 .md 檔 | ✅ |
+| 多分頁切換 | ✅ |
+| 切換語言 | ✅ |
+| Google Drive | ❌（需要網路） |
+
+---
+
+## 🌐 瀏覽器支援 / Browser Support
+
+| 瀏覽器 | 支援狀況 |
+|--------|---------|
+| Chrome 90+ | ✅ 完整支援 |
+| Firefox 88+ | ✅ 完整支援 |
+| Edge 90+ | ✅ 完整支援 |
+| Safari 14+ | ✅ 支援（iOS PWA 功能受限） |
+| IE 11 | ❌ 不支援（Mermaid v10 使用 ESM） |
+
+---
+
+## 📋 使用方式 / Usage
+
+### 基本編輯
+- 在左側編輯器輸入 Markdown，右側即時預覽
+- 手機版可點選頂部的「編輯」/「預覽」切換
+
+### 多分頁
+- 點選 `+` 新增分頁
+- 點選分頁名稱切換文件
+- `×` 關閉分頁（有未儲存變更會提示確認）
+
+### Mermaid 圖表
+在程式碼區塊中使用 `mermaid` 語言標籤：
+
+````markdown
+```mermaid
+flowchart TD
+    A[開始] --> B{判斷}
+    B -->|是| C[執行]
+    B -->|否| D[結束]
+```
+````
+
+### Google Drive
+1. 點選右上角 **⚙ 設定**，貼入 Google Client ID 並儲存（[如何取得？](#️-google-drive-設定--google-drive-setup)）
+2. 重新整理頁面後，點選 **雲端** 下拉選單
+3. 使用 Google 登入
+4. 選擇「從雲端開啟」或「儲存到雲端」
+
+---
+
+## 📄 授權 / License
+
+[MIT License](LICENSE)
+
+---
+
+## 🤝 貢獻 / Contributing
+
+歡迎提交 Issue 或 Pull Request！
+
+1. Fork 此專案
+2. 建立 feature branch：`git checkout -b feature/your-feature`
+3. Commit 你的變更：`git commit -m 'Add some feature'`
+4. Push 到 branch：`git push origin feature/your-feature`
+5. 開啟 Pull Request
