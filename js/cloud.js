@@ -141,7 +141,7 @@ const Cloud = (() => {
       const file = files[idx];
       const content = await _downloadFile(file.id);
       const tab = Tabs.createTab(file.name, content);
-      tab.cloudFileId = file.id;
+      Tabs.setCloudFileId(tab.id, file.id);
       Preview.render(content);
     } catch (e) {
       console.error('[Cloud] Open error:', e);

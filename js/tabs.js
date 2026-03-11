@@ -57,6 +57,13 @@ const Tabs = (() => {
     _saveMeta();
   }
 
+  function setCloudFileId(id, fileId) {
+    const tab = _find(id);
+    if (!tab) return;
+    tab.cloudFileId = fileId;
+    _saveMeta();
+  }
+
   function saveContent(id, content) {
     const tab = _find(id);
     if (!tab) return;
@@ -93,8 +100,9 @@ const Tabs = (() => {
   }
 
   function _switchTo(id) {
-    // Save current editor content before switching
-    if (_activeId && _onSwitch) {
+    // Save current editor content before switching (skip if switching to the same tab,
+    // which happens on initial load when Editor is still empty)
+    if (_activeId && _onSwitch && _activeId !== id) {
       const cur = _find(_activeId);
       if (cur) {
         cur.content = Editor.getValue();
@@ -198,5 +206,5 @@ const Tabs = (() => {
     return el;
   }
 
-  return { init, createTab, closeTab, switchTo, setDirty, setFilename, saveContent, activeTab, allTabs };
+  return { init, createTab, closeTab, switchTo, setDirty, setFilename, saveContent, setCloudFileId, activeTab, allTabs };
 })();

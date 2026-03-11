@@ -70,8 +70,11 @@ const Editor = (() => {
 
   function setValue(content) {
     if (!_easyMDE) return;
+    const saved = _onChange;
+    _onChange = null;
     _easyMDE.value(content);
     _easyMDE.codemirror.clearHistory();
+    _onChange = saved;
   }
 
   function focus() {
