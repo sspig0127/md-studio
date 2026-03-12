@@ -5,7 +5,7 @@
  * 快取所有本地資源，確保離線可完整使用。
  */
 
-const CACHE_NAME = 'md-editor-v4';
+const CACHE_NAME = 'md-editor-v5';
 
 const PRECACHE_URLS = [
   '/',
@@ -26,6 +26,9 @@ const PRECACHE_URLS = [
   '/locales/zh-TW.json',
   '/locales/en.json',
   '/locales/vi.json',
+  '/locales/sample-zh-TW.md',
+  '/locales/sample-en.md',
+  '/locales/sample-vi.md',
   '/vendor/easymde.min.js',
   '/vendor/easymde.min.css',
   '/vendor/marked.min.js',
