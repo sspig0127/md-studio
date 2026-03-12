@@ -1,6 +1,7 @@
 {
   "nav.title": "Markdown Editor",
   "nav.new": "New",
+  "nav.sample": "Sample",
   "nav.open": "Open File",
   "nav.save": "Save",
   "nav.download": "Download .md",
