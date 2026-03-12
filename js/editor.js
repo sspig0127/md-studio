@@ -218,7 +218,7 @@ const Editor = (() => {
           panel.hidden = !panel.hidden;
           if (!panel.hidden) _panelJustOpened = true;
         },
-        className: 'fa fa-keyboard',
+        className: 'md-shortcuts-icon',
         title: I18n.t('shortcuts.title'),
       },
     ];

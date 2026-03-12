@@ -105,6 +105,14 @@
 .editor-toolbar i.separator {
   border-color: var(--color-border) !important;
 }
+/* 快捷鍵速查按鈕：用 Unicode 字元取代 FA 圖示，避免 bundle 缺字問題 */
+.editor-toolbar button.md-shortcuts-icon::before {
+  content: '⌨';
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1;
+}
 
 .CodeMirror-cursor { border-left-color: var(--color-accent) !important; }
 .CodeMirror-selected { background: rgba(124,106,247,0.2) !important; }
