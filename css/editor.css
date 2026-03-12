@@ -113,7 +113,8 @@
   font-size: 15px;
   line-height: 1;
 }
-.editor-toolbar button.md-mermaid-icon::before  { content: '⬡'; }
+.editor-toolbar button.md-checklist-icon::before { content: '☑'; }
+.editor-toolbar button.md-mermaid-icon::before   { content: '⬡'; }
 .editor-toolbar button.md-shortcuts-icon::before { content: '⌨'; }
 
 .CodeMirror-cursor { border-left-color: var(--color-accent) !important; }

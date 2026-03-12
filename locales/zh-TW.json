@@ -16,6 +16,7 @@
   "tabs.untitled": "未命名",
   "tabs.close.confirm": "此分頁有未儲存的變更，確定要關閉嗎？",
   "editor.placeholder": "在此輸入 Markdown...",
+  "toolbar.checklist": "任務清單",
   "toolbar.mermaid": "插入 Mermaid 圖表",
   "toolbar.preview": "切換預覽",
   "mode.edit": "編輯",

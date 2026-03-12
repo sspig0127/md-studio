@@ -195,7 +195,23 @@ const Editor = (() => {
     return [
       'bold', 'italic', 'strikethrough', '|',
       'heading-1', 'heading-2', 'heading-3', '|',
-      'unordered-list', 'ordered-list', 'checklist', '|',
+      'unordered-list', 'ordered-list',
+      {
+        name: 'checklist',
+        action: (editor) => {
+          const cm = editor.codemirror;
+          const line = cm.getCursor().line;
+          const text = cm.getLine(line);
+          if (/^- \[.\] /.test(text)) {
+            cm.replaceRange(text.replace(/^- \[.\] /, ''), { line, ch: 0 }, { line, ch: text.length });
+          } else {
+            cm.replaceRange('- [ ] ' + text.replace(/^[-*+] /, ''), { line, ch: 0 }, { line, ch: text.length });
+          }
+        },
+        className: 'md-checklist-icon',
+        title: I18n.t('toolbar.checklist'),
+      },
+      '|',
       'link', 'image', 'table', '|',
       'code', 'quote', '|',
       {

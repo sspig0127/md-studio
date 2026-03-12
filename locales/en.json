@@ -16,6 +16,7 @@
   "tabs.untitled": "Untitled",
   "tabs.close.confirm": "This tab has unsaved changes. Close anyway?",
   "editor.placeholder": "Type Markdown here...",
+  "toolbar.checklist": "Task List",
   "toolbar.mermaid": "Insert Mermaid diagram",
   "toolbar.preview": "Toggle preview",
   "mode.edit": "Edit",
