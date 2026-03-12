@@ -138,7 +138,7 @@ const Outline = (() => {
     const panel = document.getElementById('outline-panel');
     const editorPane = document.getElementById('editor-pane');
     const btn = document.getElementById('btn-outline');
-    if (panel) panel.hidden = false;
+    if (panel) panel.classList.add('outline-open');
     if (editorPane) editorPane.hidden = true;
     if (btn) btn.classList.add('outline-active');
     _render();
@@ -149,7 +149,7 @@ const Outline = (() => {
     const panel = document.getElementById('outline-panel');
     const editorPane = document.getElementById('editor-pane');
     const btn = document.getElementById('btn-outline');
-    if (panel) panel.hidden = true;
+    if (panel) panel.classList.remove('outline-open');
     if (editorPane) editorPane.hidden = false;
     if (btn) btn.classList.remove('outline-active');
   }

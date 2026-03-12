@@ -223,6 +223,13 @@
   overflow: hidden;
   border-right: 1px solid var(--color-border);
   background: var(--color-surface);
+  /* 預設收起：向左移出畫面，不佔 layout 空間 */
+  margin-left: -220px;
+  transition: margin-left 0.28s ease;
+}
+
+.outline-panel.outline-open {
+  margin-left: 0;
 }
 
 .outline-header {
