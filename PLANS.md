@@ -83,4 +83,57 @@
 
 ---
 
+## 🏁 最終里程碑：版本升級與跨平台 APP 打包
+
+> 在功能穩定後，將 md-studio 打包為各平台原生 APP，提升安裝體驗與系統整合度。
+
+### 階段規劃
+
+#### 階段一：PWA 強化（基礎，已部分完成）
+- [x] Service Worker 離線快取
+- [x] `manifest.json` 基本設定
+- [ ] `manifest.json` 補齊 `shortcuts`、`share_target`、`file_handlers`（`.md` 副檔名關聯）
+- [ ] 安裝提示（`beforeinstallprompt` 事件引導使用者加入主畫面）
+- [ ] iOS Safari 安裝說明提示
+
+#### 階段二：桌機 APP — Tauri 🔴
+- 技術選型：**Tauri v2**（Rust + WebView，比 Electron 輕量數十倍）
+- 目標平台：Windows、macOS、Linux
+- 打包產出：`.exe` / `.dmg` / `.AppImage`
+- 重點整合項目：
+  - 原生選單列（File / Edit / View）
+  - 原生檔案開啟 / 儲存對話框（取代 `<input type="file">`）
+  - 視窗標題列顯示目前檔名
+  - 系統通知（儲存成功 / 離線警告）
+
+#### 階段三：行動 APP — Capacitor 🟡
+- 技術選型：**Capacitor v6**（直接包裝現有 Web 程式碼，無需改寫）
+- 目標平台：Android（APK / AAB）、iOS（IPA）
+- 重點整合項目：
+  - Android：`.md` 副檔名關聯，從檔案管理器直接開啟
+  - iOS：Files App 整合
+  - 分享功能（Share Sheet）
+  - 觸控鍵盤上方工具列（iOS inputAccessoryView 替代方案）
+
+#### 階段四：版本號與發布流程 🟡
+- 語意化版本（Semantic Versioning）：`MAJOR.MINOR.PATCH`
+- 版本號統一管理（目前三處手動同步 → 改為單一 `version.js` 或 `package.json` 驅動）
+- GitHub Releases 自動發布（GitHub Actions）：
+  - 打 tag → 觸發 build → 產出各平台安裝檔 → 上傳 Release Assets
+- Changelog 自動生成（Conventional Commits）
+
+### 技術選型比較
+
+| 方案 | 桌機 | 行動 | 包大小 | 原生 API | 難度 |
+|------|------|------|--------|----------|------|
+| PWA | ✅ | ✅ | 最小 | 受限 | 低 |
+| Tauri v2 | ✅ | 🚧 實驗中 | 極小（~5MB） | 完整 | 中 |
+| Electron | ✅ | ❌ | 大（~150MB） | 完整 | 低 |
+| Capacitor | 🚧 | ✅ | 中 | 完整 | 中 |
+| React Native / Flutter | ❌ | ✅ | 中 | 完整 | 高（需重寫） |
+
+> **建議路徑**：PWA → Tauri（桌機）→ Capacitor（行動），最大限度複用現有程式碼。
+
+---
+
 *最後更新：2026-03-12*
