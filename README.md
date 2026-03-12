@@ -192,6 +192,12 @@ Markdown_webapp/
 - 點選分頁名稱切換文件
 - `×` 關閉分頁（有未儲存變更會提示確認）
 
+### 範例檔案
+點選頂部工具列的 **範例** 按鈕，即可開啟對應目前語系的 Markdown + Mermaid 完整語法教學範例（含目錄索引）。
+
+**語法參考資料**：
+- [GitHub 官方 Markdown 文件](https://docs.github.com/en/get-started/writing-on-github)（GitHub Flavored Markdown 完整說明）
+
 ### Mermaid 圖表
 在程式碼區塊中使用 `mermaid` 語言標籤：
 
