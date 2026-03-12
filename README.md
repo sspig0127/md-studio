@@ -17,9 +17,11 @@
 |------|------|
 | 📄 即時預覽 | 分割畫面，即時渲染 Markdown |
 | 🗂️ 多分頁管理 | 同時開啟多份文件，狀態自動保存 |
-| 📊 Mermaid 圖表 | 支援流程圖、循序圖、狀態圖等；滑鼠停留 2.5 秒顯示節點標籤 tooltip |
+| 📊 Mermaid 圖表 | 支援流程圖、循序圖、狀態圖、類別圖、甘特圖等；節點 Tooltip 懸停顯示 |
 | 🎨 7 種配色主題 | Dark Purple、Dark、Light、Nord、Solarized Light、Catppuccin Latte、Rosé Pine Dawn |
 | 🖋️ 5 種排版風格 | 標準、閱讀、緊湊、文件、全寬 |
+| ⌨️ 鍵盤快捷鍵 | 標題、刪除線、Mermaid 插入等常用操作，工具列附快捷鍵速查浮動面板 |
+| 📖 語法範例 | 一鍵載入對應語系的 Markdown + Mermaid 完整教學範例（含目錄索引） |
 | ☁️ Google Drive | OAuth2 登入，讀取 / 寫入雲端檔案 |
 | ⚙️ 組態設定 | 透過網頁介面設定 Google Client ID，存入 localStorage |
 | 📴 離線可用 | Service Worker 快取，完整離線功能 |
@@ -35,8 +37,8 @@
 
 ## 🚀 線上預覽與使用 (Live Demo)
 
-您可以直接點擊以下連結開啟此工具（請使用手機開啟以獲得最佳體驗）：
-👉 **[點我開啟網站編輯預覽Markdown文件](https://sspig0127.github.io/md-studio/)**
+您可以直接點擊以下連結開啟此工具：
+👉 **[點我開啟 Markdown 編輯器](https://sspig0127.github.io/md-studio/)**
 
 ---
 
@@ -126,8 +128,8 @@ Markdown_webapp/
 │   └── responsive.css      # RWD 手機版樣式
 │
 ├── js/
-│   ├── app.js              # 主入口，事件綁定
-│   ├── editor.js           # EasyMDE 初始化
+│   ├── app.js              # 主入口，事件綁定，語法範例載入
+│   ├── editor.js           # EasyMDE 初始化，快捷鍵，速查面板
 │   ├── preview.js          # Markdown + Mermaid 渲染
 │   ├── storage.js          # localStorage 與檔案操作
 │   ├── tabs.js             # 多分頁管理
@@ -136,9 +138,12 @@ Markdown_webapp/
 │   └── i18n.js             # 多語系系統
 │
 ├── locales/
-│   ├── zh-TW.json          # 繁體中文
-│   ├── en.json             # English
-│   └── vi.json             # Tiếng Việt
+│   ├── zh-TW.json          # 繁體中文介面文字
+│   ├── en.json             # English UI strings
+│   ├── vi.json             # Tiếng Việt UI strings
+│   ├── sample-zh-TW.md     # 繁體中文語法範例
+│   ├── sample-en.md        # English syntax sample
+│   └── sample-vi.md        # Mẫu cú pháp Tiếng Việt
 │
 ├── vendor/                 # 第三方函式庫（本地打包）
 │   ├── easymde.min.js
@@ -165,6 +170,7 @@ Markdown_webapp/
 | 下載 .md 檔 | ✅ |
 | 多分頁切換 | ✅ |
 | 切換語言 | ✅ |
+| 載入語法範例 | ✅ |
 | Google Drive | ❌（需要網路） |
 
 ---
@@ -188,18 +194,36 @@ Markdown_webapp/
 - 手機版可點選頂部的「編輯」/「預覽」切換
 
 ### 多分頁
-- 點選 `+` 新增分頁
+- 點選分頁列右側 `+ 新增` 建立新分頁
 - 點選分頁名稱切換文件
 - `×` 關閉分頁（有未儲存變更會提示確認）
 
-### 範例檔案
-點選頂部工具列的 **範例** 按鈕，即可開啟對應目前語系的 Markdown + Mermaid 完整語法教學範例（含目錄索引）。
+### 語法範例
+點選頂部導覽列的 **範例** 按鈕，開啟對應目前語系的 Markdown + Mermaid 完整語法教學範例。
+範例文件包含目錄索引、21 個語法章節（基礎語法、GFM 進階、Mermaid 圖表），可直接在編輯器中修改練習。
 
-**語法參考資料**：
-- [GitHub 官方 Markdown 文件](https://docs.github.com/en/get-started/writing-on-github)（GitHub Flavored Markdown 完整說明）
+> 語法參考資料：[GitHub 官方 Markdown 文件](https://docs.github.com/en/get-started/writing-on-github)
+
+### 鍵盤快捷鍵
+點選編輯工具列最右側的 **⌨ 鍵盤圖示**，可開啟快捷鍵速查浮動面板（可拖移位置，點面板外自動關閉）。
+
+| 快捷鍵 | 功能 |
+|--------|------|
+| `Ctrl + B` | 粗體 |
+| `Ctrl + I` | 斜體 |
+| `Ctrl + K` | 插入連結 |
+| `Ctrl + Alt + 1` | H1 標題（toggle） |
+| `Ctrl + Alt + 2` | H2 標題（toggle） |
+| `Ctrl + Alt + 3` | H3 標題（toggle） |
+| `Ctrl + Alt + 4` | H4 標題（toggle） |
+| `Ctrl + Shift + X` | 刪除線（toggle） |
+| `Ctrl + Alt + M` | 插入 Mermaid 圖表 |
+| `Ctrl + Z` | 復原 |
+| `Ctrl + Y` | 重做 |
+| `F11` | 全螢幕 |
 
 ### Mermaid 圖表
-在程式碼區塊中使用 `mermaid` 語言標籤：
+在程式碼區塊中使用 `mermaid` 語言標籤，或按 `Ctrl+Alt+M` 快速插入：
 
 ````markdown
 ```mermaid
@@ -218,15 +242,15 @@ flowchart TD
 | 色票 | 主題名稱 | 風格 |
 |------|---------|------|
 | 🟣 | Dark Purple（預設）| 深色，紫色強調 |
-| 🔵 | Dark | 深色，GitHub Dark 風格 |
-| 🔵 | Light | 淺色，GitHub Light 風格 |
+| ⚫ | Dark | 深色，GitHub Dark 風格 |
+| ⚪ | Light | 淺色，GitHub Light 風格 |
 | 🩵 | Nord | 深色，北歐冷色調 |
 | 🟡 | Solarized Light | 淺色，米黃底 Solarized 經典配色 |
 | 🔷 | Catppuccin Latte | 淺色，Catppuccin 柔和粉彩 |
 | 🌸 | Rosé Pine Dawn | 淺色，玫瑰松木暖白 |
 
 ### 排版風格
-點選頂部工具列 **風格** 下拉選單即時切換，不需重新整理：
+點選頂部導覽列 **風格** 下拉選單即時切換，不需重新整理：
 
 | 風格 | 特色 |
 |------|------|
