@@ -354,6 +354,22 @@ html, body {
 .status-saved { color: var(--color-success); }
 .status-unsaved { color: var(--color-warning); }
 
+.status-outline-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+  transition: color var(--transition);
+}
+.status-outline-btn::before          { content: '○'; }
+.status-outline-btn:hover::before    { content: '◑'; color: var(--color-accent); }
+.status-outline-btn.outline-active::before       { content: '<'; }
+.status-outline-btn.outline-active:hover::before { content: '<'; color: var(--color-accent); }
+
 /* ---- UTILITY ---- */
 .desktop-only { display: inline-flex; }
 .mobile-only  { display: none; }

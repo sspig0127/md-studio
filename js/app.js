@@ -86,6 +86,80 @@ const Typo = (() => {
   return { init };
 })();
 
+const Outline = (() => {
+  let _isOpen = false;
+
+  function _extractHeadings(content) {
+    const lines = content.split('\n');
+    const headings = [];
+    let inCode = false;
+    for (const line of lines) {
+      if (line.startsWith('```')) { inCode = !inCode; continue; }
+      if (inCode) continue;
+      const m = line.match(/^(#{1,6})\s+(.+)/);
+      if (m) headings.push({ level: m[1].length, text: m[2].trim() });
+    }
+    return headings;
+  }
+
+  function _scrollToHeading(text) {
+    const preview = document.getElementById('preview-content');
+    if (!preview) return;
+    for (const el of preview.querySelectorAll('h1,h2,h3,h4,h5,h6')) {
+      if (el.textContent.trim() === text) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        break;
+      }
+    }
+  }
+
+  function _render() {
+    const body = document.getElementById('outline-body');
+    if (!body) return;
+    const headings = _extractHeadings(Editor.getValue());
+    if (headings.length === 0) {
+      body.innerHTML = `<div class="outline-empty">${I18n.t('outline.empty')}</div>`;
+      return;
+    }
+    body.innerHTML = '';
+    headings.forEach(h => {
+      const btn = document.createElement('button');
+      btn.className = 'outline-item';
+      btn.dataset.level = h.level;
+      btn.textContent = h.text;
+      btn.title = h.text;
+      btn.addEventListener('click', () => _scrollToHeading(h.text));
+      body.appendChild(btn);
+    });
+  }
+
+  function open() {
+    _isOpen = true;
+    const panel = document.getElementById('outline-panel');
+    const editorPane = document.getElementById('editor-pane');
+    const btn = document.getElementById('btn-outline');
+    if (panel) panel.hidden = false;
+    if (editorPane) editorPane.hidden = true;
+    if (btn) btn.classList.add('outline-active');
+    _render();
+  }
+
+  function close() {
+    _isOpen = false;
+    const panel = document.getElementById('outline-panel');
+    const editorPane = document.getElementById('editor-pane');
+    const btn = document.getElementById('btn-outline');
+    if (panel) panel.hidden = true;
+    if (editorPane) editorPane.hidden = false;
+    if (btn) btn.classList.remove('outline-active');
+  }
+
+  function toggle() { if (_isOpen) close(); else open(); }
+  function refresh() { if (_isOpen) _render(); }
+
+  return { open, close, toggle, refresh };
+})();
+
 (async function AppInit() {
   function toggleDropdown(menuId) {
     const menu = document.getElementById(menuId);
@@ -136,6 +210,7 @@ const Typo = (() => {
       // On tab switch: render preview for the new tab's content
       Preview.render(tab.content);
       document.title = tab.filename + ' — ' + I18n.t('nav.title');
+      Outline.refresh();
     }
   );
 
@@ -243,6 +318,9 @@ const Typo = (() => {
   if (activeTab && activeTab.content) {
     Preview.render(activeTab.content);
   }
+
+  // Outline panel
+  document.getElementById('btn-outline')?.addEventListener('click', () => Outline.toggle());
 
   // Network status: disable cloud when offline
   window.addEventListener('offline', () => {

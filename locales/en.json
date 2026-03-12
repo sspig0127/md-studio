@@ -26,6 +26,7 @@
   "status.saving": "Saving...",
   "status.words": "Words",
   "status.chars": "Chars",
+  "status.lines": "Lines",
   "offline.cloud.disabled": "Connect to the internet to use cloud features",
   "cloud.login.success": "Signed in to Google",
   "cloud.login.error": "Sign-in failed, please try again",
@@ -66,5 +67,7 @@
   "typo.reading": "Reading",
   "typo.compact": "Compact",
   "typo.document": "Document",
-  "typo.wide": "Wide"
+  "typo.wide": "Wide",
+  "outline.title": "Outline",
+  "outline.empty": "(no headings)"
 }

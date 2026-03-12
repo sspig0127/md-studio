@@ -109,6 +109,11 @@
 
   <!-- MAIN EDITOR AREA -->
   <main class="editor-wrapper" id="editor-wrapper">
+    <!-- OUTLINE PANEL（大綱，預設隱藏） -->
+    <div id="outline-panel" class="outline-panel" hidden>
+      <div class="outline-header" data-i18n="outline.title">大綱</div>
+      <div class="outline-body" id="outline-body"></div>
+    </div>
     <div class="editor-pane" id="editor-pane">
       <textarea id="editor"></textarea>
     </div>
@@ -124,6 +129,9 @@
     <span id="status-words"><span data-i18n="status.words">字數</span>: <span id="word-count">0</span></span>
     <span class="status-sep">|</span>
     <span id="status-chars"><span data-i18n="status.chars">字元</span>: <span id="char-count">0</span></span>
+    <span class="status-sep">|</span>
+    <span id="status-lines"><span data-i18n="status.lines">行數</span>: <span id="line-count">0</span></span>
+    <button id="btn-outline" class="status-outline-btn" data-i18n-title="outline.title" title="大綱"></button>
   </div>
 
   <!-- SETTINGS MODAL -->

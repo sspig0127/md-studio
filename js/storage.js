@@ -78,10 +78,13 @@ const Storage = (() => {
   function _updateWordCount(text) {
     const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
     const chars = text.length;
+    const lines = text === '' ? 0 : text.split('\n').length;
     const wc = document.getElementById('word-count');
     const cc = document.getElementById('char-count');
+    const lc = document.getElementById('line-count');
     if (wc) wc.textContent = words;
     if (cc) cc.textContent = chars;
+    if (lc) lc.textContent = lines;
   }
 
   return { init, onContentChange, openFile, downloadFile };

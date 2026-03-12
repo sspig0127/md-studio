@@ -26,6 +26,7 @@
   "status.saving": "儲存中...",
   "status.words": "字數",
   "status.chars": "字元",
+  "status.lines": "行數",
   "offline.cloud.disabled": "請連線後使用雲端功能",
   "cloud.login.success": "Google 登入成功",
   "cloud.login.error": "登入失敗，請重試",
@@ -66,5 +67,7 @@
   "typo.reading": "閱讀",
   "typo.compact": "緊湊",
   "typo.document": "文件",
-  "typo.wide": "全寬"
+  "typo.wide": "全寬",
+  "outline.title": "大綱",
+  "outline.empty": "（無標題）"
 }

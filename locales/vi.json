@@ -26,6 +26,7 @@
   "status.saving": "Đang lưu...",
   "status.words": "Từ",
   "status.chars": "Ký tự",
+  "status.lines": "Dòng",
   "offline.cloud.disabled": "Vui lòng kết nối internet để sử dụng tính năng đám mây",
   "cloud.login.success": "Đăng nhập Google thành công",
   "cloud.login.error": "Đăng nhập thất bại, vui lòng thử lại",
@@ -66,5 +67,7 @@
   "typo.reading": "Đọc sách",
   "typo.compact": "Thu gọn",
   "typo.document": "Tài liệu",
-  "typo.wide": "Rộng"
+  "typo.wide": "Rộng",
+  "outline.title": "Mục lục",
+  "outline.empty": "(không có tiêu đề)"
 }
