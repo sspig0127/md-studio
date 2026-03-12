@@ -7,14 +7,30 @@
 
 ## Table of Contents
 
-**Part 1 — Basics**
-&nbsp;&nbsp;[Headings](#s1) &nbsp;·&nbsp; [Paragraphs & Line Breaks](#s2) &nbsp;·&nbsp; [Text Emphasis](#s3) &nbsp;·&nbsp; [Lists](#s4) &nbsp;·&nbsp; [Task Lists](#s5) &nbsp;·&nbsp; [Blockquotes](#s6) &nbsp;·&nbsp; [Code](#s7) &nbsp;·&nbsp; [Links](#s8) &nbsp;·&nbsp; [Images](#s9) &nbsp;·&nbsp; [Tables](#s10) &nbsp;·&nbsp; [Horizontal Rules](#s11) &nbsp;·&nbsp; [Escape Characters](#s12)
-
-**Part 2 — Advanced (GFM)**
-&nbsp;&nbsp;[Alerts](#s13) &nbsp;·&nbsp; [Collapsible Sections](#s14) &nbsp;·&nbsp; [Inline HTML](#s15)
-
-**Part 3 — Mermaid Diagrams**
-&nbsp;&nbsp;[Flowchart](#s16) &nbsp;·&nbsp; [Sequence Diagram](#s17) &nbsp;·&nbsp; [Pie Chart](#s18) &nbsp;·&nbsp; [Gantt Chart](#s19) &nbsp;·&nbsp; [State Diagram](#s20) &nbsp;·&nbsp; [Class Diagram](#s21)
+- **Part 1 — Basics**
+  - [1. Headings](#s1)
+  - [2. Paragraphs & Line Breaks](#s2)
+  - [3. Text Emphasis](#s3)
+  - [4. Lists](#s4)
+  - [5. Task Lists](#s5)
+  - [6. Blockquotes](#s6)
+  - [7. Code](#s7)
+  - [8. Links](#s8)
+  - [9. Images](#s9)
+  - [10. Tables](#s10)
+  - [11. Horizontal Rules](#s11)
+  - [12. Escape Characters](#s12)
+- **Part 2 — Advanced (GFM)**
+  - [13. Alerts](#s13)
+  - [14. Collapsible Sections](#s14)
+  - [15. Inline HTML](#s15)
+- **Part 3 — Mermaid Diagrams**
+  - [16. Flowchart](#s16)
+  - [17. Sequence Diagram](#s17)
+  - [18. Pie Chart](#s18)
+  - [19. Gantt Chart](#s19)
+  - [20. State Diagram](#s20)
+  - [21. Class Diagram](#s21)
 
 ---
 

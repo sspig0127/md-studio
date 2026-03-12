@@ -7,14 +7,30 @@
 
 ## Mục Lục
 
-**Phần 1 — Cơ Bản**
-&nbsp;&nbsp;[Tiêu đề](#s1) &nbsp;·&nbsp; [Đoạn văn & Xuống dòng](#s2) &nbsp;·&nbsp; [Định dạng chữ](#s3) &nbsp;·&nbsp; [Danh sách](#s4) &nbsp;·&nbsp; [Danh sách công việc](#s5) &nbsp;·&nbsp; [Trích dẫn](#s6) &nbsp;·&nbsp; [Code](#s7) &nbsp;·&nbsp; [Liên kết](#s8) &nbsp;·&nbsp; [Hình ảnh](#s9) &nbsp;·&nbsp; [Bảng](#s10) &nbsp;·&nbsp; [Đường kẻ ngang](#s11) &nbsp;·&nbsp; [Ký tự đặc biệt](#s12)
-
-**Phần 2 — Nâng Cao (GFM)**
-&nbsp;&nbsp;[Hộp cảnh báo](#s13) &nbsp;·&nbsp; [Phần thu gọn](#s14) &nbsp;·&nbsp; [HTML nhúng](#s15)
-
-**Phần 3 — Biểu Đồ Mermaid**
-&nbsp;&nbsp;[Sơ đồ luồng](#s16) &nbsp;·&nbsp; [Sơ đồ tuần tự](#s17) &nbsp;·&nbsp; [Biểu đồ tròn](#s18) &nbsp;·&nbsp; [Biểu đồ Gantt](#s19) &nbsp;·&nbsp; [Sơ đồ trạng thái](#s20) &nbsp;·&nbsp; [Sơ đồ lớp](#s21)
+- **Phần 1 — Cơ Bản**
+  - [1. Tiêu đề](#s1)
+  - [2. Đoạn văn & Xuống dòng](#s2)
+  - [3. Định dạng chữ](#s3)
+  - [4. Danh sách](#s4)
+  - [5. Danh sách công việc](#s5)
+  - [6. Trích dẫn](#s6)
+  - [7. Code](#s7)
+  - [8. Liên kết](#s8)
+  - [9. Hình ảnh](#s9)
+  - [10. Bảng](#s10)
+  - [11. Đường kẻ ngang](#s11)
+  - [12. Ký tự đặc biệt](#s12)
+- **Phần 2 — Nâng Cao (GFM)**
+  - [13. Hộp cảnh báo](#s13)
+  - [14. Phần thu gọn](#s14)
+  - [15. HTML nhúng](#s15)
+- **Phần 3 — Biểu Đồ Mermaid**
+  - [16. Sơ đồ luồng](#s16)
+  - [17. Sơ đồ tuần tự](#s17)
+  - [18. Biểu đồ tròn](#s18)
+  - [19. Biểu đồ Gantt](#s19)
+  - [20. Sơ đồ trạng thái](#s20)
+  - [21. Sơ đồ lớp](#s21)
 
 ---
 
