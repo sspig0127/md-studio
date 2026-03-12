@@ -205,8 +205,8 @@ const Editor = (() => {
           const cursor = cm.getCursor();
           cm.replaceRange(MERMAID_TEMPLATE, cursor);
         },
-        className: 'fa fa-project-diagram',
-        title: 'Insert Mermaid Diagram',
+        className: 'md-mermaid-icon',
+        title: I18n.t('toolbar.mermaid'),
       },
       '|',
       'undo', 'redo', '|',
