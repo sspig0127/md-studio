@@ -374,6 +374,21 @@ html, body {
 .desktop-only { display: inline-flex; }
 .mobile-only  { display: none; }
 
+/* ---- OUTLINE BACKDROP ---- */
+.outline-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1190;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.outline-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* ---- SCROLLBARS ---- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }

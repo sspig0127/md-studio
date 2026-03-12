@@ -88,6 +88,17 @@ const Typo = (() => {
 
 const Outline = (() => {
   let _isOpen = false;
+  let _backdrop = null;
+
+  function _isMobile() { return window.innerWidth < 768; }
+
+  function _getBackdrop() {
+    if (!_backdrop) {
+      _backdrop = document.getElementById('outline-backdrop');
+      if (_backdrop) _backdrop.addEventListener('click', close);
+    }
+    return _backdrop;
+  }
 
   function _extractHeadings(content) {
     const lines = content.split('\n');
@@ -136,11 +147,18 @@ const Outline = (() => {
   function open() {
     _isOpen = true;
     const panel = document.getElementById('outline-panel');
-    const editorPane = document.getElementById('editor-pane');
     const btn = document.getElementById('btn-outline');
     if (panel) panel.classList.add('outline-open');
-    if (editorPane) editorPane.hidden = true;
     if (btn) btn.classList.add('outline-active');
+    if (_isMobile()) {
+      // Mobile: bottom sheet + backdrop
+      const bd = _getBackdrop();
+      if (bd) bd.classList.add('active');
+    } else {
+      // Desktop: slide outline in, hide editor pane
+      const editorPane = document.getElementById('editor-pane');
+      if (editorPane) editorPane.hidden = true;
+    }
     _render();
   }
 
@@ -150,8 +168,10 @@ const Outline = (() => {
     const editorPane = document.getElementById('editor-pane');
     const btn = document.getElementById('btn-outline');
     if (panel) panel.classList.remove('outline-open');
-    if (editorPane) editorPane.hidden = false;
+    if (editorPane) editorPane.hidden = false;  // always restore
     if (btn) btn.classList.remove('outline-active');
+    const bd = _getBackdrop();
+    if (bd) bd.classList.remove('active');
   }
 
   function toggle() { if (_isOpen) close(); else open(); }
@@ -321,6 +341,23 @@ const Outline = (() => {
 
   // Outline panel
   document.getElementById('btn-outline')?.addEventListener('click', () => Outline.toggle());
+
+  // ---- BOTTOM TOOLBAR (mobile) ----
+  const _btbActions = {
+    'btb-bold':    () => EasyMDE.toggleBold(Editor.instance()),
+    'btb-italic':  () => EasyMDE.toggleItalic(Editor.instance()),
+    'btb-heading': () => EasyMDE.toggleHeadingSmaller(Editor.instance()),
+    'btb-ulist':   () => EasyMDE.toggleUnorderedList(Editor.instance()),
+    'btb-olist':   () => EasyMDE.toggleOrderedList(Editor.instance()),
+    'btb-code':    () => EasyMDE.toggleCodeBlock(Editor.instance()),
+  };
+  Object.entries(_btbActions).forEach(([id, action]) => {
+    document.getElementById(id)?.addEventListener('click', (e) => {
+      e.preventDefault();
+      action();
+      Editor.focus();
+    });
+  });
 
   // Network status: disable cloud when offline
   window.addEventListener('offline', () => {

@@ -122,6 +122,16 @@
     </div>
   </main>
 
+  <!-- Bottom Toolbar (mobile only) -->
+  <div id="bottom-toolbar" class="bottom-toolbar mobile-only" role="toolbar" aria-label="格式工具列">
+    <button class="btb-btn btb-bold"   id="btb-bold"    title="粗體 (Ctrl+B)">B</button>
+    <button class="btb-btn btb-italic" id="btb-italic"  title="斜體 (Ctrl+I)">I</button>
+    <button class="btb-btn"            id="btb-heading" title="標題">#</button>
+    <button class="btb-btn"            id="btb-ulist"   title="無序清單">≡</button>
+    <button class="btb-btn"            id="btb-olist"   title="有序清單">①</button>
+    <button class="btb-btn btb-code"   id="btb-code"    title="程式碼">&lt;/&gt;</button>
+  </div>
+
   <!-- STATUS BAR -->
   <div class="status-bar">
     <span id="status-text" class="status-saved" data-i18n="status.saved">已自動儲存</span>
@@ -204,6 +214,9 @@
   <script src="js/settings.js"></script>
   <script src="js/cloud.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- Outline backdrop (mobile bottom sheet) -->
+  <div id="outline-backdrop" class="outline-backdrop"></div>
 
   <!-- PWA service worker registration -->
   <script>

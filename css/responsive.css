@@ -37,10 +37,17 @@
   .tabs-bar { height: 36px; }
   .tab-item { min-width: 80px; max-width: 130px; padding: 0 8px 0 10px; font-size: 12px; }
 
-  /* Editor: single column */
+  /* Editor: single column — subtract 48px for bottom toolbar */
   .editor-wrapper {
     flex-direction: column;
+    height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 48px);
+  }
+  /* Preview mode: toolbar hidden, restore full height */
+  body.preview-mode .editor-wrapper {
     height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height));
+  }
+  body.preview-mode #bottom-toolbar {
+    display: none !important;
   }
 
   /* Default: show edit, hide preview */
@@ -67,8 +74,70 @@
   .editor-toolbar { padding: 2px 4px !important; }
   .editor-toolbar button { width: 28px !important; height: 28px !important; }
 
-  /* Status bar */
+  /* Status bar: hide chars on mobile, keep words + lines */
   .status-bar { font-size: 10px; gap: 6px; padding: 0 8px; }
+  /* Hide chars and both its surrounding separators */
+  #status-chars,
+  #status-chars + .status-sep,
+  .status-sep:has(+ #status-chars) { display: none; }
+
+  /* ---- BOTTOM TOOLBAR ---- */
+  .bottom-toolbar {
+    height: 48px;
+    background: var(--color-navbar);
+    border-top: 1px solid var(--color-border);
+    padding: 0 8px;
+    gap: 4px;
+    justify-content: space-around;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .btb-btn {
+    flex: 1;
+    height: 36px;
+    min-width: 0;
+    background: var(--color-btn);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    font-size: 14px;
+    font-family: var(--font-ui);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btb-btn:active { background: var(--color-accent); color: #fff; }
+  .btb-bold   { font-weight: 700; }
+  .btb-italic { font-style: italic; }
+  .btb-code   { font-family: var(--font-mono); font-size: 12px; }
+
+  /* ---- OUTLINE BOTTOM SHEET (portrait) ---- */
+  .outline-panel {
+    /* Override side-panel: reset margin-left animation */
+    width: 100%;
+    margin-left: 0 !important;
+    flex-shrink: initial;
+    /* Bottom sheet positioning */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    border-right: none;
+    border-top: 1px solid var(--color-border);
+    border-radius: 12px 12px 0 0;
+    z-index: 1200;
+    /* Closed: off-screen below */
+    transform: translateY(100%);
+    transition: transform 0.28s ease;
+  }
+  .outline-panel.outline-open {
+    transform: translateY(0);
+  }
 }
 
 /* ---- SMALL MOBILE (< 400px) ---- */
