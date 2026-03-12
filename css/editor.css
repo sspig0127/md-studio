@@ -203,6 +203,88 @@
   border-radius: var(--radius);
 }
 
+/* ---- SHORTCUTS PANEL ---- */
+.shortcuts-panel {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  z-index: 500;
+  min-width: 280px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  font-family: var(--font-ui);
+}
+
+.shortcuts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  background: var(--color-navbar);
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  cursor: move;
+  user-select: none;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.shortcuts-panel-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  padding: 0 2px;
+  transition: color var(--transition);
+}
+.shortcuts-panel-close:hover { color: var(--color-text); }
+
+.shortcuts-panel-body { padding: 6px 0; }
+
+.shortcuts-panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shortcuts-panel td {
+  padding: 4px 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.shortcuts-panel .shortcuts-key {
+  text-align: right;
+}
+
+.shortcuts-panel kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: var(--color-btn);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.shortcuts-plus {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  padding: 0 1px;
+}
+
+.shortcuts-sep td {
+  padding: 3px 0;
+  border-top: 1px solid var(--color-border);
+}
+
 /* ---- MERMAID ---- */
 .mermaid-wrapper {
   background: var(--color-surface);

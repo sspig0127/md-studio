@@ -5,7 +5,7 @@
  * 快取所有本地資源，確保離線可完整使用。
  */
 
-const CACHE_NAME = 'md-editor-v6';
+const CACHE_NAME = 'md-editor-v7';
 
 const PRECACHE_URLS = [
   '/',
