@@ -116,6 +116,28 @@ const Outline = (() => {
   function _scrollToHeading(text) {
     const preview = document.getElementById('preview-content');
     if (!preview) return;
+
+    if (_isMobile()) {
+      // 行動版：確保切換到預覽模式（preview-pane 才可見）
+      if (!document.body.classList.contains('preview-mode')) {
+        document.body.classList.add('preview-mode');
+        document.getElementById('btn-mode-edit')?.classList.remove('active');
+        document.getElementById('btn-mode-preview')?.classList.add('active');
+      }
+      close(); // 關閉大綱底部抽屜
+      // 等 display:none → block 生效後再 scroll
+      requestAnimationFrame(() => {
+        for (const el of preview.querySelectorAll('h1,h2,h3,h4,h5,h6')) {
+          if (el.textContent.trim() === text) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            break;
+          }
+        }
+      });
+      return;
+    }
+
+    // 桌機：預覽區一直可見，直接 scroll
     for (const el of preview.querySelectorAll('h1,h2,h3,h4,h5,h6')) {
       if (el.textContent.trim() === text) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
