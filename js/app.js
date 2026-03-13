@@ -3,7 +3,7 @@
  * 初始化所有模組，綁定 UI 事件
  */
 
-const APP_VERSION = '2026-03-13.1';
+const APP_VERSION = '2026-03-13.2';
 console.info(`%c[md-studio] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
 
 async function loadSample() {
@@ -49,9 +49,22 @@ function closeAllDropdowns() {
   document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
 }
 
+function openMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  if (!drawer) return;
+  drawer.removeAttribute('hidden');
+  requestAnimationFrame(() => drawer.classList.add('drawer-open'));
+  backdrop?.classList.add('active');
+}
+
 function closeMobileDrawer() {
   const drawer = document.getElementById('mobile-drawer');
-  if (drawer) drawer.hidden = true;
+  const backdrop = document.getElementById('drawer-backdrop');
+  if (!drawer) return;
+  drawer.classList.remove('drawer-open');
+  backdrop?.classList.remove('active');
+  drawer.addEventListener('transitionend', () => drawer.setAttribute('hidden', ''), { once: true });
 }
 
 const Typo = (() => {
@@ -370,8 +383,15 @@ const Outline = (() => {
   document.getElementById('btn-mobile-menu').addEventListener('click', (e) => {
     e.stopPropagation();
     const drawer = document.getElementById('mobile-drawer');
-    drawer.hidden = !drawer.hidden;
+    if (drawer.classList.contains('drawer-open')) {
+      closeMobileDrawer();
+    } else {
+      openMobileDrawer();
+    }
   });
+
+  // Drawer backdrop click to close
+  document.getElementById('drawer-backdrop')?.addEventListener('click', closeMobileDrawer);
 
   // Mobile mode toggle
   document.getElementById('btn-mode-edit').addEventListener('click', () => setMode('edit'));
@@ -380,10 +400,9 @@ const Outline = (() => {
     Preview.render(Editor.getValue());
   });
 
-  // Close dropdowns/drawer on outside click
+  // Close dropdowns on outside click (drawer now handled by backdrop)
   document.addEventListener('click', () => {
     closeAllDropdowns();
-    closeMobileDrawer();
   });
 
   // Initial preview render + word count
@@ -493,5 +512,65 @@ const Outline = (() => {
       });
   });
   window.addEventListener('online', () => Cloud.init());
+
+  // ---- PWA INSTALL ----
+
+  // beforeinstallprompt: Chrome / Edge / Android
+  let _deferredInstallPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    _deferredInstallPrompt = e;
+    document.getElementById('pwa-install-section')?.removeAttribute('hidden');
+  });
+  window.addEventListener('appinstalled', () => {
+    _deferredInstallPrompt = null;
+    document.getElementById('pwa-install-section')?.setAttribute('hidden', '');
+  });
+  document.getElementById('btn-pwa-install')?.addEventListener('click', async () => {
+    if (!_deferredInstallPrompt) return;
+    _deferredInstallPrompt.prompt();
+    const { outcome } = await _deferredInstallPrompt.userChoice;
+    if (outcome === 'accepted') _deferredInstallPrompt = null;
+  });
+
+  // iOS Safari install hint
+  const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const _isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  const _iosBannerDismissed = sessionStorage.getItem('ios_banner_dismissed');
+  if (_isIOS && !_isStandalone && !_iosBannerDismissed) {
+    document.getElementById('ios-install-banner')?.removeAttribute('hidden');
+  }
+  document.getElementById('ios-banner-close')?.addEventListener('click', () => {
+    document.getElementById('ios-install-banner')?.setAttribute('hidden', '');
+    sessionStorage.setItem('ios_banner_dismissed', '1');
+  });
+
+  // launchQueue: 從檔案總管開啟 .md 檔（file_handlers）
+  if ('launchQueue' in window) {
+    window.launchQueue.setConsumer(async (launchParams) => {
+      if (!launchParams.files || launchParams.files.length === 0) return;
+      for (const fileHandle of launchParams.files) {
+        const file = await fileHandle.getFile();
+        const text = await file.text();
+        Tabs.createTab(file.name, text);
+      }
+    });
+  }
+
+  // shortcuts URL: ?action=new / ?action=sample
+  const _urlParams = new URLSearchParams(location.search);
+  const _urlAction = _urlParams.get('action');
+  if (_urlAction === 'new') {
+    Tabs.createTab();
+  } else if (_urlAction === 'sample') {
+    loadSample();
+  }
+
+  // share_target: ?text=...&title=...
+  if (_urlParams.has('text')) {
+    const sharedTitle = _urlParams.get('title') || 'shared.md';
+    const sharedText = _urlParams.get('text') || '';
+    Tabs.createTab(sharedTitle, sharedText);
+  }
 
 })();

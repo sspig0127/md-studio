@@ -1,12 +1,12 @@
 {
-  "name": "Markdown 編輯器",
-  "short_name": "MD Editor",
+  "name": "MD Studio",
+  "short_name": "MD Studio",
   "description": "離線可用的 Markdown 編輯器，支援 Mermaid 圖表與 Google Drive",
   "start_url": "/index.html",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#1e1e2e",
-  "theme_color": "#2c3e50",
+  "theme_color": "#7c6af7",
   "lang": "zh-TW",
   "icons": [
     {
@@ -23,5 +23,38 @@
     }
   ],
   "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "新增文件",
+      "short_name": "新增",
+      "description": "建立新的 Markdown 文件",
+      "url": "/index.html?action=new",
+      "icons": [{"src": "assets/icons/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "開啟範例",
+      "short_name": "範例",
+      "description": "開啟 Markdown 範例文件",
+      "url": "/index.html?action=sample",
+      "icons": [{"src": "assets/icons/icon-192.png", "sizes": "192x192"}]
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/index.html",
+      "accept": {
+        "text/markdown": [".md", ".markdown"],
+        "text/plain": [".txt"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/index.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text"
+    }
+  },
   "screenshots": []
 }

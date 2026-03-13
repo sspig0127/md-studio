@@ -275,18 +275,32 @@ html, body {
 }
 
 /* ---- MOBILE DRAWER ---- */
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1099;
+}
+.drawer-backdrop.active { display: block; }
+
 .mobile-drawer {
   position: fixed;
   top: var(--navbar-height);
   right: 0;
   width: 220px;
+  height: calc(100dvh - var(--navbar-height));
+  overflow-y: auto;
   background: var(--color-surface);
   border-left: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  border-radius: 0 0 0 var(--radius);
   box-shadow: var(--shadow);
   z-index: 1100;
   padding: 8px 0;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+.mobile-drawer.drawer-open {
+  transform: translateX(0);
 }
 .mobile-drawer button {
   display: block;
@@ -749,4 +763,30 @@ html, body {
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
   pointer-events: none;
+}
+
+/* ---- iOS INSTALL BANNER ---- */
+.ios-install-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  font-family: var(--font-ui);
+  color: var(--color-text);
+  text-align: center;
+}
+.ios-install-banner[hidden] { display: none; }
+.ios-install-banner button {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  flex-shrink: 0;
 }

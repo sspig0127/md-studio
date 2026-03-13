@@ -86,5 +86,9 @@
   "search.replaceAll": "Thay thế tất cả",
   "search.caseSensitive": "Phân biệt hoa thường",
   "search.regex": "Biểu thức chính quy",
-  "search.wholeWord": "Toàn bộ từ"
+  "search.wholeWord": "Toàn bộ từ",
+  "settings.install.title": "Cài đặt ứng dụng",
+  "settings.install.desc": "Cài MD Studio lên màn hình chính để dùng như ứng dụng gốc (hoạt động offline).",
+  "settings.install.btn": "Cài đặt",
+  "pwa.ios.hint": "Trong Safari, nhấn <b>Chia sẻ</b> (⬆) → <b>Thêm vào màn hình chính</b> để cài đặt"
 }

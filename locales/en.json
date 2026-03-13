@@ -86,5 +86,9 @@
   "search.replaceAll": "Replace All",
   "search.caseSensitive": "Case sensitive",
   "search.regex": "Regular expression",
-  "search.wholeWord": "Whole word"
+  "search.wholeWord": "Whole word",
+  "settings.install.title": "Install App",
+  "settings.install.desc": "Install MD Studio to your home screen for a native app experience (works offline).",
+  "settings.install.btn": "Install",
+  "pwa.ios.hint": "In Safari, tap <b>Share</b> (⬆) → <b>Add to Home Screen</b> to install"
 }

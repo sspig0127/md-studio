@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2c3e50">
-  <meta name="app-version" content="2026-03-13.1">
-  <title data-i18n="nav.title">Markdown 編輯器</title>
+  <meta name="theme-color" content="#7c6af7">
+  <meta name="app-version" content="2026-03-13.2">
+  <title data-i18n="nav.title">MD Studio</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="assets/favicon.ico">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+
+  <!-- iOS install hint banner (shown only on iOS Safari non-standalone) -->
+  <div id="ios-install-banner" class="ios-install-banner" hidden>
+    <span data-i18n-html="pwa.ios.hint">在 Safari 點選 <b>分享</b>（⬆）→ <b>加入主畫面</b> 即可安裝</span>
+    <button id="ios-banner-close" aria-label="關閉">✕</button>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -80,6 +86,9 @@
       <button class="nav-btn mobile-only" id="btn-mobile-menu">☰</button>
     </div>
   </nav>
+
+  <!-- Mobile drawer backdrop -->
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
 
   <!-- Mobile menu drawer -->
   <div id="mobile-drawer" class="mobile-drawer" hidden>
@@ -198,6 +207,11 @@
             <button class="theme-swatch" data-theme-btn="rosepine" title="Rosé Pine Dawn"   style="background:#faf4ed; color:#575279;">T</button>
           </div>
         </section>
+        <section id="pwa-install-section" class="settings-section" style="margin-top: 20px;" hidden>
+          <h3 data-i18n="settings.install.title">安裝應用程式</h3>
+          <p class="settings-desc" data-i18n="settings.install.desc">將 MD Studio 安裝至桌面，享受原生 App 體驗（離線可用）。</p>
+          <button class="btn-primary" id="btn-pwa-install" data-i18n="settings.install.btn">安裝</button>
+        </section>
         <section class="settings-section" style="margin-top: 20px;">
           <h3 data-i18n="settings.cloud.title">Google Drive</h3>
           <p class="settings-desc" data-i18n="settings.cloud.desc">
@@ -231,7 +245,7 @@
         <button class="btn-primary" id="btn-apply-theme" data-i18n="settings.theme.apply">套用配色</button>
         <button class="btn-primary" id="btn-settings-save" data-i18n="settings.save">儲存設定</button>
       </div>
-      <div class="modal-version">v2026-03-13.1</div>
+      <div class="modal-version">v2026-03-13.2</div>
     </div>
   </div>
 

@@ -41,6 +41,12 @@ const I18n = (() => {
       const val = t(key);
       if (val) el.title = val;
     });
+    // Inner HTML (for locale strings that contain safe HTML like <b>)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      const val = t(key);
+      if (val) el.innerHTML = val;
+    });
     // Document title
     document.title = t('nav.title');
     // Notify app

@@ -53,10 +53,11 @@
 - 大綱按鈕保留在右側
 - **實作**：CSS `:has()` 同時隱藏 `#status-chars` 及前後兩個分隔符
 
-#### 6. Navbar 整合 🟢
+#### 6. Navbar 整合 🟢 ✅ 已完成（2026-03-13）
 - 直式模式下 navbar 只保留 Logo 與 ☰ Menu 按鈕
 - 所有動作（New / Open / Download / Cloud / Lang / Typo / Settings）統一收入 Drawer
-- Drawer 改為側邊滑出（從右側），更接近原生 App 體驗
+- Drawer 從右側滑出（`transform: translateX` + `transition: 0.25s ease`）
+- Backdrop 遮罩層（點擊關閉）已加入
 
 #### 7. 分頁列觸控優化 🟢 ✅ scroll snap 已完成（2026-03-13）
 - 分頁列支援水平 scroll snap（`scroll-snap-type: x mandatory` + `scroll-snap-align: start`）
@@ -417,12 +418,15 @@ export default Search;
 
 ### 階段規劃
 
-#### 階段一：PWA 強化（基礎，已部分完成）
+#### 階段一：PWA 強化（基礎，已部分完成）✅ 已完成（2026-03-13）
 - [x] Service Worker 離線快取
 - [x] `manifest.json` 基本設定
-- [ ] `manifest.json` 補齊 `shortcuts`、`share_target`、`file_handlers`（`.md` 副檔名關聯）
-- [ ] 安裝提示（`beforeinstallprompt` 事件引導使用者加入主畫面）
-- [ ] iOS Safari 安裝說明提示
+- [x] `manifest.json` 補齊 `shortcuts`、`share_target`、`file_handlers`（`.md` 副檔名關聯）
+- [x] 安裝提示（`beforeinstallprompt` → 設定面板「安裝至桌面」按鈕）
+- [x] iOS Safari 安裝說明提示（可關閉橫幅，session 不再重複出現）
+- [x] `launchQueue` API：從檔案總管開啟 .md 自動載入新分頁
+- [x] `?action=new / sample` shortcuts URL 處理
+- [x] `?text=&title=` share_target URL 處理
 
 #### 階段二：桌機 APP — Tauri 🔴
 - 技術選型：**Tauri v2**（Rust + WebView，比 Electron 輕量數十倍）

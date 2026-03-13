@@ -86,5 +86,9 @@
   "search.replaceAll": "全部取代",
   "search.caseSensitive": "區分大小寫",
   "search.regex": "正則表達式",
-  "search.wholeWord": "整個單詞"
+  "search.wholeWord": "整個單詞",
+  "settings.install.title": "安裝應用程式",
+  "settings.install.desc": "將 MD Studio 安裝至桌面，享受原生 App 體驗（離線可用）。",
+  "settings.install.btn": "安裝至桌面",
+  "pwa.ios.hint": "在 Safari 點選 <b>分享</b>（⬆）→ <b>加入主畫面</b> 即可安裝"
 }

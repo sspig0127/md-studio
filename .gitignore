@@ -17,3 +17,7 @@ SPONSOR-TAIWAN-FINANCE.md
 
 # Playwright MCP 自動記錄
 .playwright-mcp/
+
+# 測試截圖（Playwright 臨時產出）
+test-*.png
+drawer-test-*.png
