@@ -73,5 +73,9 @@
   "typo.wide": "Rộng",
   "outline.title": "Mục lục",
   "outline.empty": "(không có tiêu đề)",
-  "dropzone.hint": "Thả để mở tệp"
+  "dropzone.hint": "Thả để mở tệp",
+  "nav.export": "Xuất",
+  "nav.export.title": "Xuất HTML / PDF",
+  "nav.export.html": "Xuất HTML",
+  "nav.export.pdf": "Xuất PDF"
 }

@@ -583,6 +583,33 @@ html, body {
 .theme-swatch:hover { transform: scale(1.15); }
 .theme-swatch.active { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
 
+/* ---- PRINT CSS (匯出 PDF) ---- */
+@media print {
+  /* Hide all UI chrome */
+  .navbar,
+  .tabs-bar,
+  .editor-pane,
+  .editor-toolbar,
+  .bottom-toolbar,
+  .swipe-dots,
+  .status-bar,
+  #shortcuts-panel,
+  #outline-panel,
+  .modal-overlay,
+  #drop-zone-overlay,
+  #outline-backdrop,
+  #shortcuts-backdrop,
+  .mobile-drawer { display: none !important; }
+
+  /* Show preview pane regardless of edit/preview mode */
+  .editor-wrapper { height: auto !important; overflow: visible !important; }
+  .preview-pane   { display: block !important; height: auto !important; overflow: visible !important; border: none !important; }
+  .preview-content { max-width: 100% !important; padding: 0 !important; font-size: 12pt !important; }
+
+  body { background: white !important; }
+  @page { margin: 20mm; }
+}
+
 /* ---- DROP ZONE OVERLAY (desktop drag & drop) ---- */
 .drop-zone-overlay {
   position: fixed;

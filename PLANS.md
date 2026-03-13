@@ -58,9 +58,9 @@
 - 所有動作（New / Open / Download / Cloud / Lang / Typo / Settings）統一收入 Drawer
 - Drawer 改為側邊滑出（從右側），更接近原生 App 體驗
 
-#### 7. 分頁列觸控優化 🟢
-- 分頁列支援水平 scroll snap
-- 長按分頁可拖移排序（Drag-to-reorder）
+#### 7. 分頁列觸控優化 🟢 ✅ scroll snap 已完成（2026-03-13）
+- 分頁列支援水平 scroll snap（`scroll-snap-type: x mandatory` + `scroll-snap-align: start`）
+- 長按分頁可拖移排序（Drag-to-reorder）🟢 待實作
 
 ---
 
@@ -83,8 +83,8 @@
 | 新手導覽 Onboarding Tour | 首次開啟時逐步介紹各功能與位置，可隨時跳過或重播 | 🟡 |
 | 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | ✅ 已完成（2026-03-13）|
 | 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 |
-| 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | 🟡 |
-| 匯出 PDF | 透過瀏覽器列印 / print CSS | 🟢 |
+| 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | ✅ 已完成（2026-03-13）|
+| 匯出 PDF | 透過瀏覽器列印 / print CSS | ✅ 已完成（2026-03-13）|
 | 字數目標 | 設定目標字數並顯示進度條 | 🟢 |
 | Vim / Emacs 模式 | CodeMirror keymap 切換 | 🟢 |
 | 自訂 CSS | 讓使用者貼入自訂 preview CSS | 🟢 |
@@ -327,4 +327,4 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 | 2：功能差異化 | 🟢 評估中 | 匯出 HTML/PDF、解鎖碼機制、分頁上限差異 |
 | 3：進階整合 | 🟢 評估中 | GitHub Gist、WebDAV、自訂快捷鍵 |
 
-*最後更新：2026-03-13（完成 Swipe 手勢切換 + Drop Zone 拖曳開檔 + 快捷鍵面板 Portrait 適配）*
+*最後更新：2026-03-13（完成匯出 HTML / PDF + 分頁列 scroll snap）*

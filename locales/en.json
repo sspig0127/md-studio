@@ -73,5 +73,9 @@
   "typo.wide": "Wide",
   "outline.title": "Outline",
   "outline.empty": "(no headings)",
-  "dropzone.hint": "Drop to open file"
+  "dropzone.hint": "Drop to open file",
+  "nav.export": "Export",
+  "nav.export.title": "Export HTML / PDF",
+  "nav.export.html": "Export HTML",
+  "nav.export.pdf": "Export PDF"
 }

@@ -251,6 +251,7 @@ const Outline = (() => {
     (tab) => {
       // On tab switch: render preview for the new tab's content
       Preview.render(tab.content);
+      Storage.updateStats(tab.content);
       document.title = tab.filename + ' — ' + I18n.t('nav.title');
       Outline.refresh();
     }
@@ -303,6 +304,29 @@ const Outline = (() => {
     closeMobileDrawer();
   });
 
+  // Export HTML
+  document.getElementById('btn-export-html')?.addEventListener('click', () => {
+    closeAllDropdowns();
+    Storage.exportHTML();
+  });
+  document.getElementById('md-export-html')?.addEventListener('click', () => {
+    Storage.exportHTML();
+    closeMobileDrawer();
+  });
+
+  // Export PDF
+  document.getElementById('btn-export-pdf')?.addEventListener('click', () => {
+    closeAllDropdowns();
+    // On mobile edit mode, switch to preview first so print shows content
+    if (window.innerWidth <= 767) setMode('preview');
+    setTimeout(() => window.print(), 80);
+  });
+  document.getElementById('md-export-pdf')?.addEventListener('click', () => {
+    closeMobileDrawer();
+    if (window.innerWidth <= 767) setMode('preview');
+    setTimeout(() => window.print(), 80);
+  });
+
   // Cloud buttons
   document.getElementById('btn-cloud-login').addEventListener('click', () => Cloud.signIn());
   document.getElementById('btn-cloud-logout').addEventListener('click', () => Cloud.signOut());
@@ -322,6 +346,10 @@ const Outline = (() => {
   });
 
   // Dropdown toggles
+  document.getElementById('btn-export')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown('export-menu');
+  });
   document.getElementById('btn-cloud').addEventListener('click', (e) => {
     e.stopPropagation();
     toggleDropdown('cloud-menu');
@@ -355,10 +383,12 @@ const Outline = (() => {
     closeMobileDrawer();
   });
 
-  // Initial preview render
+  // Initial preview render + word count
+  // setTimeout ensures this runs after any pending EasyMDE async change events
   const activeTab = Tabs.activeTab();
   if (activeTab && activeTab.content) {
     Preview.render(activeTab.content);
+    setTimeout(() => Storage.updateStats(activeTab.content), 0);
   }
 
   // Outline panel

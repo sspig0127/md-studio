@@ -73,5 +73,9 @@
   "typo.wide": "全寬",
   "outline.title": "大綱",
   "outline.empty": "（無標題）",
-  "dropzone.hint": "放開以開啟檔案"
+  "dropzone.hint": "放開以開啟檔案",
+  "nav.export": "匯出",
+  "nav.export.title": "匯出 HTML / PDF",
+  "nav.export.html": "匯出 HTML",
+  "nav.export.pdf": "匯出 PDF"
 }

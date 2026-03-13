@@ -36,6 +36,14 @@
       <button id="btn-open" class="nav-btn" data-i18n="nav.open" data-i18n-title="nav.open">開啟</button>
       <input type="file" id="file-input" accept=".md,.txt,.markdown" style="display:none">
       <button id="btn-download" class="nav-btn" data-i18n="nav.download" data-i18n-title="nav.download">下載</button>
+      <!-- Export dropdown -->
+      <div class="dropdown desktop-only" id="export-dropdown">
+        <button class="nav-btn dropdown-toggle" id="btn-export" data-i18n-title="nav.export.title" title="匯出 HTML / PDF"><span data-i18n="nav.export">匯出</span> ▾</button>
+        <div class="dropdown-menu" id="export-menu">
+          <button id="btn-export-html" data-i18n="nav.export.html">匯出 HTML</button>
+          <button id="btn-export-pdf"  data-i18n="nav.export.pdf">匯出 PDF</button>
+        </div>
+      </div>
       <!-- Cloud dropdown -->
       <div class="dropdown" id="cloud-dropdown">
         <button class="nav-btn dropdown-toggle" id="btn-cloud" data-i18n-title="nav.cloud" title="雲端"><span data-i18n="nav.cloud">雲端</span> ▾</button>
@@ -78,7 +86,9 @@
     <button id="md-new" data-i18n="nav.new">新增</button>
     <button id="md-sample" data-i18n="nav.sample">範例</button>
     <button id="md-open" data-i18n="nav.open">開啟檔案</button>
-    <button id="md-download" data-i18n="nav.download">下載 .md</button>
+    <button id="md-download"     data-i18n="nav.download">下載 .md</button>
+    <button id="md-export-html"  data-i18n="nav.export.html">匯出 HTML</button>
+    <button id="md-export-pdf"   data-i18n="nav.export.pdf">匯出 PDF</button>
     <button id="md-cloud-login" data-i18n="nav.cloud.login">Google 登入</button>
     <button id="md-cloud-open" data-i18n="nav.cloud.open" disabled>從雲端開啟</button>
     <button id="md-cloud-save" data-i18n="nav.cloud.save" disabled>儲存到雲端</button>

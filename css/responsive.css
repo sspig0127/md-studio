@@ -33,9 +33,10 @@
   /* Prevent nav-actions from overflowing */
   .nav-actions { overflow: hidden; flex-shrink: 1; min-width: 0; }
 
-  /* Tab bar: horizontal scroll */
+  /* Tab bar: horizontal scroll + snap */
   .tabs-bar { height: 36px; }
-  .tab-item { min-width: 80px; max-width: 130px; padding: 0 8px 0 10px; font-size: 12px; }
+  .tabs-list { scroll-snap-type: x mandatory; }
+  .tab-item { min-width: 80px; max-width: 130px; padding: 0 8px 0 10px; font-size: 12px; scroll-snap-align: start; }
 
   /* Editor: single column — subtract 48px toolbar + 16px swipe dots */
   .editor-wrapper {

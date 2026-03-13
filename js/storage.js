@@ -68,6 +68,55 @@ const Storage = (() => {
     _setStatus('saved');
   }
 
+  // Export current tab preview as standalone .html file
+  function exportHTML() {
+    const tab = Tabs.activeTab();
+    if (!tab) return;
+    // Ensure preview reflects latest editor content
+    Preview.render(Editor.getValue());
+    const filename = tab.filename.replace(/\.(md|markdown|txt)$/i, '') + '.html';
+    const body = document.getElementById('preview-content').innerHTML;
+    const title = tab.filename.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const html = `<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:800px;margin:0 auto;padding:32px 24px;line-height:1.6;color:#24292f}
+    h1,h2,h3,h4,h5,h6{margin-top:24px;margin-bottom:8px;font-weight:600;line-height:1.25}
+    h1,h2{border-bottom:1px solid #d0d7de;padding-bottom:.3em}
+    h1{font-size:2em}h2{font-size:1.5em}h3{font-size:1.25em}
+    pre{background:#f6f8fa;border-radius:6px;padding:16px;overflow-x:auto}
+    code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:85%}
+    p code,li code{background:#f6f8fa;padding:2px 6px;border-radius:4px}
+    blockquote{border-left:4px solid #d0d7de;padding-left:16px;color:#57606a;margin:0 0 16px}
+    table{border-collapse:collapse;width:100%;margin-bottom:16px}
+    th,td{border:1px solid #d0d7de;padding:6px 13px}
+    th{background:#f6f8fa;font-weight:600}
+    tr:nth-child(even){background:#f6f8fa}
+    img{max-width:100%;height:auto}
+    a{color:#0969da;text-decoration:none}a:hover{text-decoration:underline}
+    hr{border:none;border-top:1px solid #d0d7de;margin:24px 0}
+    ul,ol{padding-left:2em}li+li{margin-top:.25em}
+  </style>
+</head>
+<body>
+${body}
+</body>
+</html>`;
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
   function _setStatus(state) {
     const el = document.getElementById('status-text');
     if (!el) return;
@@ -87,5 +136,5 @@ const Storage = (() => {
     if (lc) lc.textContent = lines;
   }
 
-  return { init, onContentChange, openFile, downloadFile };
+  return { init, onContentChange, updateStats: _updateWordCount, openFile, downloadFile, exportHTML };
 })();
