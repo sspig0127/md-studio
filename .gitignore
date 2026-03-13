@@ -10,3 +10,7 @@ Thumbs.db
 # Logs
 *.log
 Ref/
+
+# 私人文件（本機 symlink，不推送）
+SPONSOR-MODEL.md
+SPONSOR-TAIWAN-FINANCE.md
