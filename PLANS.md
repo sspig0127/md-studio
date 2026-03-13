@@ -78,12 +78,69 @@
 
 | 功能 | 說明 | 優先序 |
 |------|------|--------|
+| 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | 🟡 |
 | 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 |
 | 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | 🟡 |
 | 匯出 PDF | 透過瀏覽器列印 / print CSS | 🟢 |
 | 字數目標 | 設定目標字數並顯示進度條 | 🟢 |
 | Vim / Emacs 模式 | CodeMirror keymap 切換 | 🟢 |
 | 自訂 CSS | 讓使用者貼入自訂 preview CSS | 🟢 |
+
+---
+
+## 🗂️ 拖曳開檔 Drop Zone（桌機）🟡
+
+> 桌機模式下，讓使用者直接從檔案總管或桌面拖曳 Markdown 檔案到編輯器，降低「開啟檔案」操作摩擦。
+
+### 互動流程
+
+```
+使用者拖曳檔案進入瀏覽器視窗
+  ↓
+偵測 dragenter — 判斷 DataTransfer 內是否含可讀格式
+  ├─ 格式符合 → 顯示 Drop Zone 覆蓋層（半透明背景 + 四邊框線 + 提示文字）
+  └─ 格式不符 → 不顯示（忽略此次拖曳）
+
+使用者在 Drop Zone 範圍內放開滑鼠（drop）
+  → 隱藏覆蓋層
+  → 以 FileReader 讀取檔案內容
+  → 呼叫現有 Storage.openFile() 開啟新分頁
+
+使用者將檔案拖離視窗（dragleave）
+  → 隱藏覆蓋層，不做任何動作
+```
+
+### 視覺設計
+
+| 元素 | 規格 |
+|------|------|
+| 覆蓋層 | `position: fixed; inset: 0`，背景 `rgba(accent, 0.15)` |
+| 框線 | `2px dashed var(--color-accent)`，`border-radius: 12px`，內縮 16px |
+| 提示文字 | 置中顯示，例如「放開以開啟檔案」/ "Drop to open" |
+| 動畫 | `opacity` 淡入淡出（0.15s），配合 `pointer-events: none/auto` |
+| z-index | 低於 modal（2000）但高於一般內容 |
+
+### 支援格式
+
+偵測 `DataTransfer.items[].type` 或副檔名：
+
+| 格式 | MIME type |
+|------|-----------|
+| `.md` | `text/markdown` / `text/plain` |
+| `.txt` | `text/plain` |
+| `.markdown` | `text/markdown` / `text/plain` |
+
+不支援的格式（圖片、PDF 等）拖入時不顯示覆蓋層，行為與瀏覽器預設一致。
+
+### 技術評估
+
+| 項目 | 說明 |
+|------|------|
+| 事件 | `dragenter` / `dragover` / `dragleave` / `drop`，均需 `e.preventDefault()` 阻止瀏覽器預設開啟行為 |
+| 格式判斷 | 優先用 `item.type`；MIME 不明時 fallback 比對副檔名 |
+| 檔案讀取 | 複用現有 `Storage.openFile(file)` |
+| 手機版 | 不啟用（`dragenter` 在觸控裝置不觸發）|
+| 依賴 | Vanilla JS + 現有 CSS 變數，zero-dependency |
 
 ---
 
@@ -151,4 +208,4 @@
 
 ---
 
-*最後更新：2026-03-13*
+*最後更新：2026-03-13（新增拖曳開檔 Drop Zone 規劃）*
