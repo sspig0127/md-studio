@@ -245,6 +245,9 @@ const Outline = (() => {
     if (tab) Tabs.setDirty(tab.id, true);
   });
 
+  // 5b. Search (requires CodeMirror instance from Editor)
+  Search.init(Editor.instance().codemirror);
+
   // 6. Tabs
   Tabs.init(
     document.getElementById('tabs-list'),

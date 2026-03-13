@@ -126,6 +126,24 @@
     </div>
     <div class="editor-pane" id="editor-pane">
       <textarea id="editor"></textarea>
+      <!-- Search / Replace Panel -->
+      <div id="search-panel" class="search-panel" hidden>
+        <div class="search-row">
+          <input id="search-input" type="text" data-i18n-placeholder="search.placeholder" autocomplete="off" spellcheck="false">
+          <span id="search-count" class="search-count"></span>
+          <button id="search-prev" class="search-nav-btn" title="↑">↑</button>
+          <button id="search-next" class="search-nav-btn" title="↓">↓</button>
+          <button id="search-opt-case"  class="search-opt" data-i18n-title="search.caseSensitive">Aa</button>
+          <button id="search-opt-regex" class="search-opt" data-i18n-title="search.regex">.*</button>
+          <button id="search-opt-word"  class="search-opt" data-i18n-title="search.wholeWord">W</button>
+          <button id="search-close" class="search-close-btn">✕</button>
+        </div>
+        <div id="replace-row" class="replace-row" hidden>
+          <input id="replace-input" type="text" data-i18n-placeholder="search.replacePlaceholder" autocomplete="off" spellcheck="false">
+          <button id="btn-replace"     data-i18n="search.replace">Replace</button>
+          <button id="btn-replace-all" data-i18n="search.replaceAll">Replace All</button>
+        </div>
+      </div>
     </div>
     <div class="preview-pane" id="preview-pane">
       <div class="preview-content" id="preview-content"></div>
@@ -229,6 +247,7 @@
   <script src="js/tabs.js"></script>
   <script src="js/settings.js"></script>
   <script src="js/cloud.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/app.js"></script>
 
   <!-- Outline backdrop (mobile bottom sheet) -->

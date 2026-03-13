@@ -77,5 +77,14 @@
   "nav.export": "匯出",
   "nav.export.title": "匯出 HTML / PDF",
   "nav.export.html": "匯出 HTML",
-  "nav.export.pdf": "匯出 PDF"
+  "nav.export.pdf": "匯出 PDF",
+  "shortcuts.search": "搜尋",
+  "shortcuts.replace": "搜尋／取代",
+  "search.placeholder": "搜尋…",
+  "search.replacePlaceholder": "取代為…",
+  "search.replace": "取代",
+  "search.replaceAll": "全部取代",
+  "search.caseSensitive": "區分大小寫",
+  "search.regex": "正則表達式",
+  "search.wholeWord": "整個單詞"
 }

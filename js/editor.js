@@ -45,6 +45,10 @@ const Editor = (() => {
       { key: 'Ctrl + Shift + X', i18n: 'shortcuts.strikethrough' },
       { key: 'Ctrl + Alt + M',   i18n: 'shortcuts.mermaid' },
       { sep: true },
+      { sep: true },
+      { key: 'Ctrl + F',         i18n: 'shortcuts.search' },
+      { key: 'Ctrl + H',         i18n: 'shortcuts.replace' },
+      { sep: true },
       { key: 'Ctrl + Z',         i18n: 'shortcuts.undo' },
       { key: 'Ctrl + Y',         i18n: 'shortcuts.redo' },
       { key: 'F11',              i18n: 'shortcuts.fullscreen' },
@@ -197,6 +201,11 @@ const Editor = (() => {
     _easyMDE.codemirror.addKeyMap({
       'Ctrl-Alt-4': (cm) => _toggleHeading(cm, 4), // H4
       'Ctrl-Alt-M': (cm) => _insertMermaid(cm),     // 插入 Mermaid
+      'Ctrl-F': () => { if (typeof Search !== 'undefined') Search.open(false); },
+      'Ctrl-H': () => { if (typeof Search !== 'undefined') Search.open(true); },
+      'F3':     () => { if (typeof Search !== 'undefined' && Search.isOpen()) Search.next(); },
+      'Shift-F3': () => { if (typeof Search !== 'undefined' && Search.isOpen()) Search.prev(); },
+      'Escape': () => { if (typeof Search !== 'undefined' && Search.isOpen()) { Search.close(); return; } },
     });
 
     // 建立快捷鍵浮動面板

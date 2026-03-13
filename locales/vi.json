@@ -77,5 +77,14 @@
   "nav.export": "Xuất",
   "nav.export.title": "Xuất HTML / PDF",
   "nav.export.html": "Xuất HTML",
-  "nav.export.pdf": "Xuất PDF"
+  "nav.export.pdf": "Xuất PDF",
+  "shortcuts.search": "Tìm kiếm",
+  "shortcuts.replace": "Tìm / Thay thế",
+  "search.placeholder": "Tìm kiếm…",
+  "search.replacePlaceholder": "Thay thế bằng…",
+  "search.replace": "Thay thế",
+  "search.replaceAll": "Thay thế tất cả",
+  "search.caseSensitive": "Phân biệt hoa thường",
+  "search.regex": "Biểu thức chính quy",
+  "search.wholeWord": "Toàn bộ từ"
 }

@@ -77,5 +77,14 @@
   "nav.export": "Export",
   "nav.export.title": "Export HTML / PDF",
   "nav.export.html": "Export HTML",
-  "nav.export.pdf": "Export PDF"
+  "nav.export.pdf": "Export PDF",
+  "shortcuts.search": "Search",
+  "shortcuts.replace": "Search / Replace",
+  "search.placeholder": "Search…",
+  "search.replacePlaceholder": "Replace with…",
+  "search.replace": "Replace",
+  "search.replaceAll": "Replace All",
+  "search.caseSensitive": "Case sensitive",
+  "search.regex": "Regular expression",
+  "search.wholeWord": "Whole word"
 }

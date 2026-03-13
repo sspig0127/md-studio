@@ -82,7 +82,7 @@
 | Google Drive 零設定（hosted）| 官方 GitHub Pages 版內建共用 Client ID，使用者不需自行申請 | 🔴 |
 | 新手導覽 Onboarding Tour | 首次開啟時逐步介紹各功能與位置，可隨時跳過或重播 | 🟡 |
 | 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | ✅ 已完成（2026-03-13）|
-| 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 |
+| 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 → [詳細規劃](#搜尋取代-search--replace) |
 | 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | ✅ 已完成（2026-03-13）|
 | 匯出 PDF | 透過瀏覽器列印 / print CSS | ✅ 已完成（2026-03-13）|
 | 字數目標 | 設定目標字數並顯示進度條 | 🟢 |
@@ -190,6 +190,168 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 | localStorage key | `md_tour_seen`（值為版本號，方便日後重置）|
 | 版本重置 | 若導覽步驟大幅更新，可改版本號讓老用戶再看一次 |
 | 與設定整合 | `Settings.init()` 新增「重新播放導覽」按鈕 |
+
+---
+
+## 🔍 搜尋/取代 Search & Replace
+
+> Ctrl+F 開啟搜尋列，Ctrl+H 展開取代列，ESC 關閉。
+> 底層使用 CodeMirror 內建 `getSearchCursor()`（已包含在 EasyMDE bundle 中），Zero-dependency。
+
+### 觸發方式
+
+| 快捷鍵 | 行為 |
+|--------|------|
+| `Ctrl+F` | 開啟搜尋列（僅搜尋模式） |
+| `Ctrl+H` | 開啟搜尋+取代列 |
+| `Enter` / `F3` | 跳至下一個符合項 |
+| `Shift+Enter` / `Shift+F3` | 跳至上一個符合項 |
+| `Escape` | 關閉面板，游標留在當前位置 |
+
+### 介面設計
+
+```
+┌─────────────────────────────────────────────────┐
+│  [🔍 搜尋輸入框]  3/12  [↑] [↓]  [Aa] [.*] [W]  [✕]  ← 搜尋列
+│  [取代輸入框]           [取代] [全部取代]              ← 取代列（Ctrl+H）
+└─────────────────────────────────────────────────┘
+```
+
+**位置**：固定在 `#editor-pane` 右上角（`position: absolute; top: 8px; right: 8px`）
+**層級**：`z-index: 1500`（低於 modal 2000，高於 outline 1000）
+
+### 選項按鈕
+
+| 按鈕 | 功能 | 快捷鍵 |
+|------|------|--------|
+| `Aa` | 區分大小寫（case-sensitive） | `Alt+C` |
+| `.*` | 正規表達式（regex）模式 | `Alt+R` |
+| `W`  | 全字比對（whole word） | `Alt+W` |
+
+### 符合項高亮
+
+- **當前符合**：`background: var(--color-accent); color: white`（滾動進視窗）
+- **其他符合**：`background: rgba(accent, 0.25)`（使用 CodeMirror overlay 或 `markText`）
+- 計數器：`3/12`（第 N 個 / 共 M 個），無符合時紅底顯示
+
+### 手機版（Portrait）
+
+- 面板改為固定在**底部**（`position: fixed; bottom: 0; left: 0; right: 0`）
+- 高度 auto，與底部工具列不重疊（底部工具列上移）
+- 選項按鈕收進第二行（avoid 按鈕太小）
+
+### 技術實作方案
+
+#### 核心搜尋邏輯（`js/search.js`）
+
+```javascript
+// 使用 CodeMirror 內建 API
+const cursor = cm.getSearchCursor(query, from, { caseFold: !caseSensitive });
+// query 若為 string → 普通搜尋；若為 RegExp → regex 搜尋
+
+// 找下一個
+cursor.findNext() → cursor.from() / cursor.to() → cm.setSelection()
+
+// 全部高亮（markText）
+cm.getAllMarks().forEach(m => m.clear());
+while (cursor.findNext()) {
+  cm.markText(cursor.from(), cursor.to(), { className: 'cm-search-match' });
+}
+
+// 取代
+cm.replaceRange(replaceText, cursor.from(), cursor.to());
+
+// 全部取代
+const cursor = cm.getSearchCursor(query);
+cm.operation(() => {
+  while (cursor.findNext()) cursor.replace(replaceText);
+});
+```
+
+#### 模組介面
+
+```javascript
+const Search = {
+  open(mode = 'search'),  // mode: 'search' | 'replace'
+  close(),
+  findNext(),
+  findPrev(),
+  replace(),
+  replaceAll(),
+  setQuery(text),
+  init(cm),               // 注入 CodeMirror instance
+};
+export default Search;
+```
+
+#### 整合點
+
+| 位置 | 修改內容 |
+|------|---------|
+| `js/editor.js` | `addKeyMap` 加入 `Ctrl-F`、`Ctrl-H`，呼叫 `Search.open()` |
+| `index.html` | 加入 `#search-panel` 結構（搜尋列 + 取代列） |
+| `css/main.css` | `.search-panel`、`.cm-search-match`、`.cm-search-match-current` 樣式 |
+| `css/responsive.css` | 手機版 bottom 定位覆蓋 |
+| `locales/*.json` | 新增 `search.*` i18n key |
+| `js/app.js` | `import Search` 並在初始化時呼叫 `Search.init(cm)` |
+
+### HTML 結構草稿
+
+```html
+<div id="search-panel" class="search-panel" hidden>
+  <div class="search-row">
+    <input id="search-input" type="text" data-i18n-placeholder="search.placeholder" autocomplete="off">
+    <span id="search-count" class="search-count"></span>
+    <button id="search-prev" title="↑">↑</button>
+    <button id="search-next" title="↓">↓</button>
+    <button id="search-opt-case" class="search-opt" data-i18n-title="search.caseSensitive">Aa</button>
+    <button id="search-opt-regex" class="search-opt" data-i18n-title="search.regex">.*</button>
+    <button id="search-opt-word" class="search-opt" data-i18n-title="search.wholeWord">W</button>
+    <button id="search-close">✕</button>
+  </div>
+  <div id="replace-row" class="replace-row" hidden>
+    <input id="replace-input" type="text" data-i18n-placeholder="search.replacePlaceholder" autocomplete="off">
+    <button id="btn-replace" data-i18n="search.replace">取代</button>
+    <button id="btn-replace-all" data-i18n="search.replaceAll">全部取代</button>
+  </div>
+</div>
+```
+
+### i18n Key 列表
+
+```json
+"search.placeholder": "搜尋...",
+"search.replacePlaceholder": "取代為...",
+"search.caseSensitive": "區分大小寫",
+"search.regex": "正規表達式",
+"search.wholeWord": "全字比對",
+"search.replace": "取代",
+"search.replaceAll": "全部取代",
+"search.noResult": "找不到結果",
+"search.matchCount": "{current}/{total}",
+"search.replaced": "已取代 {count} 處"
+```
+
+### 實作順序
+
+1. `index.html` 加入 `#search-panel` HTML
+2. `css/main.css` 加入面板樣式 + `.cm-search-match` highlight
+3. `js/search.js` 實作搜尋核心邏輯
+4. `js/editor.js` 綁定 Ctrl+F / Ctrl+H / Escape keymap
+5. `js/app.js` 初始化 Search 模組
+6. `locales/*.json` 加入 i18n key
+7. `css/responsive.css` 加入手機版覆蓋樣式
+
+### 快捷鍵面板更新
+
+`js/editor.js` 的 shortcuts panel 需加入：
+
+| 按鍵 | 功能 |
+|------|------|
+| `Ctrl + F` | 搜尋 |
+| `Ctrl + H` | 搜尋與取代 |
+| `Enter / F3` | 下一個符合 |
+| `Shift+Enter / Shift+F3` | 上一個符合 |
 
 ---
 
