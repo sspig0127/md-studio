@@ -82,18 +82,69 @@ python3 -m http.server 8080
 
 ---
 
-## ☁️ Google Drive 設定 / Google Drive Setup
+## ☁️ Google Drive 說明與設定 / Google Drive Setup
 
-> 若不需要 Google Drive 功能，可跳過此步驟。
+> **雲端功能為選用項目，不影響基本編輯功能。** 不需要 Google Drive 的使用者可直接跳過本節。
 
-1. 前往 [Google Cloud Console](https://console.cloud.google.com/)
-2. 建立專案並啟用 **Google Drive API**
-3. 建立 **OAuth 2.0 用戶端 ID**（網頁應用程式）
-4. 新增授權的 JavaScript 來源（例如 `http://localhost:8080` 或部署網址）
-5. 複製 Client ID
-6. 點選畫面右上角的 **⚙ 設定** 按鈕，貼入 Client ID 並儲存
+### 運作原理
 
-> Client ID 存放於瀏覽器 localStorage，不會寫入任何程式碼或伺服器。
+md-studio 採用 **Google OAuth 2.0** 與 Drive API，資料流如下：
+
+```
+你的瀏覽器  ←────────────────────→  Google 伺服器
+                  直接通訊（HTTPS）
+
+md-studio 開發者無法看到任何使用者資料
+```
+
+| 項目 | 說明 |
+|------|------|
+| **Client ID 是什麼** | 識別「md-studio 這個應用程式」的代號，不含個人帳號資訊，公開無妨 |
+| **資料流向** | 瀏覽器 ↔ Google 直接通訊，不經過任何第三方伺服器 |
+| **存取範圍** | 僅在使用者主動點「開啟」或「儲存」時存取對應檔案，無法自動掃描 Drive |
+| **開發者能看到什麼** | 完全看不到使用者的帳號、檔案或 Access Token |
+
+**使用者登入流程：**
+
+```
+點「雲端 → Google 登入」
+  → 瀏覽器跳到 Google 官方登入頁
+  → 輸入自己的 Google 帳號（不經過 md-studio）
+  → Google 顯示授權同意畫面
+  → 使用者點「允許」後，Token 存於瀏覽器，即可讀寫 Drive
+```
+
+---
+
+### 🌐 使用官方 hosted 版本（推薦，零設定）
+
+> **計畫中**：官方 GitHub Pages 版本（`sspig0127.github.io/md-studio`）將內建共用 Client ID，
+> 使用者**不需要任何設定**，直接點「Google 登入」即可使用雲端功能。
+
+---
+
+### 🔧 自架部署 / 本機測試（需自行設定 Client ID）
+
+自行架設（localhost、自訂網域）的使用者需建立自己的 Client ID：
+
+**步驟：**
+
+1. 前往 [Google Cloud Console](https://console.cloud.google.com/)，建立新專案（名稱隨意）
+2. 左側選單 → **API 和服務** → **啟用 API** → 搜尋並啟用 **Google Drive API**
+3. 左側 → **憑證** → **建立憑證** → **OAuth 2.0 用戶端 ID**
+4. 應用程式類型選「**網頁應用程式**」
+5. 在「授權的 JavaScript 來源」加入你的網址：
+
+   | 使用情境 | 填入網址 |
+   |---------|---------|
+   | 本機測試 | `http://localhost:8080` |
+   | GitHub Pages | `https://你的帳號.github.io` |
+   | 自訂網域 | `https://你的網域.com` |
+
+6. 建立後複製 **Client ID**（格式：`xxxxxx.apps.googleusercontent.com`）
+7. 在 md-studio 點右上角 **⚙** → 貼入 Client ID → 儲存 → 重新整理頁面
+
+> Client ID 僅存於瀏覽器 localStorage，不會上傳至任何伺服器或程式碼。
 
 ---
 
