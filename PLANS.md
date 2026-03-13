@@ -36,6 +36,7 @@
 - 高度約 60vh，內部可捲動
 - 斷點：`@media (max-width: 767px)` + orientation portrait
 - **實作**：CSS `transform: translateY()` + `#outline-backdrop` opacity 動畫
+- **修正（2026-03-13）**：手機編輯模式下點選大綱項目，`preview-pane` 為 `display:none` 導致 `scrollIntoView` 無效；改為自動切換預覽模式 → 關閉底部抽屜 → `requestAnimationFrame` 後捲動
 
 #### 3. 編輯 / 預覽 Swipe 手勢 🟡
 - 支援左右滑動切換「編輯」與「預覽」模式
@@ -136,6 +137,17 @@
 | React Native / Flutter | ❌ | ✅ | 中 | 完整 | 高（需重寫） |
 
 > **建議路徑**：PWA → Tauri（桌機）→ Capacitor（行動），最大限度複用現有程式碼。
+
+---
+
+## 🐛 已修正問題記錄
+
+| 日期 | 問題描述 | 修正方式 |
+|------|---------|---------|
+| 2026-03-13 | `btn-settings` 的 `data-i18n` 覆寫 ⚙ 圖示為翻譯文字 | 改用 `data-i18n-title`；`md-settings` 改為 `<span>` 分離圖示與文字 |
+| 2026-03-13 | 導覽列按鈕 hover tooltip 切換語系後仍顯示中文 | 硬編碼 `title` 改為 `data-i18n-title`，隨語系自動更新 |
+| 2026-03-13 | 手機大綱點選項目無法跳轉（`preview-pane` 為 `display:none`） | 點選時先切換至預覽模式，再以 `requestAnimationFrame` 捲動 |
+| 2026-03-13 | SW `CACHE_NAME` 未隨程式碼更新升版，導致設備載入舊快取 | `md-editor-v8` → `md-editor-v9` |
 
 ---
 
