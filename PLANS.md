@@ -38,14 +38,15 @@
 - **實作**：CSS `transform: translateY()` + `#outline-backdrop` opacity 動畫
 - **修正（2026-03-13）**：手機編輯模式下點選大綱項目，`preview-pane` 為 `display:none` 導致 `scrollIntoView` 無效；改為自動切換預覽模式 → 關閉底部抽屜 → `requestAnimationFrame` 後捲動
 
-#### 3. 編輯 / 預覽 Swipe 手勢 🟡
+#### 3. 編輯 / 預覽 Swipe 手勢 🟡 ✅ 已完成（2026-03-13）
 - 支援左右滑動切換「編輯」與「預覽」模式
 - 使用 `touchstart` / `touchend` 偵測，滑動距離 > 80px 觸發切換
-- 提供視覺提示（底部 page indicator 小圓點）
+- 提供視覺提示（底部 page indicator 小圓點，純 CSS 依 `preview-mode` body class 切換）
 
-#### 4. 快捷鍵面板 Portrait 適配 🟡
+#### 4. 快捷鍵面板 Portrait 適配 🟡 ✅ 已完成（2026-03-13）
 - 直式模式下改為從底部滑入的 bottom sheet（高度 70vh，可捲動）
-- 桌機版維持現有浮動視窗
+- 桌機版維持現有浮動視窗（可拖移）
+- **實作**：CSS `display:flex !important` 覆蓋 `[hidden]` 屬性，`transform: translateY()` 控制顯示；JS 統一用 `_openShortcuts()` / `_closeShortcuts()` 管理，附 `#shortcuts-backdrop` 遮罩
 
 #### 5. 狀態列精簡 🟡 ✅ 已完成（2026-03-13）
 - 直式模式下只顯示「字數」與「行數」，隱藏「字元」
@@ -80,7 +81,7 @@
 |------|------|--------|
 | Google Drive 零設定（hosted）| 官方 GitHub Pages 版內建共用 Client ID，使用者不需自行申請 | 🔴 |
 | 新手導覽 Onboarding Tour | 首次開啟時逐步介紹各功能與位置，可隨時跳過或重播 | 🟡 |
-| 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | 🟡 |
+| 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | ✅ 已完成（2026-03-13）|
 | 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 |
 | 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | 🟡 |
 | 匯出 PDF | 透過瀏覽器列印 / print CSS | 🟢 |
@@ -326,4 +327,4 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 | 2：功能差異化 | 🟢 評估中 | 匯出 HTML/PDF、解鎖碼機制、分頁上限差異 |
 | 3：進階整合 | 🟢 評估中 | GitHub Gist、WebDAV、自訂快捷鍵 |
 
-*最後更新：2026-03-13（新增拖曳開檔 Drop Zone 規劃；新增贊助模型評估）*
+*最後更新：2026-03-13（完成 Swipe 手勢切換 + Drop Zone 拖曳開檔 + 快捷鍵面板 Portrait 適配）*

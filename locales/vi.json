@@ -72,5 +72,6 @@
   "typo.document": "Tài liệu",
   "typo.wide": "Rộng",
   "outline.title": "Mục lục",
-  "outline.empty": "(không có tiêu đề)"
+  "outline.empty": "(không có tiêu đề)",
+  "dropzone.hint": "Thả để mở tệp"
 }

@@ -8,8 +8,28 @@ const Editor = (() => {
   const MERMAID_TEMPLATE = '```mermaid\nflowchart TD\n    A[開始] --> B{判斷}\n    B -->|是| C[執行]\n    B -->|否| D[結束]\n```\n';
 
   let _panelJustOpened = false;
+  let _shortcutsPanel  = null;
 
-  // ---- 快捷鍵浮動面板 ----
+  function _isMobile() { return window.innerWidth <= 767; }
+
+  function _openShortcuts() {
+    if (!_shortcutsPanel) return;
+    _shortcutsPanel.hidden = false;
+    _panelJustOpened = true;
+    if (_isMobile()) {
+      const bd = document.getElementById('shortcuts-backdrop');
+      if (bd) bd.classList.add('active');
+    }
+  }
+
+  function _closeShortcuts() {
+    if (!_shortcutsPanel) return;
+    _shortcutsPanel.hidden = true;
+    const bd = document.getElementById('shortcuts-backdrop');
+    if (bd) bd.classList.remove('active');
+  }
+
+  // ---- 快捷鍵面板（桌機：浮動可拖移；手機：底部抽屜）----
 
   function _createShortcutsPanel() {
     const SHORTCUTS = [
@@ -34,6 +54,7 @@ const Editor = (() => {
     panel.id = 'shortcuts-panel';
     panel.className = 'shortcuts-panel';
     panel.hidden = true;
+    _shortcutsPanel = panel;
 
     // Header（可拖移）
     const header = document.createElement('div');
@@ -48,7 +69,7 @@ const Editor = (() => {
     closeBtn.textContent = '×';
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      panel.hidden = true;
+      _closeShortcuts();
     });
 
     header.appendChild(titleEl);
@@ -96,11 +117,17 @@ const Editor = (() => {
     // 拖移
     _makePanelDraggable(panel, header, closeBtn);
 
-    // 點面板外部自動關閉
+    // 點面板外部自動關閉（桌機）
     document.addEventListener('click', (e) => {
       if (_panelJustOpened) { _panelJustOpened = false; return; }
-      if (!panel.hidden && !panel.contains(e.target)) panel.hidden = true;
+      if (!panel.hidden && !panel.contains(e.target)) _closeShortcuts();
     });
+
+    // Backdrop 點擊關閉（手機）
+    const backdrop = document.getElementById('shortcuts-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', () => _closeShortcuts());
+    }
 
     return panel;
   }
@@ -230,9 +257,11 @@ const Editor = (() => {
       {
         name: 'shortcuts',
         action: () => {
-          const panel = document.getElementById('shortcuts-panel');
-          panel.hidden = !panel.hidden;
-          if (!panel.hidden) _panelJustOpened = true;
+          if (_shortcutsPanel && !_shortcutsPanel.hidden) {
+            _closeShortcuts();
+          } else {
+            _openShortcuts();
+          }
         },
         className: 'md-shortcuts-icon',
         title: I18n.t('shortcuts.title'),

@@ -122,6 +122,12 @@
     </div>
   </main>
 
+  <!-- Swipe page indicator (mobile only) -->
+  <div id="swipe-dots" class="swipe-dots mobile-only" aria-hidden="true">
+    <span class="swipe-dot" id="dot-edit"></span>
+    <span class="swipe-dot" id="dot-preview"></span>
+  </div>
+
   <!-- Bottom Toolbar (mobile only) -->
   <div id="bottom-toolbar" class="bottom-toolbar mobile-only" role="toolbar" aria-label="格式工具列">
     <button class="btb-btn btb-bold"   id="btb-bold"    title="粗體 (Ctrl+B)">B</button>
@@ -217,6 +223,14 @@
 
   <!-- Outline backdrop (mobile bottom sheet) -->
   <div id="outline-backdrop" class="outline-backdrop"></div>
+
+  <!-- Shortcuts backdrop (mobile bottom sheet) -->
+  <div id="shortcuts-backdrop" class="shortcuts-backdrop"></div>
+
+  <!-- Drop Zone Overlay (desktop drag & drop) -->
+  <div id="drop-zone-overlay" class="drop-zone-overlay">
+    <span class="drop-zone-text" data-i18n="dropzone.hint">放開以開啟檔案</span>
+  </div>
 
   <!-- PWA service worker registration -->
   <script>

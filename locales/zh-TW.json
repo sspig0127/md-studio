@@ -72,5 +72,6 @@
   "typo.document": "文件",
   "typo.wide": "全寬",
   "outline.title": "大綱",
-  "outline.empty": "（無標題）"
+  "outline.empty": "（無標題）",
+  "dropzone.hint": "放開以開啟檔案"
 }

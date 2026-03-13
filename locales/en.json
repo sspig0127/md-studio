@@ -72,5 +72,6 @@
   "typo.document": "Document",
   "typo.wide": "Wide",
   "outline.title": "Outline",
-  "outline.empty": "(no headings)"
+  "outline.empty": "(no headings)",
+  "dropzone.hint": "Drop to open file"
 }

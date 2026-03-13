@@ -126,8 +126,10 @@ Markdown_webapp/
 ├──────────────────────────────┤
 │                              │
 │  編輯區 或 預覽區（擇一）     │  ← editor-wrapper (flex:1)
-│  100% 寬度                   │
+│  100% 寬度                   │  ← 支援左右 swipe 切換（> 80px）
 │                              │
+├──────────────────────────────┤
+│          ● ○  (or ○ ●)       │  ← Swipe dots (16px) — 左:edit / 右:preview
 ├──────────────────────────────┤
 │  [B] [I] [#] [≡] [①] [</>]  │  ← Bottom Toolbar (48px, 編輯模式)
 ├──────────────────────────────┤
@@ -135,6 +137,7 @@ Markdown_webapp/
 └──────────────────────────────┘
 
 大綱（手機版）：底部抽屜（60vh）從底部滑入，overlay backdrop 遮蓋
+Drop Zone（桌機）：`position:fixed` 全頁虛線框覆蓋層，拖曳 .md/.txt 時淡入
 ```
 
 ---
@@ -167,6 +170,7 @@ CSS 自訂屬性（`--color-*`）定義於 `css/main.css`，透過 `[data-theme]
 - Toolbar 項目：粗體、斜體、標題、連結、圖片、程式碼、引言、清單、Mermaid 插入按鈕、分隔、預覽（桌機）
 - 手機 toolbar 只顯示最常用的 6 個按鈕，其餘收進「更多」選單
 - 每次內容變更觸發 `preview.js` 的 `render()` 函式（debounce 300ms）
+- **快捷鍵面板（`#shortcuts-panel`）**：桌機為可拖移浮動視窗；手機（`≤ 767px`）改為 bottom sheet（70vh，附 `#shortcuts-backdrop` 遮罩）；`_openShortcuts()` / `_closeShortcuts()` 統一管理，CSS `display:flex !important` 覆蓋 `[hidden]`，`transform: translateY()` 控制動畫
 
 ### `preview.js` — 預覽渲染
 - 使用 `marked.js` 解析 Markdown → HTML
@@ -191,7 +195,7 @@ CSS 自訂屬性（`--color-*`）定義於 `css/main.css`，透過 `[data-theme]
 
 ### `storage.js` — 儲存管理（更新）
 - **自動暫存**：內容變更後 1 秒寫入對應分頁的 `localStorage` slot
-- **開啟本機 `.md` 檔**：File API，開啟後自動在新分頁顯示
+- **開啟本機 `.md` 檔**：`openFile(file)` 透過 File API 讀取，開啟後自動在新分頁顯示；同時被 `<input type="file">` 與 Drop Zone 拖曳事件呼叫
 - **下載 `.md` 檔**：Blob + URL.createObjectURL
 - **關閉頁面保護**：任一分頁有未儲存變更時，`beforeunload` 提示
 
@@ -199,6 +203,8 @@ CSS 自訂屬性（`--color-*`）定義於 `css/main.css`，透過 `[data-theme]
 - **`Theme` 模組**：讀取 / 儲存 `localStorage('md_theme')`；`activate()` 設定 `<html data-theme>`；初始化順序最優先，確保 EasyMDE 以正確色彩渲染
 - **`Typo` 模組**：讀取 / 儲存 `localStorage('md_typo')`；`apply()` 設定 `#preview-content[data-typo]`；5 種排版：default / reading / compact / document / wide
 - **下拉選單定位**：所有下拉改用 `position:fixed` + `getBoundingClientRect()` 動態計算座標，完全跳出 stacking context，不會被編輯器元素遮擋
+- **`initSwipe()`**：手機版 Swipe 手勢，監聽 `#editor-wrapper` 的 `touchstart/touchend`（passive），`|dx| ≥ 80px` 且水平分量 > 垂直分量時觸發 `setMode()`；Swipe dots 樣式由 CSS `body.preview-mode` 狀態純 CSS 控制，無 JS 狀態管理
+- **`initDropZone()`**：桌機版拖曳開檔，監聽 `document` 的 `dragenter/dragover/dragleave/drop`；`dragDepth` 計數解決子元素觸發 `dragleave` 誤判；`drop` 時比對 MIME type 或副檔名（`.md/.txt/.markdown`），呼叫 `Storage.openFile()`；`window.innerWidth > 767` 動態判斷，手機不啟動
 
 ### `pwa` — 離線支援（sw.js + manifest.json）
 - **Service Worker 策略（雙軌）**：

@@ -582,3 +582,34 @@ html, body {
 }
 .theme-swatch:hover { transform: scale(1.15); }
 .theme-swatch.active { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
+
+/* ---- DROP ZONE OVERLAY (desktop drag & drop) ---- */
+.drop-zone-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.08);
+  border: 2px dashed var(--color-accent);
+  border-radius: 12px;
+  margin: 16px;
+  z-index: 1800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.drop-zone-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.drop-zone-text {
+  font-size: 18px;
+  font-family: var(--font-ui);
+  color: var(--color-accent);
+  background: var(--color-bg);
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  pointer-events: none;
+}

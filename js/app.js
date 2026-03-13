@@ -381,6 +381,76 @@ const Outline = (() => {
     });
   });
 
+  // ---- SWIPE GESTURE (mobile: edit ↔ preview) ----
+  (function initSwipe() {
+    const wrapper = document.getElementById('editor-wrapper');
+    if (!wrapper) return;
+    let startX = 0, startY = 0;
+    wrapper.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    wrapper.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 80 || Math.abs(dx) <= Math.abs(dy)) return;
+      if (dx < 0) {
+        // Swipe left → preview
+        setMode('preview');
+        Preview.render(Editor.getValue());
+      } else {
+        // Swipe right → edit
+        setMode('edit');
+      }
+    }, { passive: true });
+  })();
+
+  // ---- DROP ZONE (desktop drag & drop) ----
+  (function initDropZone() {
+    const overlay = document.getElementById('drop-zone-overlay');
+    if (!overlay) return;
+    const VALID_TYPES = ['text/markdown', 'text/plain', 'text/x-markdown'];
+    const VALID_EXTS  = ['.md', '.txt', '.markdown'];
+    let dragDepth = 0;
+
+    function isDesktop() { return window.innerWidth > 767; }
+
+    document.addEventListener('dragenter', (e) => {
+      if (!isDesktop()) return;
+      const items = e.dataTransfer?.items;
+      if (!items || ![...items].some(i => i.kind === 'file')) return;
+      e.preventDefault();
+      dragDepth++;
+      overlay.classList.add('active');
+    });
+
+    document.addEventListener('dragover', (e) => {
+      if (!isDesktop()) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+
+    document.addEventListener('dragleave', () => {
+      if (!isDesktop()) return;
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (dragDepth === 0) overlay.classList.remove('active');
+    });
+
+    document.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragDepth = 0;
+      overlay.classList.remove('active');
+      if (!isDesktop()) return;
+      const files = [...(e.dataTransfer?.files || [])];
+      files.forEach(file => {
+        const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+        if (VALID_TYPES.includes(file.type) || VALID_EXTS.includes(ext)) {
+          Storage.openFile(file);
+        }
+      });
+    });
+  })();
+
   // Network status: disable cloud when offline
   window.addEventListener('offline', () => {
     ['btn-cloud-login','btn-cloud-open','btn-cloud-save','md-cloud-login','md-cloud-open','md-cloud-save']
