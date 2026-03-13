@@ -78,6 +78,7 @@
 
 | 功能 | 說明 | 優先序 |
 |------|------|--------|
+| 新手導覽 Onboarding Tour | 首次開啟時逐步介紹各功能與位置，可隨時跳過或重播 | 🟡 |
 | 拖曳開檔 Drop Zone | 桌機版拖曳 .md 檔至畫面，半透明框線提示後放開即開啟 | 🟡 |
 | 搜尋 / 取代 | 編輯器內 Ctrl+F 搜尋，Ctrl+H 取代 | 🟡 |
 | 匯出 HTML | 將預覽區 HTML 下載為 .html 檔 | 🟡 |
@@ -85,6 +86,108 @@
 | 字數目標 | 設定目標字數並顯示進度條 | 🟢 |
 | Vim / Emacs 模式 | CodeMirror keymap 切換 | 🟢 |
 | 自訂 CSS | 讓使用者貼入自訂 preview CSS | 🟢 |
+
+---
+
+## 🎓 新手導覽 Onboarding Tour 🟡
+
+> 首次開啟應用時，以「聚光燈 + 說明氣泡」方式逐步介紹各功能位置，
+> 降低新使用者學習門檻，同時保留隨時跳過的自由度。
+
+### 觸發時機
+
+| 觸發 | 說明 |
+|------|------|
+| 首次開啟 | `localStorage` 無 `md_tour_seen` 紀錄時自動啟動 |
+| 手動重播 | 設定頁面新增「重新播放導覽」按鈕 |
+| 跳過後重播 | 不強制，可隨時從設定喚起 |
+
+### 互動流程
+
+```
+首次開啟頁面
+  ↓
+顯示歡迎覆蓋層（「要開始導覽嗎？」）
+  ├─ 開始 → 逐步導覽
+  └─ 跳過 → 寫入 md_tour_seen，不再自動觸發
+
+導覽中每一步：
+  → 半透明覆蓋層（spotlight 聚光），目標元素高亮
+  → 說明氣泡（標題 + 說明文 + 步驟進度 X/N）
+  → 上一步 / 下一步 / 隨時跳過
+
+最後一步結束 → 寫入 md_tour_seen → 導覽結束
+```
+
+### 聚光燈視覺方案
+
+| 方案 | 說明 | 選用 |
+|------|------|------|
+| `box-shadow: 0 0 0 9999px rgba(0,0,0,0.6)` | 直接套用在目標元素 | ❌ z-index 複雜 |
+| `clip-path` polygon 挖洞 | 全頁遮罩 + clip-path 矩形缺口 | ✅ 推薦 |
+| SVG mask | 最精確，支援 border-radius | 🟡 備選 |
+
+**採用 clip-path 方案：**
+```
+覆蓋層 position:fixed; inset:0; background:rgba(0,0,0,0.55)
+clip-path: polygon(
+  0% 0%, 100% 0%, 100% 100%, 0% 100%,   ← 外框
+  0% top, left top, left bottom, 0% bottom, ← 挖洞（目標元素 rect）
+)
+transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
+```
+
+### 步驟規劃（桌機版，約 10 步）
+
+| 步驟 | 目標元素 | 說明重點 |
+|------|---------|---------|
+| 1 | `.nav-logo` | 歡迎，介紹工具名稱與定位 |
+| 2 | `#btn-new` / `#btn-open` | 新增文件、開啟本地檔案 |
+| 3 | `#tabs-bar` | 多分頁管理 |
+| 4 | `#editor-pane` | Markdown 編輯區，支援語法高亮 |
+| 5 | `#preview-pane` | 即時預覽區，Mermaid 圖表支援 |
+| 6 | `.editor-toolbar` | 工具列快捷操作（含快捷鍵速查） |
+| 7 | `#btn-cloud` | Google Drive 雲端整合 |
+| 8 | `#btn-typo` | 排版風格切換 |
+| 9 | `.status-bar` | 字數 / 行數統計 |
+| 10 | `#btn-outline` | 大綱面板（點選跳轉） |
+
+**手機版（約 6 步）：** 略過桌機專屬項目，加入底部工具列與 ☰ Drawer 說明。
+
+### 說明氣泡定位邏輯
+
+```
+取目標元素 getBoundingClientRect()
+  → 計算上下左右可用空間
+  → 優先顯示在元素「下方」（空間足夠時）
+  → 空間不足時自動切換方向（上 / 左 / 右）
+  → 手機版：一律顯示於畫面底部固定位置（避免遮擋）
+```
+
+### 多語系
+
+導覽步驟的標題與說明文字加入 locale JSON：
+```json
+"tour.step.1.title": "歡迎使用 MD Studio",
+"tour.step.1.desc": "一款純前端、支援離線的 Markdown 編輯器。",
+...
+"tour.next": "下一步",
+"tour.prev": "上一步",
+"tour.skip": "跳過導覽",
+"tour.done": "開始使用",
+"tour.replay": "重新播放導覽"
+```
+
+### 技術評估
+
+| 項目 | 說明 |
+|------|------|
+| 新增檔案 | `js/tour.js`（Tour 模組）|
+| CSS | 加入 `css/main.css`（`.tour-overlay`、`.tour-bubble` 等）|
+| 依賴 | Zero-dependency，Vanilla JS + CSS |
+| localStorage key | `md_tour_seen`（值為版本號，方便日後重置）|
+| 版本重置 | 若導覽步驟大幅更新，可改版本號讓老用戶再看一次 |
+| 與設定整合 | `Settings.init()` 新增「重新播放導覽」按鈕 |
 
 ---
 
