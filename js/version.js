@@ -1,0 +1,6 @@
+/**
+ * version.js — 唯一版本來源
+ * sw.js 透過 importScripts 讀取；app.js 直接使用全域變數。
+ * 每次部署只需修改這一個檔案。
+ */
+const APP_VERSION = '2026-03-14';

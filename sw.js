@@ -1,11 +1,12 @@
 /**
  * sw.js — Service Worker (Cache-First strategy)
- * Version: 1.0.0
  *
  * 快取所有本地資源，確保離線可完整使用。
+ * 版本號由 js/version.js 統一管理，每次部署只需改那一個檔案。
  */
 
-const CACHE_NAME = 'md-editor-v10';
+importScripts('/js/version.js');
+const CACHE_NAME = 'md-editor-' + APP_VERSION;
 
 const PRECACHE_URLS = [
   '/',
@@ -15,6 +16,7 @@ const PRECACHE_URLS = [
   '/css/editor.css',
   '/css/tabs.css',
   '/css/responsive.css',
+  '/js/version.js',
   '/js/app.js',
   '/js/editor.js',
   '/js/preview.js',
@@ -23,6 +25,8 @@ const PRECACHE_URLS = [
   '/js/settings.js',
   '/js/cloud.js',
   '/js/i18n.js',
+  '/js/search.js',
+  '/js/tour.js',
   '/locales/zh-TW.json',
   '/locales/en.json',
   '/locales/vi.json',

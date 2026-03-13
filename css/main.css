@@ -790,3 +790,170 @@ html, body {
   line-height: 1;
   flex-shrink: 0;
 }
+
+/* ---- ONBOARDING TOUR ---- */
+
+/* Transparent overlay blocks clicks during tour */
+#tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  pointer-events: auto;
+  background: transparent;
+}
+#tour-overlay[hidden] { display: none; }
+
+/* Spotlight: positioned over target element, box-shadow creates darkened backdrop */
+#tour-spotlight {
+  position: fixed;
+  z-index: 8001;
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.62);
+  pointer-events: none;
+  opacity: 0;
+  transition: top 0.28s ease, left 0.28s ease,
+              width 0.28s ease, height 0.28s ease,
+              opacity 0.18s ease;
+}
+
+/* Step bubble */
+#tour-bubble {
+  position: fixed;
+  z-index: 8002;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  padding: 16px 18px 14px;
+  width: 300px;
+  max-width: calc(100vw - 24px);
+  pointer-events: auto;
+}
+#tour-bubble[hidden] { display: none; }
+
+.tour-bubble-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.tour-progress {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.tour-skip-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius);
+  transition: color var(--transition);
+}
+.tour-skip-btn:hover { color: var(--color-text); }
+
+.tour-bubble-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 6px;
+}
+.tour-bubble-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+.tour-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.tour-btn {
+  border: none;
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.tour-btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.tour-btn-primary:hover { background: var(--color-accent-hover); }
+.tour-btn-secondary {
+  background: var(--color-btn);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+.tour-btn-secondary:hover { background: var(--color-btn-hover); }
+
+/* Welcome card (shown before tour starts) */
+#tour-welcome {
+  position: fixed;
+  z-index: 8002;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  padding: 28px 28px 22px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  pointer-events: auto;
+}
+#tour-welcome[hidden] { display: none; }
+
+.tour-welcome-icon {
+  font-size: 34px;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.tour-welcome-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 8px;
+}
+.tour-welcome-desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0 0 20px;
+}
+.tour-welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tour-welcome-actions .tour-btn {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* Pulse animation for tour step targets that need extra visual attention */
+@keyframes tour-pulse-ring {
+  0%   { box-shadow: 0 0 0 0    rgba(139, 92, 246, 0.75); }
+  70%  { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);    }
+  100% { box-shadow: 0 0 0 0    rgba(139, 92, 246, 0);    }
+}
+.tour-pulse-highlight {
+  animation: tour-pulse-ring 1.2s ease-out infinite;
+  border-radius: 50%;
+  position: relative;
+  z-index: 8003;
+}
+
+/* Hide tour elements in print */
+@media print {
+  #tour-overlay, #tour-spotlight, #tour-bubble, #tour-welcome { display: none !important; }
+}

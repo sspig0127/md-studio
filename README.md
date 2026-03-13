@@ -89,6 +89,19 @@ python3 -m http.server 8080
 
 將整個資料夾上傳至靜態網站服務即可（GitHub Pages、Netlify、Vercel 等），**無需 build 步驟**。
 
+#### 部署版本升號（重要）
+
+每次部署前，只需修改 **一個檔案**：
+
+```js
+// js/version.js
+const APP_VERSION = '2026-03-14';  // 改成今天的日期
+```
+
+Service Worker 的 `CACHE_NAME` 會自動連動（`'md-editor-' + APP_VERSION`），舊快取在下次造訪時自動清除，使用者無需手動清快取。
+
+> ⚠️ 若新增了 JS / CSS 檔案，須同步更新 `sw.js` 的 `PRECACHE_URLS` 清單，否則離線版本將缺少該檔案。
+
 ### 預覽最新版本（GitHub Pages）
 
 部署後若畫面未更新，請執行強制重新整理以清除 Service Worker 舊快取：
@@ -200,6 +213,7 @@ Markdown_webapp/
 │   └── responsive.css      # RWD 手機版樣式
 │
 ├── js/
+│   ├── version.js          # 唯一版本來源（部署升版只改此檔）
 │   ├── app.js              # 主入口，事件綁定，語法範例載入
 │   ├── editor.js           # EasyMDE 初始化，快捷鍵，速查面板
 │   ├── preview.js          # Markdown + Mermaid 渲染
@@ -207,7 +221,9 @@ Markdown_webapp/
 │   ├── tabs.js             # 多分頁管理
 │   ├── settings.js         # 使用者設定（Google Client ID）
 │   ├── cloud.js            # Google Drive 整合
-│   └── i18n.js             # 多語系系統
+│   ├── i18n.js             # 多語系系統
+│   ├── search.js           # 搜尋 / 取代功能
+│   └── tour.js             # 新手導覽
 │
 ├── locales/
 │   ├── zh-TW.json          # 繁體中文介面文字

@@ -230,3 +230,11 @@
   .tab-item { min-width: 70px; max-width: 110px; font-size: 11px; }
   .nav-logo { display: none; }
 }
+
+/* ---- TOUR: mobile overrides ---- */
+@media (max-width: 767px) {
+  #tour-bubble {
+    width: auto;
+  }
+  .tour-welcome-title { font-size: 16px; }
+}

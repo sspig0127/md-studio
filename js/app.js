@@ -3,7 +3,7 @@
  * 初始化所有模組，綁定 UI 事件
  */
 
-const APP_VERSION = '2026-03-13.2';
+// APP_VERSION 由 js/version.js 提供（全域變數）
 console.info(`%c[md-studio] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
 
 async function loadSample() {
@@ -281,6 +281,13 @@ const Outline = (() => {
 
   // 9. Cloud (non-blocking)
   Cloud.init();
+
+  // 10. Onboarding Tour
+  Tour.init();
+
+  // 版本號顯示（modal footer）
+  const modalVer = document.getElementById('modal-version');
+  if (modalVer) modalVer.textContent = 'v' + APP_VERSION;
 
   // ---- BIND EVENTS ----
 

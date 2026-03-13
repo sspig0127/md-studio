@@ -42,6 +42,7 @@ Markdown_webapp/
 │   ├── tabs.css            # 多分頁樣式
 │   └── responsive.css      # RWD media query
 ├── js/
+│   ├── version.js          # 唯一版本來源（APP_VERSION），sw.js 與 app.js 共用
 │   ├── app.js              # 主程式入口；Theme / Typo 模組、事件綁定
 │   ├── editor.js           # EasyMDE 初始化與設定
 │   ├── preview.js          # 預覽區渲染（marked + mermaid + tooltip）
@@ -49,7 +50,9 @@ Markdown_webapp/
 │   ├── storage.js          # localStorage、開啟/下載 .md
 │   ├── settings.js         # 設定 Modal（Google Client ID）
 │   ├── cloud.js            # Google Drive API 整合
-│   └── i18n.js             # 多語言切換邏輯
+│   ├── i18n.js             # 多語言切換邏輯
+│   ├── search.js           # 搜尋 / 取代功能
+│   └── tour.js             # 新手導覽 Onboarding Tour
 ├── locales/
 │   ├── zh-TW.json          # 繁體中文
 │   ├── en.json             # 英文
@@ -210,8 +213,13 @@ CSS 自訂屬性（`--color-*`）定義於 `css/main.css`，透過 `[data-theme]
 - **Service Worker 策略（雙軌）**：
   - HTML 導航請求（`navigate` mode）→ **Network-First**：確保 `location.reload()` 後取得最新 `index.html`，更新成功後寫入快取
   - 其他靜態資源（JS / CSS / vendor）→ **Cache-First**：離線時仍可使用
-- **快取清單**：index.html、所有 CSS/JS/vendor/locales 檔案
-- **更新機制**：`CACHE_NAME` 版本升號時，`activate` 事件自動清除舊快取；`skipWaiting()` + `clients.claim()` 確保新 SW 即時生效
+- **快取清單（`PRECACHE_URLS`）**：index.html、所有 CSS/JS/vendor/locales 檔案
+  - ⚠️ 新增 JS/CSS 檔案時，**必須手動**加入 `PRECACHE_URLS`，否則離線時無法載入
+- **更新機制**：`CACHE_NAME = 'md-editor-' + APP_VERSION`；版本升號後 `activate` 事件自動清除舊快取；`skipWaiting()` + `clients.claim()` 確保新 SW 即時生效
+- **版本號管理**：`js/version.js` 為唯一版本來源（`const APP_VERSION = 'YYYY-MM-DD'`）
+  - `sw.js` 透過 `importScripts('/js/version.js')` 取得版本號
+  - `app.js` 直接讀取全域 `APP_VERSION`（設定 Modal 版本顯示）
+  - **部署時只需修改 `js/version.js` 一個檔案**，SW 快取即自動升版
 - **manifest.json**：設定 App 名稱、圖示、`display: standalone`、`start_url: /`
 
 
