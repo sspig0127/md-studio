@@ -310,6 +310,8 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 | 2026-03-13 | 導覽列按鈕 hover tooltip 切換語系後仍顯示中文 | 硬編碼 `title` 改為 `data-i18n-title`，隨語系自動更新 |
 | 2026-03-13 | 手機大綱點選項目無法跳轉（`preview-pane` 為 `display:none`） | 點選時先切換至預覽模式，再以 `requestAnimationFrame` 捲動 |
 | 2026-03-13 | SW `CACHE_NAME` 未隨程式碼更新升版，導致設備載入舊快取 | `md-editor-v8` → `md-editor-v9` |
+| 2026-03-13 | 匯出 ▾ 下拉選單即開即關（click 事件冒泡觸發 `closeAllDropdowns`） | 補 `btn-export` event listener + `e.stopPropagation()` |
+| 2026-03-13 | 頁面載入 / 切換分頁後字數統計顯示 0 | `storage.js` 新增 `updateStats` export；`_onSwitch` 補呼叫；AppInit 結尾加 `setTimeout` 確保在 EasyMDE async change event 之後更新 |
 
 ---
 
@@ -327,4 +329,4 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 | 2：功能差異化 | 🟢 評估中 | 匯出 HTML/PDF、解鎖碼機制、分頁上限差異 |
 | 3：進階整合 | 🟢 評估中 | GitHub Gist、WebDAV、自訂快捷鍵 |
 
-*最後更新：2026-03-13（完成匯出 HTML / PDF + 分頁列 scroll snap）*
+*最後更新：2026-03-13（修正匯出選單事件冒泡 + 字數統計初始化問題）*

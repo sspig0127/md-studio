@@ -35,7 +35,17 @@
 
 ## 🖥️ 畫面預覽 / Screenshot
 
-> *(可在此放置截圖)*
+### 桌機 — 分割預覽 + 大綱面板
+
+| 分割預覽（即時渲染） | 大綱面板展開 |
+|:---:|:---:|
+| ![桌機分割預覽](docs/screenshots/desktop-main.png) | ![大綱面板](docs/screenshots/desktop-outline.png) |
+
+### 手機 — 編輯 / 預覽 / 大綱
+
+| 編輯模式（底部工具列） | 預覽模式 | 大綱底部抽屜 |
+|:---:|:---:|:---:|
+| ![手機編輯](docs/screenshots/mobile-edit.png) | ![手機預覽](docs/screenshots/mobile-preview.png) | ![手機大綱](docs/screenshots/mobile-outline.png) |
 
 ## 🚀 線上預覽與使用 (Live Demo)
 
@@ -59,8 +69,17 @@ python -m http.server 8080
 
 ### 本地測試（macOS / Linux）
 
+使用內附腳本（自動開啟瀏覽器 + 顯示區域網路 IP）：
+
 ```bash
-cd /path/to/Markdown_webapp
+bash scripts/Preview-Web.sh          # 預設 port 8080
+bash scripts/Preview-Web.sh 3939     # 指定 port
+```
+
+或直接使用 Python：
+
+```bash
+cd /path/to/md-studio
 python3 -m http.server 8080
 ```
 
@@ -203,6 +222,12 @@ Markdown_webapp/
 │   ├── easymde.min.css
 │   ├── marked.min.js
 │   └── mermaid.min.js
+│
+├── scripts/
+│   └── Preview-Web.sh      # 本機預覽伺服器（自動開啟瀏覽器）
+│
+├── docs/
+│   └── screenshots/        # README 操作截圖
 │
 └── assets/
     ├── favicon.ico

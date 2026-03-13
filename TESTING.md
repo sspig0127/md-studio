@@ -8,15 +8,19 @@
 ## 環境準備
 
 ### 本地測試
-```bash
-# Windows
-cd D:\_SideProject\Markdown_webapp
-python -m http.server 8080
 
-# macOS / Linux
-cd /path/to/Markdown_webapp
-python3 -m http.server 8080
+**macOS / Linux（推薦，自動開啟瀏覽器）：**
+```bash
+bash scripts/Preview-Web.sh          # 預設 port 8080
+bash scripts/Preview-Web.sh 3939     # 指定 port
 ```
+
+**Windows（PowerShell / CMD）：**
+```powershell
+cd D:\_SideProject\md-studio
+python -m http.server 8080
+```
+
 開啟瀏覽器前往 `http://localhost:8080`
 
 > ⚠️ WSL 使用者請在 **Windows 側**執行，避免虛擬網路問題
