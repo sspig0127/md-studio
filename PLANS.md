@@ -213,6 +213,7 @@
 ## 💝 贊助模型
 
 > 詳細評估報告 → [SPONSOR-MODEL.md](./SPONSOR-MODEL.md)
+> 臺灣金流與稅務評估 → [SPONSOR-TAIWAN-FINANCE.md](./SPONSOR-TAIWAN-FINANCE.md)
 
 | 階段 | 狀態 | 主要內容 |
 |------|------|---------|
