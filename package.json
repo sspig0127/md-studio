@@ -1,0 +1,27 @@
+{
+  "name": "md-studio",
+  "version": "1.0.0",
+  "description": "> 一款支援離線使用的 PWA Markdown 編輯器，具備多分頁管理、Mermaid 圖表、Google Drive 整合與多語系支援。 > > A PWA-based offline-first Markdown editor with multi-tab management, Mermaid diagrams, Google Drive integration, and multi-language support.",
+  "main": "sw.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sspig0127/md-studio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sspig0127/md-studio/issues"
+  },
+  "homepage": "https://github.com/sspig0127/md-studio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
