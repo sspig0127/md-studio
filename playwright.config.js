@@ -22,7 +22,6 @@ module.exports = defineConfig({
         userAgent:
           'Mozilla/5.0 (Android 11; Mobile; rv:109.0) Gecko/109.0 Firefox/109.0',
         hasTouch: true,
-        isMobile: true,
       },
     },
   ],
