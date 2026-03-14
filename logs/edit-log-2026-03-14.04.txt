@@ -1,0 +1,12 @@
+Edit batch: 2026-03-14.04
+Status: completed
+
+Backups created before edits:
+- backups/2026-03-14.04/tests/mobile.spec.js.bak
+
+Edited files:
+- tests/mobile.spec.js: fixed three Firefox mobile test issues by using the specific `#md-open` drawer selector, targeting only `#outline-panel` for outline-open assertions, and checking `body.preview-mode` after tapping `#btn-mode-preview`.
+
+Validation notes:
+- `npm run test:firefox-mobile` ✅
+- Result: 16 passed
