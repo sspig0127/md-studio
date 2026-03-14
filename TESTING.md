@@ -1,7 +1,7 @@
 # md-studio 測試指南
 
 > 供部署人員使用，確認各功能在部署後正常運作。
-> 最後更新：2026-03-14（新增測試十三 新手導覽 Onboarding Tour）
+> 最後更新：2026-03-14（新增 Playwright 自動化測試環境說明）
 
 ---
 
@@ -24,6 +24,25 @@ python -m http.server 8080
 開啟瀏覽器前往 `http://localhost:8080`
 
 > ⚠️ WSL 使用者請在 **Windows 側**執行，避免虛擬網路問題
+
+### Playwright 自動化測試環境
+
+專案使用 Playwright MCP 進行 Chromium / WebKit（Safari-like）E2E 驗證。初次設定：
+
+```bash
+npm install                        # 安裝 @playwright/test
+npx playwright install chromium    # 安裝 Chromium
+npx playwright install webkit      # 安裝 WebKit（Safari 模擬）
+npx playwright install firefox     # 安裝 Firefox（行動版 viewport 測試）
+```
+
+已安裝瀏覽器確認：
+
+```bash
+npx playwright install --list      # 列出已安裝的瀏覽器
+```
+
+> Playwright MCP 工作目錄（`.playwright-mcp/`）已列入 `.gitignore`，截圖與 console log 不納入版本控制。
 
 ### 行動版模擬
 Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
