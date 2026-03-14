@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:firefox": "playwright test --project=firefox-desktop --project=firefox-mobile",
+    "test:firefox-mobile": "playwright test --project=firefox-mobile",
+    "test:report": "playwright show-report"
   },
   "repository": {
     "type": "git",
