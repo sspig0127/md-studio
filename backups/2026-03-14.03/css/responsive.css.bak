@@ -41,13 +41,11 @@
   /* Editor: single column — subtract 48px toolbar + 16px swipe dots */
   .editor-wrapper {
     flex-direction: column;
-    height: calc(100vh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 48px - 16px - env(safe-area-inset-bottom, 0px));
-    height: calc(100dvh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 48px - 16px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 48px - 16px);
   }
   /* Preview mode: toolbar hidden, dots still visible */
   body.preview-mode .editor-wrapper {
-    height: calc(100vh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 16px - env(safe-area-inset-bottom, 0px));
-    height: calc(100dvh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 16px - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height) - 16px);
   }
   body.preview-mode #bottom-toolbar {
     display: none !important;
@@ -78,14 +76,7 @@
   .editor-toolbar button { width: 28px !important; height: 28px !important; }
 
   /* Status bar: hide chars on mobile, keep words + lines */
-  .status-bar {
-    font-size: 10px;
-    gap: 6px;
-    height: auto;
-    min-height: calc(var(--status-height) + env(safe-area-inset-bottom, 0px));
-    padding: 0 8px calc(env(safe-area-inset-bottom, 0px) + 2px);
-    box-sizing: border-box;
-  }
+  .status-bar { font-size: 10px; gap: 6px; padding: 0 8px; }
   /* Hide chars and both its surrounding separators */
   #status-chars,
   #status-chars + .status-sep,

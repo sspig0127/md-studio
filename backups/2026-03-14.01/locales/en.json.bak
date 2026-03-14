@@ -126,5 +126,5 @@
   "tour.s2m.title": "Mode Toggle / Swipe",
   "tour.s2m.desc": "Tap the buttons to switch between Edit and Preview, or swipe left/right to toggle.",
   "tour.s10m.title": "Side Menu",
-  "tour.s10m.desc": "Tap ☰ for the side menu: new file, download, outline, cloud sync, language, and settings."
+  "tour.s10m.desc": "Tap ☰ for the side menu: new file, download, cloud sync, language, and settings."
 }

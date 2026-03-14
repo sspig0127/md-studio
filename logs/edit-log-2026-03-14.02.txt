@@ -1,0 +1,24 @@
+Edit batch: 2026-03-14.02
+Status: completed
+
+Backups created before edits:
+- backups/2026-03-14.02/js/tour.js.bak
+- backups/2026-03-14.02/css/main.css.bak
+- backups/2026-03-14.02/TESTING.md.bak
+- backups/2026-03-14.02/js/version.js.bak
+- backups/2026-03-14.02/index.html.bak
+
+Edited files:
+- js/tour.js: added pulse highlighting for mobile steps 2, 6, and 7, and enabled strong spotlight styling for the large mobile steps 3-5.
+- css/main.css: added a stronger rectangular breathing spotlight style for large mobile tour targets while preserving the existing pulse effect for small targets.
+- TESTING.md: documented the new mobile-tour visual emphasis expectations for steps 2-7.
+- js/version.js: bumped APP_VERSION to `2026-03-14.2` for this static asset update.
+- index.html: synced `meta[name="app-version"]` to `2026-03-14.2`.
+
+Validation notes:
+- `node --check js/tour.js` ✅
+- Playwright mobile tour verification on `375x812` / `msedge` ✅
+  - step 2 pulse on `.mode-toggle`
+  - steps 3-5 strong rectangular spotlight
+  - step 6 pulse on `#btn-outline`
+  - step 7 pulse on `#btn-mobile-menu`

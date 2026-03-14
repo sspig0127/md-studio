@@ -28,13 +28,6 @@ python -m http.server 8080
 ### 行動版模擬
 Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
 
-### Safari / iPhone 檢查
-
-- [ ] iPhone Safari / WebKit 視窗中，底部 `#bottom-toolbar` 與 `.status-bar` **完整可見**
-- [ ] Safari 底部瀏覽器工具列顯示時，狀態列文字與 `○` 大綱按鈕**未被遮住**
-- [ ] 若頁面頂部顯示 iOS 安裝提示 banner，底部 `#bottom-toolbar` 與 `.status-bar` 仍完整可見
-- [ ] 切換到預覽模式後，底部狀態列仍完整可見
-
 ---
 
 ## 測試一：行動版 Navbar RWD
@@ -468,10 +461,7 @@ flowchart TD
 - [ ] 每步氣泡**固定於畫面底部**（距底部 ~100px），不蓋住目標聚光燈
 - [ ] 氣泡寬度自動延伸至左右邊距（`left:12px; right:12px`）
 - [ ] 聚光燈正確定位於各目標元素
-- [ ] 第 2 步 `.mode-toggle` 有脈衝提示，協助辨識切換模式按鈕
-- [ ] 第 3～5 步的聚光燈顯示亮色矩形呼吸框，能比一般步驟更清楚強調大區塊
 - [ ] 第 6 步時，`#btn-outline` 有脈衝提示，協助使用者找到大綱入口
-- [ ] 第 7 步時，`#btn-mobile-menu` 有脈衝提示，協助使用者找到 ☰ 選單
 
 ### 13-G 「重新播放導覽」（設定頁）
 
@@ -515,7 +505,6 @@ flowchart TD
 - [ ] 新增/切換/關閉分頁正常
 - [ ] 下載 .md 可正常觸發
 - [ ] 行動版 375px 下 navbar 無溢出
-- [ ] iPhone Safari / WebKit：底部狀態列與 `○` 大綱按鈕未被瀏覽器底部 UI 遮住
 - [ ] 切換主題並套用成功 → **再次開設定，色票顯示為新版 T 字母**（SW 快取未殘留舊版）
 - [ ] 切換排版風格 → 預覽即時更新
 - [ ] Mermaid 節點 hover 2.5 秒 → tooltip 出現

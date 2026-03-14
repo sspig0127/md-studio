@@ -1,0 +1,16 @@
+Edit batch: 2026-03-14.03
+Status: initialized before edits
+Planned files:
+- index.html: enable viewport-fit=cover and sync app-version metadata
+- css/editor.css: replace fixed mobile-height assumptions with dynamic viewport-safe sizing fallback
+- css/responsive.css: add iPhone/Safari bottom safe-area handling for editor wrapper and status bar
+- TESTING.md: add Safari / WebKit mobile safe-area verification notes
+- js/version.js: bump APP_VERSION after static changes
+- js/app.js: include the iOS install banner height in layout calculations when Safari shows the install hint
+Backups created:
+- backups/2026-03-14.03/index.html.bak
+- backups/2026-03-14.03/css/editor.css.bak
+- backups/2026-03-14.03/css/responsive.css.bak
+- backups/2026-03-14.03/TESTING.md.bak
+- backups/2026-03-14.03/js/version.js.bak
+- backups/2026-03-14.03/js/app.js.bak

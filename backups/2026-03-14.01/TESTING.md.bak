@@ -28,13 +28,6 @@ python -m http.server 8080
 ### 行動版模擬
 Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
 
-### Safari / iPhone 檢查
-
-- [ ] iPhone Safari / WebKit 視窗中，底部 `#bottom-toolbar` 與 `.status-bar` **完整可見**
-- [ ] Safari 底部瀏覽器工具列顯示時，狀態列文字與 `○` 大綱按鈕**未被遮住**
-- [ ] 若頁面頂部顯示 iOS 安裝提示 banner，底部 `#bottom-toolbar` 與 `.status-bar` 仍完整可見
-- [ ] 切換到預覽模式後，底部狀態列仍完整可見
-
 ---
 
 ## 測試一：行動版 Navbar RWD
@@ -70,7 +63,6 @@ Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
 - [ ] 新增
 - [ ] 開啟檔案
 - [ ] 下載 .md
-- [ ] 大綱
 - [ ] Google 登入相關項目
 - [ ] ⚙ 設定
 - [ ] 語言切換按鈕
@@ -78,10 +70,6 @@ Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
 功能測試：
 - [ ] 點「開啟檔案」→ 觸發檔案選擇器，drawer 自動關閉
 - [ ] 點「下載 .md」→ 下載當前內容，drawer 自動關閉
-- [ ] 點「大綱」→ drawer 自動關閉，底部大綱面板滑入
-- [ ] 點狀態列右側 `○` 按鈕 → 同樣開啟大綱底部面板
-- [ ] 大綱開啟後，點遮罩區域 → 面板關閉
-- [ ] 大綱開啟後，點任一標題 → 切到預覽模式並平滑捲動至對應段落
 - [ ] 點 drawer 以外區域 → drawer 自動關閉
 
 ### 1-D 語言切換後 Navbar 仍正常
@@ -448,12 +436,12 @@ flowchart TD
 - [ ] `md_tour_seen` = `'1'`（已寫入，不重複觸發）
 - [ ] 頁面所有功能恢復正常
 
-### 13-F 行動版 7 步（≤ 767px）
+### 13-F 行動版 6 步（≤ 767px）
 
 #### 環境：Chrome DevTools → 375px，清除 `md_tour_seen`
 
 - [ ] 重新整理 → 歡迎卡正常顯示，不超出螢幕
-- [ ] 開始導覽 → 共 7 步，進度顯示「1 / 7」
+- [ ] 開始導覽 → 共 6 步，進度顯示「1 / 6」
 
 | 步驟 | 目標元素 | 說明包含 |
 |------|---------|---------|
@@ -462,16 +450,11 @@ flowchart TD
 | 3 | `#editor-pane` | 編輯區（提示可滑動）|
 | 4 | `#bottom-toolbar` | 底部工具列 |
 | 5 | `.status-bar` | 狀態列 |
-| 6 | `.status-bar` | 大綱按鈕 / 點 `○` 開啟大綱 |
-| 7 | `#btn-mobile-menu` | ☰ 選單 |
+| 6 | `#btn-mobile-menu` | ☰ 選單 |
 
 - [ ] 每步氣泡**固定於畫面底部**（距底部 ~100px），不蓋住目標聚光燈
 - [ ] 氣泡寬度自動延伸至左右邊距（`left:12px; right:12px`）
 - [ ] 聚光燈正確定位於各目標元素
-- [ ] 第 2 步 `.mode-toggle` 有脈衝提示，協助辨識切換模式按鈕
-- [ ] 第 3～5 步的聚光燈顯示亮色矩形呼吸框，能比一般步驟更清楚強調大區塊
-- [ ] 第 6 步時，`#btn-outline` 有脈衝提示，協助使用者找到大綱入口
-- [ ] 第 7 步時，`#btn-mobile-menu` 有脈衝提示，協助使用者找到 ☰ 選單
 
 ### 13-G 「重新播放導覽」（設定頁）
 
@@ -515,12 +498,10 @@ flowchart TD
 - [ ] 新增/切換/關閉分頁正常
 - [ ] 下載 .md 可正常觸發
 - [ ] 行動版 375px 下 navbar 無溢出
-- [ ] iPhone Safari / WebKit：底部狀態列與 `○` 大綱按鈕未被瀏覽器底部 UI 遮住
 - [ ] 切換主題並套用成功 → **再次開設定，色票顯示為新版 T 字母**（SW 快取未殘留舊版）
 - [ ] 切換排版風格 → 預覽即時更新
 - [ ] Mermaid 節點 hover 2.5 秒 → tooltip 出現
 - [ ] 行動版：左右滑動切換編輯/預覽，圓點正確更新
-- [ ] 行動版：☰ drawer 內顯示「大綱」，點擊後可開啟大綱 bottom sheet
 - [ ] 桌機：拖曳 .md 檔 → 新分頁開啟，虛線框淡入淡出正常
 - [ ] 行動版：點 ⌨ 按鈕 → 快捷鍵 bottom sheet 從底部滑入，背景有遮罩
 - [ ] 桌機：點 ⌨ 按鈕 → 快捷鍵浮動面板顯示，可拖移
@@ -535,5 +516,5 @@ flowchart TD
 每次修改 `js/version.js` 後：
 
 - [ ] DevTools → Application → Service Workers → 確認已註冊新版 SW
-- [ ] DevTools → Application → Cache Storage → 確認新快取名稱（`md-editor-YYYY-MM-DD.N`）已建立，舊快取已清除
+- [ ] DevTools → Application → Cache Storage → 確認新快取名稱（`md-editor-YYYY-MM-DD`）已建立，舊快取已清除
 - [ ] 設定 Modal 版本號與新版本一致

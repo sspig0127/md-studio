@@ -808,13 +808,12 @@ html, body {
   position: fixed;
   z-index: 8001;
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--color-text) 18%, transparent);
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.62);
   pointer-events: none;
   opacity: 0;
   transition: top 0.28s ease, left 0.28s ease,
               width 0.28s ease, height 0.28s ease,
-              opacity 0.18s ease, border-color 0.18s ease;
+              opacity 0.18s ease;
 }
 
 /* Step bubble */
@@ -947,28 +946,6 @@ html, body {
   70%  { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);    }
   100% { box-shadow: 0 0 0 0    rgba(139, 92, 246, 0);    }
 }
-
-@keyframes tour-spotlight-breathe {
-  0%, 100% {
-    box-shadow:
-      0 0 0 9999px rgba(0, 0, 0, 0.62),
-      0 0 0 1px var(--color-accent),
-      0 0 14px color-mix(in srgb, var(--color-accent) 28%, transparent);
-  }
-  50% {
-    box-shadow:
-      0 0 0 9999px rgba(0, 0, 0, 0.74),
-      0 0 0 2px var(--color-accent),
-      0 0 24px color-mix(in srgb, var(--color-accent) 48%, transparent);
-  }
-}
-
-#tour-spotlight.tour-spotlight-strong {
-  border-width: 2px;
-  border-color: var(--color-accent);
-  animation: tour-spotlight-breathe 1.45s ease-in-out infinite;
-}
-
 .tour-pulse-highlight {
   animation: tour-pulse-ring 1.2s ease-out infinite;
   border-radius: 50%;

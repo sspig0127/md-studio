@@ -23,12 +23,12 @@ const Tour = (() => {
 
   const MOBILE_STEPS = [
     { target: '.navbar',          titleKey: 'tour.s1.title',  descKey: 'tour.s1.desc'   },
-    { target: '.mode-toggle',     pulseTarget: '.mode-toggle', titleKey: 'tour.s2m.title', descKey: 'tour.s2m.desc'  },
-    { target: '#editor-pane',     spotlightStrong: true, titleKey: 'tour.s4.title',  descKey: 'tour.s4m.desc'  },
-    { target: '#bottom-toolbar',  spotlightStrong: true, titleKey: 'tour.s6m.title', descKey: 'tour.s6m.desc'  },
-    { target: '.status-bar',      spotlightStrong: true, titleKey: 'tour.s9.title',  descKey: 'tour.s9.desc'   },
+    { target: '.mode-toggle',     titleKey: 'tour.s2m.title', descKey: 'tour.s2m.desc'  },
+    { target: '#editor-pane',     titleKey: 'tour.s4.title',  descKey: 'tour.s4m.desc'  },
+    { target: '#bottom-toolbar',  titleKey: 'tour.s6m.title', descKey: 'tour.s6m.desc'  },
+    { target: '.status-bar',      titleKey: 'tour.s9.title',  descKey: 'tour.s9.desc'   },
     { target: '.status-bar', pulseTarget: '#btn-outline', titleKey: 'tour.s10.title', descKey: 'tour.s10.desc' },
-    { target: '#btn-mobile-menu', pulseTarget: '#btn-mobile-menu', titleKey: 'tour.s10m.title',descKey: 'tour.s10m.desc' },
+    { target: '#btn-mobile-menu', titleKey: 'tour.s10m.title',descKey: 'tour.s10m.desc' },
   ];
 
   let _steps   = [];
@@ -105,9 +105,6 @@ const Tour = (() => {
     const step     = _steps[index];
     const total    = _steps.length;
     const targetEl = document.querySelector(step.target);
-    const spot     = _el('tour-spotlight');
-
-    if (spot) spot.classList.toggle('tour-spotlight-strong', !!step.spotlightStrong);
 
     _updateSpotlight(targetEl);
 
@@ -156,10 +153,7 @@ const Tour = (() => {
     localStorage.setItem(LS_KEY, VERSION);
     _el('tour-overlay')?.setAttribute('hidden', '');
     const spot = _el('tour-spotlight');
-    if (spot) {
-      spot.style.opacity = '0';
-      spot.classList.remove('tour-spotlight-strong');
-    }
+    if (spot) spot.style.opacity = '0';
     _el('tour-bubble')?.setAttribute('hidden', '');
     _el('tour-welcome')?.setAttribute('hidden', '');
     document.querySelectorAll('.tour-pulse-highlight').forEach(el => el.classList.remove('tour-pulse-highlight'));

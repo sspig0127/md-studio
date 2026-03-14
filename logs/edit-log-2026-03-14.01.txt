@@ -1,0 +1,28 @@
+Edit batch: 2026-03-14.01
+Status: completed
+
+Backups created before edits:
+- backups/2026-03-14.01/index.html.bak
+- backups/2026-03-14.01/js/app.js.bak
+- backups/2026-03-14.01/js/tour.js.bak
+- backups/2026-03-14.01/js/version.js.bak
+- backups/2026-03-14.01/TESTING.md.bak
+- backups/2026-03-14.01/locales/zh-TW.json.bak
+- backups/2026-03-14.01/locales/en.json.bak
+- backups/2026-03-14.01/locales/vi.json.bak
+
+Edited files:
+- index.html: synced app-version meta and added a mobile drawer outline entry (`#md-outline`).
+- js/app.js: let `closeMobileDrawer` accept a completion callback and wired the new drawer outline action to open the existing outline bottom sheet after the drawer closes.
+- js/tour.js: extended the mobile onboarding tour with a dedicated outline step that highlights `#btn-outline` via pulse state.
+- js/version.js: bumped APP_VERSION to `2026-03-14.1` for this static asset update.
+- TESTING.md: documented mobile drawer outline access, outline bottom-sheet behaviors, the 7-step mobile tour, and the versioned cache-name expectation.
+- locales/zh-TW.json: updated side-menu tour copy to mention the new outline entry.
+- locales/en.json: updated side-menu tour copy to mention the new outline entry.
+- locales/vi.json: updated side-menu tour copy to mention the new outline entry.
+
+Validation notes:
+- `node --check js/app.js` ✅
+- `node --check js/tour.js` ✅
+- locale JSON parse check ✅
+- `npm test` remains a placeholder and exits 1 (`Error: no test specified`) — pre-existing repository baseline.

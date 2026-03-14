@@ -550,25 +550,13 @@ const Outline = (() => {
   const _isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const _isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   const _iosBannerDismissed = sessionStorage.getItem('ios_banner_dismissed');
-  const _iosBanner = document.getElementById('ios-install-banner');
-  function _syncIOSBannerHeight() {
-    document.documentElement.style.setProperty('--ios-banner-height', _iosBanner && !_iosBanner.hasAttribute('hidden')
-      ? `${_iosBanner.offsetHeight}px`
-      : '0px');
-  }
   if (_isIOS && !_isStandalone && !_iosBannerDismissed) {
-    _iosBanner?.removeAttribute('hidden');
-    _syncIOSBannerHeight();
-    requestAnimationFrame(_syncIOSBannerHeight);
-  } else {
-    _syncIOSBannerHeight();
+    document.getElementById('ios-install-banner')?.removeAttribute('hidden');
   }
   document.getElementById('ios-banner-close')?.addEventListener('click', () => {
-    _iosBanner?.setAttribute('hidden', '');
+    document.getElementById('ios-install-banner')?.setAttribute('hidden', '');
     sessionStorage.setItem('ios_banner_dismissed', '1');
-    _syncIOSBannerHeight();
   });
-  window.addEventListener('resize', _syncIOSBannerHeight);
 
   // launchQueue: 從檔案總管開啟 .md 檔（file_handlers）
   if ('launchQueue' in window) {

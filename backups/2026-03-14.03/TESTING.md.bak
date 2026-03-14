@@ -28,13 +28,6 @@ python -m http.server 8080
 ### 行動版模擬
 Chrome DevTools → `F12` → Toggle Device Toolbar（`Ctrl+Shift+M`）
 
-### Safari / iPhone 檢查
-
-- [ ] iPhone Safari / WebKit 視窗中，底部 `#bottom-toolbar` 與 `.status-bar` **完整可見**
-- [ ] Safari 底部瀏覽器工具列顯示時，狀態列文字與 `○` 大綱按鈕**未被遮住**
-- [ ] 若頁面頂部顯示 iOS 安裝提示 banner，底部 `#bottom-toolbar` 與 `.status-bar` 仍完整可見
-- [ ] 切換到預覽模式後，底部狀態列仍完整可見
-
 ---
 
 ## 測試一：行動版 Navbar RWD
@@ -515,7 +508,6 @@ flowchart TD
 - [ ] 新增/切換/關閉分頁正常
 - [ ] 下載 .md 可正常觸發
 - [ ] 行動版 375px 下 navbar 無溢出
-- [ ] iPhone Safari / WebKit：底部狀態列與 `○` 大綱按鈕未被瀏覽器底部 UI 遮住
 - [ ] 切換主題並套用成功 → **再次開設定，色票顯示為新版 T 字母**（SW 快取未殘留舊版）
 - [ ] 切換排版風格 → 預覽即時更新
 - [ ] Mermaid 節點 hover 2.5 秒 → tooltip 出現

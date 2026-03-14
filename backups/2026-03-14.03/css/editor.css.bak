@@ -5,8 +5,7 @@
 /* ---- EDITOR WRAPPER ---- */
 .editor-wrapper {
   display: flex;
-  height: calc(100vh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height));
-  height: calc(100dvh - var(--ios-banner-height, 0px) - var(--navbar-height) - var(--tabs-height) - var(--status-height));
+  height: calc(100vh - var(--navbar-height) - var(--tabs-height) - var(--status-height));
   overflow: hidden;
 }
 

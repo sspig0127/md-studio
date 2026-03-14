@@ -2,9 +2,9 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#7c6af7">
-  <meta name="app-version" content="2026-03-14.4">
+  <meta name="app-version" content="2026-03-13.2">
   <title data-i18n="nav.title">MD Studio</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="assets/favicon.ico">
@@ -101,7 +101,6 @@
     <button id="md-cloud-login" data-i18n="nav.cloud.login">Google 登入</button>
     <button id="md-cloud-open" data-i18n="nav.cloud.open" disabled>從雲端開啟</button>
     <button id="md-cloud-save" data-i18n="nav.cloud.save" disabled>儲存到雲端</button>
-    <button id="md-outline" data-i18n="outline.title">大綱</button>
     <hr>
     <button id="md-settings">⚙ <span data-i18n="nav.settings">設定</span></button>
     <hr>
