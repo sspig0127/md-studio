@@ -35,17 +35,33 @@
 
 ## 🖥️ 畫面預覽 / Screenshot
 
-### 桌機 — 分割預覽 + 大綱面板
+### 桌機（Dark Purple 主題）
 
-| 分割預覽（即時渲染） | 大綱面板展開 |
+| 分割預覽 + 即時渲染 | Mermaid 圖表 |
 |:---:|:---:|
-| ![桌機分割預覽](docs/screenshots/desktop-main.png) | ![大綱面板](docs/screenshots/desktop-outline.png) |
+| ![桌機分割預覽](docs/screenshots/desktop-split.png) | ![Mermaid 圖表](docs/screenshots/desktop-mermaid.png) |
 
-### 手機 — 編輯 / 預覽 / 大綱
+| 大綱面板（H1–H6 層級） | 搜尋 / 取代（關鍵字高亮） |
+|:---:|:---:|
+| ![大綱面板](docs/screenshots/desktop-outline.png) | ![搜尋高亮](docs/screenshots/desktop-search.png) |
 
-| 編輯模式（底部工具列） | 預覽模式 | 大綱底部抽屜 |
-|:---:|:---:|:---:|
-| ![手機編輯](docs/screenshots/mobile-edit.png) | ![手機預覽](docs/screenshots/mobile-preview.png) | ![手機大綱](docs/screenshots/mobile-outline.png) |
+| 新手導覽 Spotlight（第 4/10 步） |
+|:---:|
+| ![導覽 Spotlight](docs/screenshots/desktop-tour-step.png) |
+
+### 手機（Catppuccin Latte 淺色主題）
+
+| 編輯模式（底部工具列） | 預覽模式 |
+|:---:|:---:|
+| ![手機編輯](docs/screenshots/mobile-edit.png) | ![手機預覽](docs/screenshots/mobile-preview.png) |
+
+| ☰ Drawer 選單 | 大綱 Bottom Sheet |
+|:---:|:---:|
+| ![Drawer 選單](docs/screenshots/mobile-drawer.png) | ![大綱 Bottom Sheet](docs/screenshots/mobile-outline.png) |
+
+| 新手導覽 — 歡迎卡 | 新手導覽 — 步驟 3/7 |
+|:---:|:---:|
+| ![歡迎卡](docs/screenshots/mobile-tour-welcome.png) | ![導覽步驟](docs/screenshots/mobile-tour-step.png) |
 
 ## 🚀 線上預覽與使用 (Live Demo)
 

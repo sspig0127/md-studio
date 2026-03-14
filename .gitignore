@@ -21,6 +21,7 @@ SPONSOR-TAIWAN-FINANCE.md
 # 測試截圖（Playwright 臨時產出）
 test-*.png
 drawer-test-*.png
+docs/screenshots/test-*.png
 
 # Node.js 依賴
 node_modules/
