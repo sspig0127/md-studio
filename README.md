@@ -428,6 +428,8 @@ flowchart TD
 
 [MIT License](LICENSE)
 
+本專案使用第三方函式庫（EasyMDE、marked、Mermaid）及 Google APIs。詳細版權聲明請見 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
 ---
 
 ## 🤝 貢獻 / Contributing
