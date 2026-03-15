@@ -15,6 +15,9 @@ Ref/
 SPONSOR-MODEL.md
 SPONSOR-TAIWAN-FINANCE.md
 
+# 內部設定文件（本機專用，不推送）
+docs/GOOGLE_OAUTH_SETUP.md
+
 # Playwright MCP 自動記錄
 .playwright-mcp/
 
