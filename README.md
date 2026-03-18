@@ -9,6 +9,8 @@
 ![Languages](https://img.shields.io/badge/languages-zh--TW%20%7C%20en%20%7C%20vi-orange)
 ![No Build](https://img.shields.io/badge/build-none%20required-lightgrey)
 
+**其他語言版本:** [繁體中文](README.md) | [English](README.en.md) | [Tiếng Việt](README.vi.md)
+
 ---
 
 ## ✨ 功能特色 / Features
