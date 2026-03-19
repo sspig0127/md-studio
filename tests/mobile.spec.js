@@ -11,6 +11,8 @@ async function clearTourSeen(page) {
 test.describe('Navbar 行動版 RWD', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    await page.evaluate(() => localStorage.setItem('md_tour_seen', '1'));
+    await page.reload();
     await page.waitForLoadState('networkidle');
   });
 
@@ -66,6 +68,8 @@ test.describe('Navbar 行動版 RWD', () => {
 test.describe('底部工具列 safe-area', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    await page.evaluate(() => localStorage.setItem('md_tour_seen', '1'));
+    await page.reload();
     await page.waitForLoadState('networkidle');
   });
 
@@ -93,6 +97,8 @@ test.describe('底部工具列 safe-area', () => {
 test.describe('編輯 / 預覽模式切換', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    await page.evaluate(() => localStorage.setItem('md_tour_seen', '1'));
+    await page.reload();
     await page.waitForLoadState('networkidle');
   });
 
