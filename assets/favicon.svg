@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="MD Studio favicon">
+  <path
+    d="M16 6h24l12 12v40H16a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4Z"
+    fill="#ffffff"
+    stroke="#4b5563"
+    stroke-linejoin="round"
+    stroke-width="3"
+  />
+  <path
+    d="M40 6v12h12"
+    fill="none"
+    stroke="#4b5563"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+  />
+  <text
+    x="31"
+    y="43"
+    fill="#9ca3af"
+    font-family="Arial Black, Segoe UI, sans-serif"
+    font-size="34"
+    font-weight="900"
+    text-anchor="middle"
+  >M</text>
+  <text
+    x="32"
+    y="36"
+    fill="#111827"
+    font-family="Arial Black, Segoe UI, sans-serif"
+    font-size="22"
+    font-weight="900"
+    text-anchor="middle"
+  >#</text>
+</svg>
