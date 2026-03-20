@@ -1,6 +1,6 @@
 # 後續開發計畫 / Development Roadmap
 
-> 本文件記錄 md-studio 尚未實作但已規劃的功能方向。
+> 本文件記錄 spigot-md 尚未實作但已規劃的功能方向。
 > 優先序標記：🔴 高 / 🟡 中 / 🟢 低
 
 ---
@@ -182,7 +182,7 @@ transition: clip-path 0.3s ease          ← 步驟切換時平滑移動
 
 導覽步驟的標題與說明文字加入 locale JSON：
 ```json
-"tour.step.1.title": "歡迎使用 MD Studio",
+"tour.step.1.title": "歡迎使用 Spigot MD",
 "tour.step.1.desc": "一款純前端、支援離線的 Markdown 編輯器。",
 ...
 "tour.next": "下一步",
@@ -425,7 +425,7 @@ export default Search;
 
 ## 🏁 最終里程碑：版本升級與跨平台 APP 打包
 
-> 在功能穩定後，將 md-studio 打包為各平台原生 APP，提升安裝體驗與系統整合度。
+> 在功能穩定後，將 spigot-md 打包為各平台原生 APP，提升安裝體驗與系統整合度。
 
 ### 階段規劃
 
@@ -496,7 +496,7 @@ export default Search;
 
 ## 💝 贊助模型
 
-> 詳細評估報告 → `SPONSOR-MODEL.md`（私人文件，存於 toolbox-wiki-notes/projects/md-studio/，本機 symlink）
+> 詳細評估報告 → `SPONSOR-MODEL.md`（私人文件，存於 toolbox-wiki-notes/projects/spigot-md/，本機 symlink）
 > 臺灣金流與稅務評估 → `SPONSOR-TAIWAN-FINANCE.md`（同上）
 
 | 階段 | 狀態 | 主要內容 |

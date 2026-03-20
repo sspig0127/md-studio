@@ -4,7 +4,7 @@
  */
 
 // APP_VERSION 由 js/version.js 提供（全域變數）
-console.info(`%c[md-studio] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
+console.info(`%c[spigot-md] v${APP_VERSION}`, 'color:#7c6af7;font-weight:bold;font-size:13px;');
 
 async function loadSample() {
   const lang = I18n.lang;

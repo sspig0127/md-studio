@@ -1,5 +1,5 @@
 {
-  "name": "md-studio",
+  "name": "spigot-md",
   "version": "1.0.0",
   "description": "> 一款支援離線使用的 PWA Markdown 編輯器，具備多分頁管理、Mermaid 圖表、Google Drive 整合與多語系支援。 > > A PWA-based offline-first Markdown editor with multi-tab management, Mermaid diagrams, Google Drive integration, and multi-language support.",
   "main": "sw.js",
@@ -14,16 +14,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sspig0127/md-studio.git"
+    "url": "git+https://github.com/sspig0127/spigot-md.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/sspig0127/md-studio/issues"
+    "url": "https://github.com/sspig0127/spigot-md/issues"
   },
-  "homepage": "https://github.com/sspig0127/md-studio#readme",
+  "homepage": "https://github.com/sspig0127/spigot-md#readme",
   "devDependencies": {
     "@playwright/test": "^1.58.2"
   }

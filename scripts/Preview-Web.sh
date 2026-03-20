@@ -16,7 +16,7 @@ fi
 LAN_IP=$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo "（無法取得）")
 
 echo "================================================"
-echo " md-studio 本機預覽"
+echo " spigot-md 本機預覽"
 echo "================================================"
 echo " 根目錄：$ROOT_DIR"
 echo " 本機  ：http://localhost:$PORT"

@@ -1,5 +1,5 @@
 /* ============================================
-   search.js — Search / Replace for md-studio
+   search.js — Search / Replace for spigot-md
    Uses CodeMirror's built-in getSearchCursor()
    ============================================ */
 

@@ -1,4 +1,4 @@
-# Copilot 執行指引 — md-studio
+# Copilot 執行指引 — spigot-md
 
 ## 角色定義
 

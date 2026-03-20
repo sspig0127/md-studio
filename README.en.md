@@ -68,7 +68,7 @@
 ## 🚀 Live Demo
 
 Open the tool directly here:
-👉 **[Open Markdown Editor](https://sspig0127.github.io/md-studio/)**
+👉 **[Open Markdown Editor](https://sspig0127.github.io/spigot-md/)**
 
 ---
 
@@ -97,7 +97,7 @@ bash scripts/Preview-Web.sh 3939     # Specify port
 Or use Python directly:
 
 ```bash
-cd /path/to/md-studio
+cd /path/to/spigot-md
 python3 -m http.server 8080
 ```
 
@@ -160,18 +160,18 @@ npm run test:report                # Open HTML test report
 
 ### How It Works
 
-md-studio uses **Google OAuth 2.0** and Drive API with this data flow:
+spigot-md uses **Google OAuth 2.0** and Drive API with this data flow:
 
 ```
 Your Browser  ←────────────────────→  Google Servers
                  Direct HTTPS Connection
 
-md-studio developers cannot see any user data
+spigot-md developers cannot see any user data
 ```
 
 | Item | Description |
 |------|-------------|
-| **What is Client ID** | An identifier for "md-studio the application", contains no personal account info, safe to share publicly |
+| **What is Client ID** | An identifier for "spigot-md the application", contains no personal account info, safe to share publicly |
 | **Data Flow** | Browser ↔ Google direct communication, doesn't go through any third-party servers |
 | **Access Scope** | Only accesses files when user actively clicks "Open" or "Save", cannot auto-scan Drive |
 | **What Developers See** | Completely no access to user account, files, or Access Tokens |
@@ -181,7 +181,7 @@ md-studio developers cannot see any user data
 ```
 Click "Cloud → Google Sign In"
   → Browser redirects to official Google login page
-  → Enter your Google account (doesn't go through md-studio)
+  → Enter your Google account (doesn't go through spigot-md)
   → Google shows authorization consent screen
   → After clicking "Allow", token stored in browser, ready to read/write Drive
 ```
@@ -190,7 +190,7 @@ Click "Cloud → Google Sign In"
 
 ### 🌐 Use Official Hosted Version (Recommended, Zero Config)
 
-> **Planned**: The official GitHub Pages version (`sspig0127.github.io/md-studio`) will include a shared Client ID,
+> **Planned**: The official GitHub Pages version (`sspig0127.github.io/spigot-md`) will include a shared Client ID,
 > users won't need any setup — just click "Google Sign In" to use cloud features.
 
 ---
@@ -214,7 +214,7 @@ For self-hosted deployments (localhost, custom domain), create your own Client I
    | Custom domain | `https://your-domain.com` |
 
 6. Copy the **Client ID** (format: `xxxxxx.apps.googleusercontent.com`)
-7. In md-studio, click ⚙ → paste Client ID → Save → refresh page
+7. In spigot-md, click ⚙ → paste Client ID → Save → refresh page
 
 > Client ID is only stored in browser localStorage, never uploaded to any server or code.
 
@@ -240,7 +240,7 @@ For self-hosted deployments (localhost, custom domain), create your own Client I
 ## 📁 Project Structure
 
 ```
-md-studio/
+spigot-md/
 ├── index.html              # Single-page application entry
 ├── manifest.json           # PWA configuration
 ├── sw.js                   # Service Worker (offline caching)

@@ -1,4 +1,4 @@
-# md-studio 測試指南
+# spigot-md 測試指南
 
 > 供部署人員使用，確認各功能在部署後正常運作。
 > 最後更新：2026-03-14（新增 Playwright 自動化測試環境說明）
@@ -17,7 +17,7 @@ bash scripts/Preview-Web.sh 3939     # 指定 port
 
 **Windows（PowerShell / CMD）：**
 ```powershell
-cd D:\_SideProject\md-studio
+cd D:\_SideProject\spigot-md
 python -m http.server 8080
 ```
 
@@ -415,7 +415,7 @@ flowchart TD
 ### 13-A 首次開啟自動觸發（歡迎卡）
 
 - [ ] 清除 `md_tour_seen` 後重新整理 → 約 0.7s 後出現歡迎卡（暗色遮罩 + 居中卡片）
-- [ ] 歡迎卡顯示標題「歡迎使用 MD Studio」、說明文字、兩個按鈕
+- [ ] 歡迎卡顯示標題「歡迎使用 Spigot MD」、說明文字、兩個按鈕
 - [ ] 暗色遮罩覆蓋整個頁面，歡迎卡可正常點擊
 - [ ] 歡迎卡出現時，背景頁面功能（編輯、按鈕）無法互動（遮罩攔截）
 
@@ -501,7 +501,7 @@ flowchart TD
 
 ### 13-H i18n 多語系
 
-- [ ] 切換至 **English** → 重新播放導覽，所有文字為英文（「Welcome to MD Studio」等）
+- [ ] 切換至 **English** → 重新播放導覽，所有文字為英文（「Welcome to Spigot MD」等）
 - [ ] 切換至 **Tiếng Việt** → 重新播放導覽，所有文字為越南文
 - [ ] 「重新播放導覽」按鈕在三種語系下文字正確更新
 

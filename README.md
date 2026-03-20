@@ -68,7 +68,7 @@
 ## 🚀 線上預覽與使用 (Live Demo)
 
 您可以直接點擊以下連結開啟此工具：
-👉 **[點我開啟 Markdown 編輯器](https://sspig0127.github.io/md-studio/)**
+👉 **[點我開啟 Markdown 編輯器](https://sspig0127.github.io/spigot-md/)**
 
 ---
 
@@ -97,7 +97,7 @@ bash scripts/Preview-Web.sh 3939     # 指定 port
 或直接使用 Python：
 
 ```bash
-cd /path/to/md-studio
+cd /path/to/spigot-md
 python3 -m http.server 8080
 ```
 
@@ -160,18 +160,18 @@ npm run test:report                # 開啟 HTML 測試報告
 
 ### 運作原理
 
-md-studio 採用 **Google OAuth 2.0** 與 Drive API，資料流如下：
+spigot-md 採用 **Google OAuth 2.0** 與 Drive API，資料流如下：
 
 ```
 你的瀏覽器  ←────────────────────→  Google 伺服器
                   直接通訊（HTTPS）
 
-md-studio 開發者無法看到任何使用者資料
+spigot-md 開發者無法看到任何使用者資料
 ```
 
 | 項目 | 說明 |
 |------|------|
-| **Client ID 是什麼** | 識別「md-studio 這個應用程式」的代號，不含個人帳號資訊，公開無妨 |
+| **Client ID 是什麼** | 識別「spigot-md 這個應用程式」的代號，不含個人帳號資訊，公開無妨 |
 | **資料流向** | 瀏覽器 ↔ Google 直接通訊，不經過任何第三方伺服器 |
 | **存取範圍** | 僅在使用者主動點「開啟」或「儲存」時存取對應檔案，無法自動掃描 Drive |
 | **開發者能看到什麼** | 完全看不到使用者的帳號、檔案或 Access Token |
@@ -181,7 +181,7 @@ md-studio 開發者無法看到任何使用者資料
 ```
 點「雲端 → Google 登入」
   → 瀏覽器跳到 Google 官方登入頁
-  → 輸入自己的 Google 帳號（不經過 md-studio）
+  → 輸入自己的 Google 帳號（不經過 spigot-md）
   → Google 顯示授權同意畫面
   → 使用者點「允許」後，Token 存於瀏覽器，即可讀寫 Drive
 ```
@@ -190,7 +190,7 @@ md-studio 開發者無法看到任何使用者資料
 
 ### 🌐 使用官方 hosted 版本（推薦，零設定）
 
-> **計畫中**：官方 GitHub Pages 版本（`sspig0127.github.io/md-studio`）將內建共用 Client ID，
+> **計畫中**：官方 GitHub Pages 版本（`sspig0127.github.io/spigot-md`）將內建共用 Client ID，
 > 使用者**不需要任何設定**，直接點「Google 登入」即可使用雲端功能。
 
 ---
@@ -214,7 +214,7 @@ md-studio 開發者無法看到任何使用者資料
    | 自訂網域 | `https://你的網域.com` |
 
 6. 建立後複製 **Client ID**（格式：`xxxxxx.apps.googleusercontent.com`）
-7. 在 md-studio 點右上角 **⚙** → 貼入 Client ID → 儲存 → 重新整理頁面
+7. 在 spigot-md 點右上角 **⚙** → 貼入 Client ID → 儲存 → 重新整理頁面
 
 > Client ID 僅存於瀏覽器 localStorage，不會上傳至任何伺服器或程式碼。
 
@@ -240,7 +240,7 @@ md-studio 開發者無法看到任何使用者資料
 ## 📁 專案結構 / Project Structure
 
 ```
-md-studio/
+spigot-md/
 ├── index.html              # 單頁應用入口
 ├── manifest.json           # PWA 設定
 ├── sw.js                   # Service Worker（離線快取）

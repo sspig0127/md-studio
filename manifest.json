@@ -1,6 +1,6 @@
 {
-  "name": "MD Studio",
-  "short_name": "MD Studio",
+  "name": "Spigot MD",
+  "short_name": "Spigot MD",
   "description": "離線可用的 Markdown 編輯器，支援 Mermaid 圖表與 Google Drive",
   "start_url": "/index.html",
   "display": "standalone",
