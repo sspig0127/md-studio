@@ -26,5 +26,11 @@ test-*.png
 drawer-test-*.png
 docs/screenshots/test-*.png
 
+# 本機開發工具設定（不推送）
+.github/
+
+# 本機備份（不推送）
+backups/
+
 # Node.js 依賴
 node_modules/
