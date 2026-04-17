@@ -185,6 +185,7 @@ const Editor = (() => {
       autosave: { enabled: false },
       placeholder: I18n.t('editor.placeholder'),
       status: false, // We have our own status bar
+      lineNumbers: true,
       toolbar: _buildToolbar(),
       previewRender: () => '', // Disable built-in preview (we use our own pane)
       renderingConfig: { singleLineBreaks: false },
